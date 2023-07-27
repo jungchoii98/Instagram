@@ -7,9 +7,9 @@
 
 import UIKit
 
-class ExploreCoordinator: Coordinator {
+final class ExploreCoordinator: Coordinator {
     
-    let navigationController: UINavigationController
+    private let navigationController: UINavigationController
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -19,10 +19,10 @@ class ExploreCoordinator: Coordinator {
         showExplore()
     }
     
-    func showExplore() {
+    private func showExplore() {
         let exploreVC = ExploreViewController()
         exploreVC.delegate = self
-        navigationController.pushViewController(exploreVC, animated: false)
+        navigationController.pushViewController(exploreVC, animated: true)
     }
 }
 

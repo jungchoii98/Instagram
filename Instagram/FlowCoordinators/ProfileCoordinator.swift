@@ -7,9 +7,9 @@
 
 import UIKit
 
-class ProfileCoordinator: Coordinator {
+final class ProfileCoordinator: Coordinator {
     
-    let navigationController: UINavigationController
+    private let navigationController: UINavigationController
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -19,10 +19,10 @@ class ProfileCoordinator: Coordinator {
         showProfile()
     }
     
-    func showProfile() {
+    private func showProfile() {
         let profileVC = ProfileViewController()
         profileVC.delegate = self
-        navigationController.pushViewController(profileVC, animated: false)
+        navigationController.pushViewController(profileVC, animated: true)
     }
 }
 

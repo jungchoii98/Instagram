@@ -7,9 +7,9 @@
 
 import UIKit
 
-class HomeCoordinator: Coordinator {
+final class HomeCoordinator: Coordinator {
     
-    let navigationController: UINavigationController
+    private let navigationController: UINavigationController
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -19,10 +19,10 @@ class HomeCoordinator: Coordinator {
         showHome()
     }
     
-    func showHome() {
+    private func showHome() {
         let homeVC = HomeViewController()
         homeVC.delegate = self
-        navigationController.pushViewController(homeVC, animated: false)
+        navigationController.pushViewController(homeVC, animated: true)
     }
 }
 

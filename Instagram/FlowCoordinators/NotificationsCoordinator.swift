@@ -7,9 +7,9 @@
 
 import UIKit
 
-class NotificationsCoordinator: Coordinator {
+final class NotificationsCoordinator: Coordinator {
     
-    let navigationController: UINavigationController
+    private let navigationController: UINavigationController
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -19,10 +19,10 @@ class NotificationsCoordinator: Coordinator {
         showNotifications()
     }
     
-    func showNotifications() {
+    private func showNotifications() {
         let notificationsVC = NotificationsViewController()
         notificationsVC.delegate = self
-        navigationController.pushViewController(notificationsVC, animated: false)
+        navigationController.pushViewController(notificationsVC, animated: true)
     }
 }
 

@@ -7,9 +7,9 @@
 
 import UIKit
 
-class CameraCoordinator: Coordinator {
+final class CameraCoordinator: Coordinator {
     
-    let navigationController: UINavigationController
+    private let navigationController: UINavigationController
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -19,10 +19,10 @@ class CameraCoordinator: Coordinator {
         showCamera()
     }
     
-    func showCamera() {
+    private func showCamera() {
         let cameraVC = CameraViewController()
         cameraVC.delegate = self
-        navigationController.pushViewController(cameraVC, animated: false)
+        navigationController.pushViewController(cameraVC, animated: true)
     }
 }
 
