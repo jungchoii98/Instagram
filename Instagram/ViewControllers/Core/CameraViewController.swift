@@ -11,7 +11,7 @@ protocol CameraViewControllerDelegate: AnyObject {}
 
 class CameraViewController: UIViewController {
     
-    weak var delegate: CameraViewControllerDelegate?
+    weak var coordinator: CameraViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()

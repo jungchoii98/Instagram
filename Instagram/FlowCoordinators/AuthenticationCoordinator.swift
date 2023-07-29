@@ -9,15 +9,15 @@ import SafariServices
 import UIKit
 
 protocol AuthenticationCoordinatorDelegate: AnyObject {
-    func didAuthenticate()
+    func didAuthenticate(child: Coordinator)
 }
 
 final class AuthenticationCoordinator: Coordinator {
     
-    weak var delegate: AuthenticationCoordinatorDelegate?
     private let navigationController: UINavigationController
-    private var signInVC: SignInViewController!
-    private var signUpVC: SignUpViewController!
+    var childCoordinators: [Coordinator] = []
+    
+    weak var delegate: AuthenticationCoordinatorDelegate?
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -28,24 +28,26 @@ final class AuthenticationCoordinator: Coordinator {
     }
     
     private func showSignIn() {
-        let signInVCViewModel = SignInVCViewModel()
-        signInVC = SignInViewController(viewModel: signInVCViewModel)
-        signInVC.delegate = self
+        let viewModel = AuthenticationViewModel()
+        let signInVC = SignInViewController(viewModel: viewModel)
+        signInVC.coordinator = self
         navigationController.pushViewController(signInVC, animated: true)
     }
     
     private func showSignUp() {
-        signUpVC = SignUpViewController()
-        signUpVC.delegate = self
+        let viewModel = AuthenticationViewModel()
+        let signUpVC = SignUpViewController(viewModel: viewModel)
+        signUpVC.coordinator = self
         navigationController.pushViewController(signUpVC, animated: true)
     }
 }
 
-extension AuthenticationCoordinator: SignInViewControllerDelegate {
+extension AuthenticationCoordinator: SignInViewControllerDelegate, SignUpViewControllerDelegate {
     func authenticationDidSucceed() {
+        delegate?.didAuthenticate(child: self)
     }
     
-    func didTapSignUp() {
+    func didTapCreateAccount() {
         showSignUp()
     }
     
@@ -61,5 +63,3 @@ extension AuthenticationCoordinator: SignInViewControllerDelegate {
         navigationController.present(vc, animated: true)
     }
 }
-
-extension AuthenticationCoordinator: SignUpViewControllerDelegate {}

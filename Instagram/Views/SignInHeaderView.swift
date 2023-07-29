@@ -13,6 +13,7 @@ class SignInHeaderView: UIView {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "logo")
         imageView.contentMode = .scaleAspectFit
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
@@ -22,6 +23,7 @@ class SignInHeaderView: UIView {
         super.init(frame: frame)
         createGradient()
         addSubview(logoImageView)
+        translatesAutoresizingMaskIntoConstraints = false
     }
     
     required init?(coder: NSCoder) {
@@ -31,7 +33,12 @@ class SignInHeaderView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         gradientLayer.frame = self.bounds
-        logoImageView.frame = CGRect(x: width/4, y: 20, width: width/2, height: height-40)
+        NSLayoutConstraint.activate([
+            logoImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            logoImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            logoImageView.heightAnchor.constraint(equalToConstant: height - 40),
+            logoImageView.widthAnchor.constraint(equalToConstant: width / 2)
+        ])
     }
     
     private func createGradient() {

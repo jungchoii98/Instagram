@@ -11,7 +11,7 @@ protocol ExploreViewControllerDelegate: AnyObject {}
 
 class ExploreViewController: UIViewController {
     
-    weak var delegate: ExploreViewControllerDelegate?
+    weak var coordinator: ExploreViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()

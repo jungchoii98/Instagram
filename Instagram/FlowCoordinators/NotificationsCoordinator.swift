@@ -10,6 +10,7 @@ import UIKit
 final class NotificationsCoordinator: Coordinator {
     
     private let navigationController: UINavigationController
+    var childCoordinators: [Coordinator] = []
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -21,7 +22,7 @@ final class NotificationsCoordinator: Coordinator {
     
     private func showNotifications() {
         let notificationsVC = NotificationsViewController()
-        notificationsVC.delegate = self
+        notificationsVC.coordinator = self
         navigationController.pushViewController(notificationsVC, animated: true)
     }
 }

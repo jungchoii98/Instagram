@@ -7,27 +7,24 @@
 
 import UIKit
 
-protocol Coordinator {
+protocol Coordinator: AnyObject {
+    var childCoordinators: [Coordinator] { get set }
     func start()
 }
 
 final class AppCoordinator {
     
-    private var mainTabBarController: UITabBarController?
-    private var signInNavigationController: UINavigationController?
+    private var navigationController = UINavigationController()
     
+    private var authManager: AuthManagerProtocol = AuthManager(database: DatabaseManager())
     private var childCoordinators: [Coordinator] = []
     
-    init(mainTabBarController: UITabBarController) {
-        self.mainTabBarController = mainTabBarController
-    }
-    
-    init(signInNavigationController: UINavigationController) {
-        self.signInNavigationController = signInNavigationController
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
     }
     
     func start() {
-        if mainTabBarController != nil {
+        if authManager.isSignedIn {
             showMainScreen()
         } else {
             showSignIn()
@@ -47,16 +44,6 @@ final class AppCoordinator {
         notificationsNavigationController.tabBarItem = UITabBarItem(title: "Notifications", image: UIImage(systemName: "bell"), tag: 1)
         profileNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 1)
         
-        mainTabBarController?.setViewControllers([
-            homeNavigationController,
-            exploreNavigationController,
-            cameraNavigationController,
-            notificationsNavigationController,
-            profileNavigationController
-        ],
-            animated: false
-        )
-        
         let homeFlowCoordinator = HomeCoordinator(navigationController: homeNavigationController)
         let exploreFlowCoordinator = ExploreCoordinator(navigationController: exploreNavigationController)
         let cameraFlowCoordinator = CameraCoordinator(navigationController: cameraNavigationController)
@@ -75,18 +62,48 @@ final class AppCoordinator {
         childCoordinators.forEach { coordinator in
             coordinator.start()
         }
+        
+        let mainTabBarController = UITabBarController()
+        
+        mainTabBarController.setViewControllers([
+            homeNavigationController,
+            exploreNavigationController,
+            cameraNavigationController,
+            notificationsNavigationController,
+            profileNavigationController
+        ],
+            animated: false
+        )
+        
+        navigationController.pushViewController(mainTabBarController, animated: true)
     }
     
     func showSignIn() {
-        let authenticationCoordinator = AuthenticationCoordinator(navigationController: signInNavigationController ?? UINavigationController())
+        let authenticationCoordinator = AuthenticationCoordinator(navigationController: navigationController)
         authenticationCoordinator.delegate = self
         authenticationCoordinator.start()
         childCoordinators.append(authenticationCoordinator)
     }
 }
 
+// MARK: Delegates
+
 extension AppCoordinator: AuthenticationCoordinatorDelegate {
-    func didAuthenticate() {
+    func didAuthenticate(child: Coordinator) {
+        removeChild(child: child)
         showMainScreen()
+    }
+}
+
+// MARK: Extensions
+
+extension AppCoordinator {
+    private func removeChild(child: Coordinator) {
+        for (index, coordinator) in childCoordinators.enumerated() {
+            if child === coordinator {
+                childCoordinators.remove(at: index)
+                break
+            }
+        }
     }
 }

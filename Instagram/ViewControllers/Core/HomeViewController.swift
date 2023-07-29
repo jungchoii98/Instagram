@@ -11,7 +11,7 @@ protocol HomeViewControllerDelegate: AnyObject {}
 
 class HomeViewController: UIViewController {
     
-    weak var delegate: HomeViewControllerDelegate?
+    weak var coordinator: HomeViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()

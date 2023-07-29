@@ -9,7 +9,7 @@ import UIKit
 
 protocol SignInViewControllerDelegate: AnyObject {
     func authenticationDidSucceed()
-    func didTapSignUp()
+    func didTapCreateAccount()
     func didTapTerms()
     func didTapPrivacy()
 }
@@ -32,7 +32,6 @@ class SignInViewController: UIViewController {
     private let passwordTextField: IGTextField = {
         let textField = IGTextField()
         textField.placeholder = "Password"
-        textField.keyboardType = .default
         textField.returnKeyType = .continue
         textField.autocorrectionType = .no
         textField.isSecureTextEntry = true
@@ -44,6 +43,7 @@ class SignInViewController: UIViewController {
         button.setTitle("Sign In", for: .normal)
         button.backgroundColor = .systemBlue
         button.layer.cornerRadius = 8
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -51,6 +51,7 @@ class SignInViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Create Account", for: .normal)
         button.setTitleColor(UIColor.link, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -58,6 +59,7 @@ class SignInViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Terms and Services", for: .normal)
         button.setTitleColor(UIColor.link, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
@@ -65,15 +67,16 @@ class SignInViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Privacy", for: .normal)
         button.setTitleColor(UIColor.link, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    weak var delegate: SignInViewControllerDelegate?
-    private let viewModel: SignInVCViewModel
+    weak var coordinator: SignInViewControllerDelegate?
+    private let viewModel: AuthenticationViewModel
     
     // MARK: Lifecycle
     
-    init(viewModel: SignInVCViewModel) {
+    init(viewModel: AuthenticationViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -93,48 +96,42 @@ class SignInViewController: UIViewController {
     }
     
     override func viewWillLayoutSubviews() {
-        headerView.frame = CGRect(
-            x: 0,
-            y: view.safeAreaInsets.top,
-            width: view.width,
-            height: (view.height - view.safeAreaInsets.top)/3
-        )
-        emailTextField.frame = CGRect(
-            x: 20,
-            y: headerView.bottom + 20,
-            width: view.width-40,
-            height: 50
-        )
-        passwordTextField.frame = CGRect(
-            x: 20,
-            y: emailTextField.bottom + 10,
-            width: view.width-40,
-            height: 50
-        )
-        signInButton.frame = CGRect(
-            x: 150,
-            y: passwordTextField.bottom + 20,
-            width: view.width/4,
-            height: 50
-        )
-        createAccountButton.frame = CGRect(
-            x: 100,
-            y: signInButton.bottom + 20,
-            width: view.width/2,
-            height: 30
-        )
-        termsButton.frame = CGRect(
-            x: 100,
-            y: createAccountButton.bottom + 50,
-            width: view.width/2,
-            height: 30
-        )
-        privacyButton.frame = CGRect(
-            x: 100,
-            y: termsButton.bottom + 50,
-            width: view.width/2,
-            height: 30
-        )
+        NSLayoutConstraint.activate([
+            headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            headerView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            headerView.heightAnchor.constraint(equalToConstant: (view.height - view.safeAreaInsets.top)/3),
+            
+            emailTextField.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 20),
+            emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            emailTextField.heightAnchor.constraint(equalToConstant: 50),
+            
+            passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 10),
+            passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 50),
+            
+            signInButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 20),
+            signInButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            signInButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            signInButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            createAccountButton.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 20),
+            createAccountButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            createAccountButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            createAccountButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            termsButton.topAnchor.constraint(equalTo: createAccountButton.bottomAnchor, constant: 50),
+            termsButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            termsButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            termsButton.heightAnchor.constraint(equalToConstant: 50),
+            
+            privacyButton.topAnchor.constraint(equalTo: termsButton.bottomAnchor, constant: 20),
+            privacyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            privacyButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            privacyButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
     
     private func addSubviews() {
@@ -158,28 +155,27 @@ class SignInViewController: UIViewController {
     
     
     @objc func didTapSignIn() {
+        emailTextField.resignFirstResponder()
+        passwordTextField.resignFirstResponder()
         guard let email = emailTextField.text,
               let password = passwordTextField.text,
-              viewModel.isValidSignIn(email: email, password: password)
-        else {
-            return
-        }
+              viewModel.isValidSignIn(email: email, password: password) else { return }
         
         // authenticate sign in
-        delegate?.authenticationDidSucceed()
+        coordinator?.authenticationDidSucceed()
         print("authenticating...")
     }
     
     @objc func didTapCreateAccount() {
-        delegate?.didTapSignUp()
+        coordinator?.didTapCreateAccount()
     }
     
     @objc func didTapTerms() {
-        delegate?.didTapTerms()
+        coordinator?.didTapTerms()
     }
     
     @objc func didTapPrivacy() {
-        delegate?.didTapPrivacy()
+        coordinator?.didTapPrivacy()
     }
 }
 

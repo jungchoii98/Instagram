@@ -10,6 +10,7 @@ import UIKit
 final class ExploreCoordinator: Coordinator {
     
     private let navigationController: UINavigationController
+    var childCoordinators: [Coordinator] = []
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -21,7 +22,7 @@ final class ExploreCoordinator: Coordinator {
     
     private func showExplore() {
         let exploreVC = ExploreViewController()
-        exploreVC.delegate = self
+        exploreVC.coordinator = self
         navigationController.pushViewController(exploreVC, animated: true)
     }
 }

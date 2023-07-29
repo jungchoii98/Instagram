@@ -11,7 +11,7 @@ protocol ProfileViewControllerDelegate: AnyObject {}
 
 class ProfileViewController: UIViewController {
     
-    weak var delegate: ProfileViewControllerDelegate?
+    weak var coordinator: ProfileViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()

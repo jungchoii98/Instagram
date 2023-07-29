@@ -8,11 +8,21 @@
 import FirebaseFirestore
 import Foundation
 
-final class DatabaseManager {
+protocol DatabaseManagerProtocol {
     
-    static let shared = DatabaseManager()
-    
-    private init() {}
-    
-    let database = Firestore.firestore()
 }
+
+protocol DatabaseSession {
+    
+}
+
+final class DatabaseManager: DatabaseManagerProtocol {
+    
+    private let database: DatabaseSession
+    
+    init(database: DatabaseSession = Firestore.firestore()) {
+        self.database = database
+    }
+}
+
+extension Firestore: DatabaseSession {}

@@ -27,18 +27,21 @@ protocol AuthManagerProtocol {
 
 protocol Authenticator {
     var currentUser: User? { get }
+    func createUser(withEmail: String, password: String, completion: ((AuthDataResult?, Error?) -> Void)?)
 }
 
 final class AuthManager: AuthManagerProtocol {
     
     private let auth: Authenticator
+    private let database: DatabaseManagerProtocol
     
     var isSignedIn: Bool {
         return auth.currentUser != nil ? true : false
     }
     
-    init(auth: Authenticator = FirebaseAuth.Auth.auth()) {
+    init(auth: Authenticator = FirebaseAuth.Auth.auth(), database: DatabaseManagerProtocol) {
         self.auth = auth
+        self.database = database
     }
     
     func signIn(
@@ -49,14 +52,16 @@ final class AuthManager: AuthManagerProtocol {
         
     }
     
-    func signUp(
+    public func signUp(
         email: String,
         password: String,
         username: String,
         profileImage: Data?,
         completion: @escaping (Result<IGUser, Error>) -> Void
     ) {
-        
+        auth.createUser(withEmail: email, password: password) { result, error in
+            
+        }
     }
     
     func signOut(completion: @escaping (Bool) -> Void) {

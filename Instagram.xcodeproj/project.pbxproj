@@ -42,7 +42,8 @@
 		F09AA5E52A72EFA60059C845 /* SignInHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5E42A72EFA60059C845 /* SignInHeaderView.swift */; };
 		F09AA5E82A72F4790059C845 /* Extensions+UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5E72A72F4790059C845 /* Extensions+UIView.swift */; };
 		F09AA5EA2A72FD560059C845 /* IGTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5E92A72FD560059C845 /* IGTextField.swift */; };
-		F09AA5EC2A7309D60059C845 /* SignInVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5EB2A7309D60059C845 /* SignInVCViewModel.swift */; };
+		F09AA5EC2A7309D60059C845 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5EB2A7309D60059C845 /* AuthenticationViewModel.swift */; };
+		F09AA5EF2A74CCB50059C845 /* UIImagePickerControllerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5EE2A74CCB50059C845 /* UIImagePickerControllerAdapter.swift */; };
 		FDF9B74F1F7140AF20DAC2A6 /* Pods_Instagram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 724437086F110C91F8BF55FB /* Pods_Instagram.framework */; };
 /* End PBXBuildFile section */
 
@@ -86,7 +87,8 @@
 		F09AA5E42A72EFA60059C845 /* SignInHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInHeaderView.swift; sourceTree = "<group>"; };
 		F09AA5E72A72F4790059C845 /* Extensions+UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+UIView.swift"; sourceTree = "<group>"; };
 		F09AA5E92A72FD560059C845 /* IGTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGTextField.swift; sourceTree = "<group>"; };
-		F09AA5EB2A7309D60059C845 /* SignInVCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVCViewModel.swift; sourceTree = "<group>"; };
+		F09AA5EB2A7309D60059C845 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
+		F09AA5EE2A74CCB50059C845 /* UIImagePickerControllerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImagePickerControllerAdapter.swift; sourceTree = "<group>"; };
 		FF3313F510F5DFF75A97A005 /* Pods-Instagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.debug.xcconfig"; path = "Target Support Files/Pods-Instagram/Pods-Instagram.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -140,6 +142,7 @@
 		F09AA58F2A71C3330059C845 /* Instagram */ = {
 			isa = PBXGroup;
 			children = (
+				F09AA5ED2A74CC530059C845 /* Adapters */,
 				F09AA5A42A71C8F00059C845 /* Resources */,
 				F09AA5A62A71C91E0059C845 /* Managers */,
 				F09AA5AB2A71CC470059C845 /* FlowCoordinators */,
@@ -198,7 +201,7 @@
 		F09AA5A82A71C9290059C845 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				F09AA5EB2A7309D60059C845 /* SignInVCViewModel.swift */,
+				F09AA5EB2A7309D60059C845 /* AuthenticationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -259,6 +262,14 @@
 				F09AA5E72A72F4790059C845 /* Extensions+UIView.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F09AA5ED2A74CC530059C845 /* Adapters */ = {
+			isa = PBXGroup;
+			children = (
+				F09AA5EE2A74CCB50059C845 /* UIImagePickerControllerAdapter.swift */,
+			);
+			path = Adapters;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -398,13 +409,14 @@
 				F09AA5D02A71D38D0059C845 /* Post.swift in Sources */,
 				F09AA5E52A72EFA60059C845 /* SignInHeaderView.swift in Sources */,
 				F09AA5B92A71CDBB0059C845 /* ExploreCoordinator.swift in Sources */,
-				F09AA5EC2A7309D60059C845 /* SignInVCViewModel.swift in Sources */,
+				F09AA5EC2A7309D60059C845 /* AuthenticationViewModel.swift in Sources */,
 				F09AA5912A71C3330059C845 /* AppDelegate.swift in Sources */,
 				F09AA5E82A72F4790059C845 /* Extensions+UIView.swift in Sources */,
 				F09AA5C42A71D2FB0059C845 /* SignUpViewController.swift in Sources */,
 				F09AA5E32A720ED20059C845 /* AuthenticationCoordinator.swift in Sources */,
 				F09AA5BF2A71CDDD0059C845 /* ProfileCoordinator.swift in Sources */,
 				F09AA5932A71C3330059C845 /* SceneDelegate.swift in Sources */,
+				F09AA5EF2A74CCB50059C845 /* UIImagePickerControllerAdapter.swift in Sources */,
 				F09AA5B32A71CD2B0059C845 /* NotificationsViewController.swift in Sources */,
 				F09AA5B52A71CD410059C845 /* ProfileViewController.swift in Sources */,
 				F09AA5B12A71CD150059C845 /* CameraViewController.swift in Sources */,

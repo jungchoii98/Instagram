@@ -11,7 +11,7 @@ protocol NotificationsViewControllerDelegate: AnyObject {}
 
 class NotificationsViewController: UIViewController {
     
-    weak var delegate: NotificationsViewControllerDelegate?
+    weak var coordinator: NotificationsViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()

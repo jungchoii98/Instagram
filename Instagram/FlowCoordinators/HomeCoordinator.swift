@@ -10,6 +10,7 @@ import UIKit
 final class HomeCoordinator: Coordinator {
     
     private let navigationController: UINavigationController
+    var childCoordinators: [Coordinator] = []
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -21,7 +22,7 @@ final class HomeCoordinator: Coordinator {
     
     private func showHome() {
         let homeVC = HomeViewController()
-        homeVC.delegate = self
+        homeVC.coordinator = self
         navigationController.pushViewController(homeVC, animated: true)
     }
 }
