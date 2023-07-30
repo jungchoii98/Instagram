@@ -33,6 +33,7 @@ final class ProfileCoordinator: Coordinator {
     
     private func showSettings() {
         let settingsVC = SettingsViewController()
+        settingsVC.coordinator = self
         navigationController.present(UINavigationController(rootViewController: settingsVC), animated: true)
     }
 }

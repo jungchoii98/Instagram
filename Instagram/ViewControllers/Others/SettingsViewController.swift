@@ -74,7 +74,6 @@ class SettingsViewController: UIViewController {
             AuthManager.shared.signOut { [weak self] signOutDidSucceed in
                 guard let self = self else { return }
                 if signOutDidSucceed {
-                    print("auth manager sign out success")
                     self.coordinator?.didTapSignOut()
                 } else {
                     print("error signing out")

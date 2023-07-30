@@ -90,7 +90,6 @@ final class AppCoordinator {
     
     func didSignOut(child: Coordinator) {
         removeChild(child: child)
-        print("reaching app coordinator")
         DispatchQueue.main.async {
             self.navigationController.popToRootViewController(animated: true)
             self.showSignIn()
