@@ -16,6 +16,6 @@ class ExploreViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Explore"
-        view.backgroundColor = .systemRed
+        view.backgroundColor = .systemBackground
     }
 }

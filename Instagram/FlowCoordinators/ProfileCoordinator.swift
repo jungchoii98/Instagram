@@ -10,6 +10,7 @@ import UIKit
 final class ProfileCoordinator: Coordinator {
     
     private let navigationController: UINavigationController
+    weak var appCoordinator: AppCoordinator?
     var childCoordinators: [Coordinator] = []
     
     init(navigationController: UINavigationController) {
@@ -21,10 +22,29 @@ final class ProfileCoordinator: Coordinator {
     }
     
     private func showProfile() {
-        let profileVC = ProfileViewController()
+        guard let data = UserDefaults.standard.object(forKey: UserDefaultsConstants.user.rawValue) as? Data,
+              let user = Utility.decode(IGUser.self, data: data) else {
+            return
+        }
+        let profileVC = ProfileViewController(user: user)
         profileVC.coordinator = self
         navigationController.pushViewController(profileVC, animated: true)
     }
+    
+    private func showSettings() {
+        let settingsVC = SettingsViewController()
+        navigationController.present(UINavigationController(rootViewController: settingsVC), animated: true)
+    }
 }
 
-extension ProfileCoordinator: ProfileViewControllerDelegate {}
+extension ProfileCoordinator: ProfileViewControllerDelegate {
+    func didTapSettings() {
+        showSettings()
+    }
+}
+
+extension ProfileCoordinator: SettingsViewControllerDelegate {
+    func didTapSignOut() {
+        appCoordinator?.didSignOut(child: self)
+    }
+}

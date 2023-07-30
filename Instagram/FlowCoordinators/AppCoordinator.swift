@@ -43,11 +43,15 @@ final class AppCoordinator {
         notificationsNavigationController.tabBarItem = UITabBarItem(title: "Notifications", image: UIImage(systemName: "bell"), tag: 1)
         profileNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 1)
         
+        profileNavigationController.navigationBar.tintColor = .label
+        
         let homeFlowCoordinator = HomeCoordinator(navigationController: homeNavigationController)
         let exploreFlowCoordinator = ExploreCoordinator(navigationController: exploreNavigationController)
         let cameraFlowCoordinator = CameraCoordinator(navigationController: cameraNavigationController)
         let notificationsFlowCoordinator = NotificationsCoordinator(navigationController: notificationsNavigationController)
         let profileFlowCoordinator = ProfileCoordinator(navigationController: profileNavigationController)
+        
+        profileFlowCoordinator.appCoordinator = self
         
         let childCoordinators: [Coordinator] = [
             homeFlowCoordinator,
@@ -82,6 +86,15 @@ final class AppCoordinator {
         authenticationCoordinator.delegate = self
         authenticationCoordinator.start()
         childCoordinators.append(authenticationCoordinator)
+    }
+    
+    func didSignOut(child: Coordinator) {
+        removeChild(child: child)
+        print("reaching app coordinator")
+        DispatchQueue.main.async {
+            self.navigationController.popToRootViewController(animated: true)
+            self.showSignIn()
+        }
     }
 }
 

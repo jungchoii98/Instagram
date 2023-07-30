@@ -18,4 +18,14 @@ extension Encodable {
             return nil
         }
     }
+    
+    func asData() -> Data? {
+        let encoder = JSONEncoder()
+        do {
+            let data = try encoder.encode(self)
+            return data
+        } catch {
+            return nil
+        }
+    }
 }

@@ -215,7 +215,7 @@ class SignUpViewController: UIViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let user):
-                    //UserDefaults.standard.set(user, forKey: "user")
+                    UserDefaults.standard.set(user.asData(), forKey: UserDefaultsConstants.user.rawValue)
                     self.coordinator?.authenticationDidSucceed()
                 case .failure(let error):
                     self.presentError(title: "Error", message: error.localizedDescription)
