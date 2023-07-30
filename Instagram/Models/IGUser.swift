@@ -7,6 +7,7 @@
 
 import Foundation
 
-struct IGUser {
-    
+struct IGUser: Codable {
+    let username: String
+    let email: String
 }

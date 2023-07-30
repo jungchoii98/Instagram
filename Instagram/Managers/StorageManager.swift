@@ -8,11 +8,34 @@
 import FirebaseStorage
 import Foundation
 
-final class StorageManager {
+protocol StorageManagerProtocol {
+    func uploadProfilePicture(
+        username: String,
+        pictureData: Data?,
+        completion: @escaping (Bool) -> Void
+    )
+}
+
+final class StorageManager: StorageManagerProtocol {
     
     static let shared = StorageManager()
     
     private init() {}
     
-    let storage = FirebaseStorage.Storage.storage()
+    private let storage = FirebaseStorage.Storage.storage()
+    
+    public func uploadProfilePicture(
+        username: String,
+        pictureData: Data?,
+        completion: @escaping (Bool) -> Void
+    ) {
+        guard let data = pictureData else {
+            completion(false)
+            return
+        }
+        let reference = storage.reference()
+        reference.child("\(username)/profile_picture.png").putData(data) { _, error in
+            completion(error == nil)
+        }
+    }
 }

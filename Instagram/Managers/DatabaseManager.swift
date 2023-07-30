@@ -9,20 +9,26 @@ import FirebaseFirestore
 import Foundation
 
 protocol DatabaseManagerProtocol {
-    
-}
-
-protocol DatabaseSession {
-    
+    func createUser(user: IGUser, completion: @escaping (Bool) -> Void)
 }
 
 final class DatabaseManager: DatabaseManagerProtocol {
     
-    private let database: DatabaseSession
+    static let shared = DatabaseManager()
     
-    init(database: DatabaseSession = Firestore.firestore()) {
-        self.database = database
+    private init() {}
+    
+    private let database = Firestore.firestore()
+    
+    public func createUser(user: IGUser, completion: @escaping (Bool) -> Void) {
+        let document = database.document("users/\(user.username)")
+        guard let documentData = user.asJsonObject() else {
+            completion(false)
+            return
+        }
+        document.setData(documentData) { error in
+            completion(error == nil)
+            return
+        }
     }
 }
-
-extension Firestore: DatabaseSession {}

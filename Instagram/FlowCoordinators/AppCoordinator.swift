@@ -16,7 +16,6 @@ final class AppCoordinator {
     
     private var navigationController = UINavigationController()
     
-    private var authManager: AuthManagerProtocol = AuthManager(database: DatabaseManager())
     private var childCoordinators: [Coordinator] = []
     
     init(navigationController: UINavigationController) {
@@ -24,7 +23,7 @@ final class AppCoordinator {
     }
     
     func start() {
-        if authManager.isSignedIn {
+        if AuthManager.shared.isSignedIn {
             showMainScreen()
         } else {
             showSignIn()
@@ -74,8 +73,8 @@ final class AppCoordinator {
         ],
             animated: false
         )
-        
-        navigationController.pushViewController(mainTabBarController, animated: true)
+        mainTabBarController.modalPresentationStyle = .fullScreen
+        navigationController.present(mainTabBarController, animated: true)
     }
     
     func showSignIn() {
@@ -91,7 +90,8 @@ final class AppCoordinator {
 extension AppCoordinator: AuthenticationCoordinatorDelegate {
     func didAuthenticate(child: Coordinator) {
         removeChild(child: child)
-        showMainScreen()
+        self.navigationController.popToRootViewController(animated: true)
+        self.showMainScreen()
     }
 }
 

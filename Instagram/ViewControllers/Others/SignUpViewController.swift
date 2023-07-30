@@ -167,8 +167,8 @@ class SignUpViewController: UIViewController {
         profilePictureImageView.addGestureRecognizer(gesture)
     }
     
-    private func presentError() {
-        let alertController = UIAlertController(title: "Woops", message: "Please make sure the username and password are valid.", preferredStyle: .alert)
+    private func presentError(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel)
         alertController.addAction(dismissAction)
         present(alertController, animated: true)
@@ -205,13 +205,23 @@ class SignUpViewController: UIViewController {
               let email = emailTextField.text,
               let password = passwordTextField.text,
               viewModel.isValidSignUp(username: username,email: email, password: password) else {
-            presentError()
+            presentError(title: "Woops", message: "Please make sure the username and password are valid.")
             return
         }
         
         // authenticate sign in
-        coordinator?.authenticationDidSucceed()
-        print("authenticating...")
+        AuthManager.shared.signUp(email: email, password: password, username: username, profileImage: profilePictureImageView.image?.pngData()) { [weak self] result in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let user):
+                    //UserDefaults.standard.set(user, forKey: "user")
+                    self.coordinator?.authenticationDidSucceed()
+                case .failure(let error):
+                    self.presentError(title: "Error", message: error.localizedDescription)
+                }
+            }
+        }
     }
     
     @objc func didTapTerms() {

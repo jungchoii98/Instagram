@@ -44,6 +44,7 @@
 		F09AA5EA2A72FD560059C845 /* IGTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5E92A72FD560059C845 /* IGTextField.swift */; };
 		F09AA5EC2A7309D60059C845 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5EB2A7309D60059C845 /* AuthenticationViewModel.swift */; };
 		F09AA5EF2A74CCB50059C845 /* UIImagePickerControllerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5EE2A74CCB50059C845 /* UIImagePickerControllerAdapter.swift */; };
+		F09AA5F12A75E7C80059C845 /* Extensions+Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5F02A75E7C80059C845 /* Extensions+Encodable.swift */; };
 		FDF9B74F1F7140AF20DAC2A6 /* Pods_Instagram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 724437086F110C91F8BF55FB /* Pods_Instagram.framework */; };
 /* End PBXBuildFile section */
 
@@ -89,6 +90,7 @@
 		F09AA5E92A72FD560059C845 /* IGTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGTextField.swift; sourceTree = "<group>"; };
 		F09AA5EB2A7309D60059C845 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		F09AA5EE2A74CCB50059C845 /* UIImagePickerControllerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImagePickerControllerAdapter.swift; sourceTree = "<group>"; };
+		F09AA5F02A75E7C80059C845 /* Extensions+Encodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+Encodable.swift"; sourceTree = "<group>"; };
 		FF3313F510F5DFF75A97A005 /* Pods-Instagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.debug.xcconfig"; path = "Target Support Files/Pods-Instagram/Pods-Instagram.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -143,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				F09AA5ED2A74CC530059C845 /* Adapters */,
+				F09AA5E62A72F46A0059C845 /* Extensions */,
 				F09AA5A42A71C8F00059C845 /* Resources */,
 				F09AA5A62A71C91E0059C845 /* Managers */,
 				F09AA5AB2A71CC470059C845 /* FlowCoordinators */,
@@ -158,7 +161,6 @@
 		F09AA5A42A71C8F00059C845 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				F09AA5E62A72F46A0059C845 /* Extensions */,
 				F09AA5E02A71D7280059C845 /* GoogleService-Info.plist */,
 				F09AA5992A71C33A0059C845 /* Assets.xcassets */,
 				F09AA59B2A71C33A0059C845 /* LaunchScreen.storyboard */,
@@ -260,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				F09AA5E72A72F4790059C845 /* Extensions+UIView.swift */,
+				F09AA5F02A75E7C80059C845 /* Extensions+Encodable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				F09AA5CE2A71D37C0059C845 /* IGUser.swift in Sources */,
 				F09AA5D22A71D3A50059C845 /* Relationship.swift in Sources */,
 				F09AA5BD2A71CDD20059C845 /* NotificationsCoordinator.swift in Sources */,
+				F09AA5F12A75E7C80059C845 /* Extensions+Encodable.swift in Sources */,
 				F09AA5B72A71CDA90059C845 /* HomeCoordinator.swift in Sources */,
 				F09AA5AF2A71CD090059C845 /* ExploreViewController.swift in Sources */,
 				F09AA5D02A71D38D0059C845 /* Post.swift in Sources */,
