@@ -91,8 +91,10 @@ final class AppCoordinator {
     func didSignOut(child: Coordinator) {
         removeChild(child: child)
         DispatchQueue.main.async {
-            self.navigationController.popToRootViewController(animated: true)
-            self.showSignIn()
+            self.navigationController.dismiss(animated: true)
+            if self.navigationController.viewControllers.isEmpty {
+                self.showSignIn()
+            }
         }
     }
 }

@@ -26,7 +26,8 @@ final class ProfileCoordinator: Coordinator {
               let user = Utility.decode(IGUser.self, data: data) else {
             return
         }
-        let profileVC = ProfileViewController(user: user)
+        let viewModel = ProfileVCViewModel()
+        let profileVC = ProfileViewController(viewModel: viewModel, user: user)
         profileVC.coordinator = self
         navigationController.pushViewController(profileVC, animated: true)
     }

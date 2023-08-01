@@ -15,9 +15,11 @@ class ProfileViewController: UIViewController {
     
     weak var coordinator: ProfileViewControllerDelegate?
     private let user: IGUser
+    private let viewModel: ProfileVCViewModel
     
-    init(user: IGUser) {
+    init(viewModel: ProfileVCViewModel, user: IGUser) {
         self.user = user
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -33,17 +35,31 @@ class ProfileViewController: UIViewController {
     }
     
     private func configureNavigationBar() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "gear"),
-            style: .plain,
-            target: self,
-            action: #selector(didTapSettings)
-        )
+        do {
+            let isCurrentUser = try viewModel.isCurrentUser(user: user)
+            if isCurrentUser {
+                navigationItem.rightBarButtonItem = UIBarButtonItem(
+                    image: UIImage(systemName: "gear"),
+                    style: .plain,
+                    target: self,
+                    action: #selector(didTapSettings)
+                )
+            }
+
+        } catch(let error) {
+            print(error.localizedDescription)
+        }
     }
     
     // MARK: Actions
     
     @objc func didTapSettings() {
         coordinator?.didTapSettings()
+    }
+}
+
+extension ProfileViewController {
+    enum ProfileErrors: Error {
+        case badData
     }
 }
