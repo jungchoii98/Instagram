@@ -31,4 +31,20 @@ final class DatabaseManager: DatabaseManagerProtocol {
             return
         }
     }
+    
+    public func findUser(email: String, completion: @escaping (IGUser?) -> Void) {
+        let collection = database.collection("users")
+        collection.getDocuments { snapshot, error in
+            guard let usersDocuments = snapshot?.documents, error == nil else {
+                completion(nil)
+                return
+            }
+            
+            let usersData = usersDocuments.compactMap({ $0.data() })
+            let users = usersData.compactMap({ IGUser(dictionary: $0) })
+            completion(
+                users.first(where: { $0.email == email })
+            )
+        }
+    }
 }

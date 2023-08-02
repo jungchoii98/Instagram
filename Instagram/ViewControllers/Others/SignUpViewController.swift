@@ -201,6 +201,7 @@ class SignUpViewController: UIViewController {
         usernameTextField.resignFirstResponder()
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
+        showSpinner()
         guard let username = usernameTextField.text,
               let email = emailTextField.text,
               let password = passwordTextField.text,
@@ -212,6 +213,7 @@ class SignUpViewController: UIViewController {
         // authenticate sign in
         AuthManager.shared.signUp(email: email, password: password, username: username, profileImage: profilePictureImageView.image?.pngData()) { [weak self] result in
             guard let self = self else { return }
+            self.dismissSpinner()
             DispatchQueue.main.async {
                 switch result {
                 case .success(let user):

@@ -44,10 +44,11 @@
 		F09AA5EA2A72FD560059C845 /* IGTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5E92A72FD560059C845 /* IGTextField.swift */; };
 		F09AA5EC2A7309D60059C845 /* AuthenticationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5EB2A7309D60059C845 /* AuthenticationViewModel.swift */; };
 		F09AA5EF2A74CCB50059C845 /* UIImagePickerControllerAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5EE2A74CCB50059C845 /* UIImagePickerControllerAdapter.swift */; };
-		F09AA5F12A75E7C80059C845 /* Extensions+Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5F02A75E7C80059C845 /* Extensions+Encodable.swift */; };
+		F09AA5F12A75E7C80059C845 /* Extensions+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5F02A75E7C80059C845 /* Extensions+Codable.swift */; };
 		F09AA5F72A76F5110059C845 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5F62A76F5110059C845 /* Constants.swift */; };
 		F09AA5F92A76F5E10059C845 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5F82A76F5E10059C845 /* Utility.swift */; };
 		F09AA5FB2A771F3C0059C845 /* ProfileVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5FA2A771F3C0059C845 /* ProfileVCViewModel.swift */; };
+		F0B850792A79D45B00004B8C /* Extensions+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B850782A79D45B00004B8C /* Extensions+UIViewController.swift */; };
 		FDF9B74F1F7140AF20DAC2A6 /* Pods_Instagram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 724437086F110C91F8BF55FB /* Pods_Instagram.framework */; };
 /* End PBXBuildFile section */
 
@@ -93,10 +94,11 @@
 		F09AA5E92A72FD560059C845 /* IGTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGTextField.swift; sourceTree = "<group>"; };
 		F09AA5EB2A7309D60059C845 /* AuthenticationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewModel.swift; sourceTree = "<group>"; };
 		F09AA5EE2A74CCB50059C845 /* UIImagePickerControllerAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImagePickerControllerAdapter.swift; sourceTree = "<group>"; };
-		F09AA5F02A75E7C80059C845 /* Extensions+Encodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+Encodable.swift"; sourceTree = "<group>"; };
+		F09AA5F02A75E7C80059C845 /* Extensions+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+Codable.swift"; sourceTree = "<group>"; };
 		F09AA5F62A76F5110059C845 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F09AA5F82A76F5E10059C845 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		F09AA5FA2A771F3C0059C845 /* ProfileVCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVCViewModel.swift; sourceTree = "<group>"; };
+		F0B850782A79D45B00004B8C /* Extensions+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+UIViewController.swift"; sourceTree = "<group>"; };
 		FF3313F510F5DFF75A97A005 /* Pods-Instagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.debug.xcconfig"; path = "Target Support Files/Pods-Instagram/Pods-Instagram.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -271,7 +273,8 @@
 			isa = PBXGroup;
 			children = (
 				F09AA5E72A72F4790059C845 /* Extensions+UIView.swift */,
-				F09AA5F02A75E7C80059C845 /* Extensions+Encodable.swift */,
+				F09AA5F02A75E7C80059C845 /* Extensions+Codable.swift */,
+				F0B850782A79D45B00004B8C /* Extensions+UIViewController.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -414,10 +417,11 @@
 				F09AA5C62A71D3090059C845 /* CaptionViewController.swift in Sources */,
 				F09AA5BB2A71CDC50059C845 /* CameraCoordinator.swift in Sources */,
 				F09AA5CE2A71D37C0059C845 /* IGUser.swift in Sources */,
+				F0B850792A79D45B00004B8C /* Extensions+UIViewController.swift in Sources */,
 				F09AA5D22A71D3A50059C845 /* Relationship.swift in Sources */,
 				F09AA5F92A76F5E10059C845 /* Utility.swift in Sources */,
 				F09AA5BD2A71CDD20059C845 /* NotificationsCoordinator.swift in Sources */,
-				F09AA5F12A75E7C80059C845 /* Extensions+Encodable.swift in Sources */,
+				F09AA5F12A75E7C80059C845 /* Extensions+Codable.swift in Sources */,
 				F09AA5B72A71CDA90059C845 /* HomeCoordinator.swift in Sources */,
 				F09AA5AF2A71CD090059C845 /* ExploreViewController.swift in Sources */,
 				F09AA5D02A71D38D0059C845 /* Post.swift in Sources */,

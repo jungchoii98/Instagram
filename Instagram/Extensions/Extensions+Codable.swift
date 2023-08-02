@@ -29,3 +29,14 @@ extension Encodable {
         }
     }
 }
+
+extension Decodable {
+    init?(dictionary: [String:Any]) {
+        guard let data = try? JSONSerialization.data(withJSONObject: dictionary),
+              let model = try? JSONDecoder().decode(Self.self, from: data) else {
+            return nil
+        }
+        
+        self = model
+    }
+}

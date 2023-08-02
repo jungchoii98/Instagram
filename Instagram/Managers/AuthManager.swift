@@ -37,12 +37,25 @@ final class AuthManager: AuthManagerProtocol {
         return auth.currentUser != nil ? true : false
     }
     
-    func signIn(
+    public func signIn(
         email: String,
         password: String,
         completion: @escaping (Result<IGUser, AuthManager.AuthError>) -> Void
     ) {
-        
+        DatabaseManager.shared.findUser(email: email) { [weak self] user in
+            guard let self = self,
+                  let user = user else {
+                completion(.failure(.signInError))
+                return
+            }
+            self.auth.signIn(withEmail: email, password: password) { result, error in
+                guard result != nil, error == nil else {
+                    completion(.failure(.signInError))
+                    return
+                }
+                completion(.success(user))
+            }
+        }
     }
     
     public func signUp(
@@ -91,5 +104,6 @@ extension AuthManager {
     enum AuthError: Error {
         case createUserError
         case uploadProfilePictureError
+        case signInError
     }
 }

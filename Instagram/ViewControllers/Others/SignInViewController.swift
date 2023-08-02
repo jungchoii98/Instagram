@@ -157,13 +157,23 @@ class SignInViewController: UIViewController {
     @objc func didTapSignIn() {
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
+        showSpinner()
         guard let email = emailTextField.text,
               let password = passwordTextField.text,
               viewModel.isValidSignIn(email: email, password: password) else { return }
         
         // authenticate sign in
-        coordinator?.authenticationDidSucceed()
-        print("authenticating...")
+        AuthManager.shared.signIn(email: email, password: password) { [weak self] result in
+            guard let self = self else { return }
+            self.dismissSpinner()
+            switch result {
+            case .success(let user):
+                UserDefaults.standard.set(user.asData(), forKey: UserDefaultsConstants.user.rawValue)
+                self.coordinator?.authenticationDidSucceed()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
     @objc func didTapCreateAccount() {
