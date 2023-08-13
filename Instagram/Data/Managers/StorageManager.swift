@@ -18,11 +18,11 @@ protocol StorageManagerProtocol {
 
 final class StorageManager: StorageManagerProtocol {
     
-    static let shared = StorageManager()
+    private let storageClient: StorageClient
     
-    private init() {}
-    
-    private let storage = FirebaseStorage.Storage.storage()
+    init(storageClient: StorageClient) {
+        self.storageClient = storageClient
+    }
     
     public func uploadProfilePicture(
         username: String,
@@ -33,9 +33,8 @@ final class StorageManager: StorageManagerProtocol {
             completion(false)
             return
         }
-        let reference = storage.reference()
-        reference.child("\(username)/profile_picture.png").putData(data) { _, error in
-            completion(error == nil)
+        storageClient.upload(fileName: username, itemName: "profile_picture.png", data: data) { didSucceed in
+            completion(didSucceed)
         }
     }
 }

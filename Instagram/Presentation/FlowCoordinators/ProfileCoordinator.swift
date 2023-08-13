@@ -12,9 +12,11 @@ final class ProfileCoordinator: Coordinator {
     private let navigationController: UINavigationController
     weak var appCoordinator: AppCoordinator?
     var childCoordinators: [Coordinator] = []
+    private let authManager: AuthServiceProtocol
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, authManager: AuthServiceProtocol) {
         self.navigationController = navigationController
+        self.authManager = authManager
     }
     
     func start() {
@@ -33,7 +35,8 @@ final class ProfileCoordinator: Coordinator {
     }
     
     private func showSettings() {
-        let settingsVC = SettingsViewController()
+        let viewModel = SettingsVCViewModel(authManager: authManager)
+        let settingsVC = SettingsViewController(viewModel: viewModel)
         settingsVC.coordinator = self
         navigationController.present(UINavigationController(rootViewController: settingsVC), animated: true)
     }

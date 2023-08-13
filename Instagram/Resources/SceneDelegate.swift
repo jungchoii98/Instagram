@@ -5,12 +5,23 @@
 //  Created by Jung Choi on 7/26/23.
 //
 
+import FirebaseAuth
+import FirebaseFirestore
+import FirebaseStorage
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     var coordinator: AppCoordinator?
+    
+    // TODO: Dependency Injection Container
+    private lazy var storageClient = FirebaseStorage.Storage.storage()
+    private lazy var storageManager = StorageManager(storageClient: storageClient)
+    private lazy var databaseClient = Firestore.firestore()
+    private lazy var databaseManager = DatabaseManager(databaseClient: databaseClient)
+    private lazy var authClient = FirebaseAuth.Auth.auth()
+    private lazy var authManager = AuthService(authClient: authClient, databaseManager: databaseManager, storageManager: storageManager)
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -21,7 +32,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationController = UINavigationController()
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
-        coordinator = AppCoordinator(navigationController: navigationController)
+        coordinator = AppCoordinator(navigationController: navigationController, authManager: authManager, databaseManager: databaseManager, storageManager: storageManager)
         coordinator?.start()
     }
 

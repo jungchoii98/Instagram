@@ -34,4 +34,11 @@ extension UIViewController {
             containerView = nil
         }
     }
+    
+    func presentError(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel)
+        alertController.addAction(dismissAction)
+        present(alertController, animated: true)
+    }
 }

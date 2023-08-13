@@ -16,11 +16,16 @@ final class AuthenticationCoordinator: Coordinator {
     
     private let navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
+    private let authManager: AuthServiceProtocol
     
     weak var delegate: AuthenticationCoordinatorDelegate?
     
-    init(navigationController: UINavigationController) {
+    init(
+        navigationController: UINavigationController,
+        authManager: AuthServiceProtocol
+    ) {
         self.navigationController = navigationController
+        self.authManager = authManager
     }
     
     func start() {
@@ -28,14 +33,14 @@ final class AuthenticationCoordinator: Coordinator {
     }
     
     private func showSignIn() {
-        let viewModel = AuthenticationViewModel()
+        let viewModel = AuthenticationViewModel(authManager: authManager)
         let signInVC = SignInViewController(viewModel: viewModel)
         signInVC.coordinator = self
         navigationController.pushViewController(signInVC, animated: true)
     }
     
     private func showSignUp() {
-        let viewModel = AuthenticationViewModel()
+        let viewModel = AuthenticationViewModel(authManager: authManager)
         let signUpVC = SignUpViewController(viewModel: viewModel)
         signUpVC.coordinator = self
         navigationController.pushViewController(signUpVC, animated: true)

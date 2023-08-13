@@ -17,13 +17,24 @@ final class AppCoordinator {
     private var navigationController = UINavigationController()
     
     private var childCoordinators: [Coordinator] = []
+    private let authManager: AuthServiceProtocol
+    private let databaseManager: DatabaseManagerProtocol
+    private let storageManager: StorageManagerProtocol
     
-    init(navigationController: UINavigationController) {
+    init(
+        navigationController: UINavigationController,
+        authManager: AuthServiceProtocol,
+        databaseManager: DatabaseManagerProtocol,
+        storageManager: StorageManagerProtocol
+    ) {
         self.navigationController = navigationController
+        self.authManager = authManager
+        self.databaseManager = databaseManager
+        self.storageManager = storageManager
     }
     
     func start() {
-        if AuthManager.shared.isSignedIn {
+        if authManager.isSignedIn {
             showMainScreen()
         } else {
             showSignIn()
@@ -49,7 +60,7 @@ final class AppCoordinator {
         let exploreFlowCoordinator = ExploreCoordinator(navigationController: exploreNavigationController)
         let cameraFlowCoordinator = CameraCoordinator(navigationController: cameraNavigationController)
         let notificationsFlowCoordinator = NotificationsCoordinator(navigationController: notificationsNavigationController)
-        let profileFlowCoordinator = ProfileCoordinator(navigationController: profileNavigationController)
+        let profileFlowCoordinator = ProfileCoordinator(navigationController: profileNavigationController, authManager: authManager)
         
         profileFlowCoordinator.appCoordinator = self
         
@@ -82,7 +93,7 @@ final class AppCoordinator {
     }
     
     func showSignIn() {
-        let authenticationCoordinator = AuthenticationCoordinator(navigationController: navigationController)
+        let authenticationCoordinator = AuthenticationCoordinator(navigationController: navigationController, authManager: authManager)
         authenticationCoordinator.delegate = self
         authenticationCoordinator.start()
         childCoordinators.append(authenticationCoordinator)

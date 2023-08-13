@@ -85,7 +85,9 @@ class SignUpViewController: UIViewController {
     weak var coordinator: SignUpViewControllerDelegate?
     private let viewModel: AuthenticationViewModel
     
-    init(viewModel: AuthenticationViewModel) {
+    init(
+        viewModel: AuthenticationViewModel
+    ) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -167,13 +169,6 @@ class SignUpViewController: UIViewController {
         profilePictureImageView.addGestureRecognizer(gesture)
     }
     
-    private func presentError(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let dismissAction = UIAlertAction(title: "Dismiss", style: .cancel)
-        alertController.addAction(dismissAction)
-        present(alertController, animated: true)
-    }
-    
     // MARK: Actions
     
     @objc func didTapProfilePicture() {
@@ -211,18 +206,15 @@ class SignUpViewController: UIViewController {
         }
         
         // authenticate sign in
-        AuthManager.shared.signUp(email: email, password: password, username: username, profileImage: profilePictureImageView.image?.pngData()) { [weak self] result in
+        viewModel.signUp(email: email, password: password, username: username, profileImageData: profilePictureImageView.image?.pngData()) { [weak self] error in
             guard let self = self else { return }
-            self.dismissSpinner()
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let user):
-                    UserDefaults.standard.set(user.asData(), forKey: UserDefaultsConstants.user.rawValue)
-                    self.coordinator?.authenticationDidSucceed()
-                case .failure(let error):
-                    self.presentError(title: "Error", message: error.localizedDescription)
-                }
+            guard error == nil else {
+                self.presentError(title: "Error", message: error?.localizedDescription ?? "Error occured while signing up")
+                return
             }
+            self.dismissSpinner()
+            self.coordinator?.authenticationDidSucceed()
+            
         }
     }
     

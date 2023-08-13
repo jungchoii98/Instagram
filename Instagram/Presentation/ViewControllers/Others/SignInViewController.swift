@@ -163,16 +163,13 @@ class SignInViewController: UIViewController {
               viewModel.isValidSignIn(email: email, password: password) else { return }
         
         // authenticate sign in
-        AuthManager.shared.signIn(email: email, password: password) { [weak self] result in
+        viewModel.signIn(email: email, password: password) { [weak self] error in
             guard let self = self else { return }
-            self.dismissSpinner()
-            switch result {
-            case .success(let user):
-                UserDefaults.standard.set(user.asData(), forKey: UserDefaultsConstants.user.rawValue)
-                self.coordinator?.authenticationDidSucceed()
-            case .failure(let error):
-                print(error.localizedDescription)
+            guard error == nil else {
+                self.presentError(title: "Error", message: error?.localizedDescription ?? "Error occured while signing up")
+                return
             }
+            self.coordinator?.authenticationDidSucceed()
         }
     }
     

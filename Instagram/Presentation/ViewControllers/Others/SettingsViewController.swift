@@ -28,7 +28,17 @@ class SettingsViewController: UIViewController {
     private var dataSource: UITableViewDiffableDataSource<Section, Int>!
     
     weak var coordinator: SettingsViewControllerDelegate?
-
+    private let viewModel: SettingsVCViewModel
+    
+    init(viewModel: SettingsVCViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Settings"
@@ -70,8 +80,9 @@ class SettingsViewController: UIViewController {
     @objc func didTapSignOutButton() {
         let alertController = UIAlertController(title: "Sign Out", message: "Are You Sure?", preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        let signOutAction = UIAlertAction(title: "Sign Out", style: .destructive) { _ in 
-            AuthManager.shared.signOut { [weak self] signOutDidSucceed in
+        let signOutAction = UIAlertAction(title: "Sign Out", style: .destructive) { [weak self] _ in
+            guard let self = self else { return }
+            self.viewModel.signOut { [weak self] signOutDidSucceed in
                 guard let self = self else { return }
                 if signOutDidSucceed {
                     self.coordinator?.didTapSignOut()
