@@ -21,10 +21,11 @@ final class HomeCoordinator: Coordinator {
     }
     
     private func showHome() {
-        let homeVC = HomeViewController()
+        let viewModel = HomeFeedVCViewModel()
+        let homeVC = HomeFeedViewController(viewModel: viewModel)
         homeVC.coordinator = self
         navigationController.pushViewController(homeVC, animated: true)
     }
 }
 
-extension HomeCoordinator: HomeViewControllerDelegate {}
+extension HomeCoordinator: HomeFeedViewControllerDelegate {}

@@ -1,5 +1,5 @@
 //
-//  HomeViewController.swift
+//  HomeFeedViewController.swift
 //  Instagram
 //
 //  Created by Jung Choi on 7/26/23.
@@ -7,28 +7,39 @@
 
 import UIKit
 
-protocol HomeViewControllerDelegate: AnyObject {}
+protocol HomeFeedViewControllerDelegate: AnyObject {}
 
-class HomeViewController: UIViewController {
+class HomeFeedViewController: UIViewController {
     
     enum Section {
         case main
     }
     
-    private var collectionView: HomeCollectionView!
-    private var dataSource: UICollectionViewDiffableDataSource<Section,Int>!
+    private var collectionView: HomeFeedCollectionView!
+    private var dataSource: UICollectionViewDiffableDataSource<Int,HomeFeedCellType>!
     
-    weak var coordinator: HomeViewControllerDelegate?
-
+    weak var coordinator: HomeFeedViewControllerDelegate?
+    private var viewModel: HomeFeedVCViewModel
+    
+    init(viewModel: HomeFeedVCViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Home"
         view.backgroundColor = .systemBackground
         configureCollectionView()
+        viewModel.fetchPosts()
     }
     
     private func configureCollectionView() {
-        collectionView = HomeCollectionView(frame: .zero, collectionViewLayout: HomeCollectionView.collectionViewLayout(viewWidth: view.width))
+        collectionView = HomeFeedCollectionView(frame: .zero, collectionViewLayout: HomeFeedCollectionView.collectionViewLayout(viewWidth: view.width))
         view.addSubview(collectionView)
         configureDataSource()
     }
@@ -51,9 +62,11 @@ class HomeViewController: UIViewController {
     
     private func update() {
         DispatchQueue.main.async {
-            var snapshot = NSDiffableDataSourceSnapshot<Section,Int>()
-            snapshot.appendSections([.main])
-            snapshot.appendItems([1,2,3,4,5,6,7,8,9])
+            var snapshot = NSDiffableDataSourceSnapshot<Int,HomeFeedCellType>()
+            for (index, item) in self.viewModel.posts.enumerated() {
+                snapshot.appendSections([index])
+                snapshot.appendItems(item, toSection: index)
+            }
             self.dataSource.apply(snapshot, animatingDifferences: true)
         }
     }
