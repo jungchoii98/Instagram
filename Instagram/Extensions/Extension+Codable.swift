@@ -1,5 +1,5 @@
 //
-//  Extensions+Encodable.swift
+//  Extension+Encodable.swift
 //  Instagram
 //
 //  Created by Jung Choi on 7/29/23.

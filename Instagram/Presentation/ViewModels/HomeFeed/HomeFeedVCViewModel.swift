@@ -18,7 +18,7 @@ struct HomeFeedVCViewModel {
             HomeFeedCellType.actions(ActionsCellViewModel(isLiked: true)),
             HomeFeedCellType.likesCount(LikesCountCellViewModel(likers: [])),
             HomeFeedCellType.caption(CaptionCellViewModel(username: "jchoi", caption: "hello")),
-            HomeFeedCellType.timestamp(TimeStampCellViewModel(date: Date())),
+            HomeFeedCellType.timestamp(TimetampCellViewModel(date: Date(timeIntervalSinceNow: 0))),
         ]])
     }
 }

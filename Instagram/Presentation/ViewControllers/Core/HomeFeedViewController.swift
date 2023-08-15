@@ -81,11 +81,13 @@ extension HomeFeedViewController {
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LikesCountCollectionViewCell.reuseID, for: indexPath) as! LikesCountCollectionViewCell
                 cell.configure(with: viewModel)
                 return cell
-            default:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-                cell.backgroundColor = .blue
-                cell.layer.borderColor = UIColor.black.cgColor
-                cell.layer.borderWidth = 1.0
+            case .caption(let viewModel):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CaptionCollectionViewCell.reuseID, for: indexPath) as! CaptionCollectionViewCell
+                cell.configure(with: viewModel)
+                return cell
+            case .timestamp(let viewModel):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TimestampCollectionViewCell.reuseID, for: indexPath) as! TimestampCollectionViewCell
+                cell.configure(with: viewModel)
                 return cell
             }
         })

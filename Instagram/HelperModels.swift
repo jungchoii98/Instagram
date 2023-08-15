@@ -13,5 +13,5 @@ enum HomeFeedCellType: Hashable {
     case actions(ActionsCellViewModel)
     case likesCount(LikesCountCellViewModel)
     case caption(CaptionCellViewModel)
-    case timestamp(TimeStampCellViewModel)
+    case timestamp(TimetampCellViewModel)
 }

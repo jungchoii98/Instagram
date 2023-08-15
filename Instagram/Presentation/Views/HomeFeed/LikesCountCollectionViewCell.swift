@@ -30,10 +30,10 @@ class LikesCountCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
         let padding: CGFloat = 12
         NSLayoutConstraint.activate([
-            likesCountLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            likesCountLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
             likesCountLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            likesCountLabel.heightAnchor.constraint(equalToConstant: contentView.height),
-            likesCountLabel.widthAnchor.constraint(equalToConstant: contentView.width/5)
+            likesCountLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            likesCountLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding)
         ])
     }
     

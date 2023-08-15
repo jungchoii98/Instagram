@@ -1,5 +1,5 @@
 //
-//  Extensions+UIViewController.swift
+//  Extension+UIViewController.swift
 //  Instagram
 //
 //  Created by Jung Choi on 8/1/23.

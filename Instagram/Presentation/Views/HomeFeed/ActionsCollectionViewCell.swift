@@ -48,20 +48,20 @@ class ActionsCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
         let padding: CGFloat = 12
         NSLayoutConstraint.activate([
-            likeButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            likeButton.topAnchor.constraint(equalTo: contentView.topAnchor),
+            likeButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             likeButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
-            likeButton.heightAnchor.constraint(equalToConstant: contentView.height),
-            likeButton.widthAnchor.constraint(equalToConstant: contentView.height),
+            likeButton.widthAnchor.constraint(equalTo: contentView.heightAnchor),
             
-            commentButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            commentButton.topAnchor.constraint(equalTo: contentView.topAnchor),
+            commentButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             commentButton.leadingAnchor.constraint(equalTo: likeButton.trailingAnchor, constant: padding),
-            commentButton.heightAnchor.constraint(equalToConstant: contentView.height),
-            commentButton.widthAnchor.constraint(equalToConstant: contentView.height),
+            commentButton.widthAnchor.constraint(equalTo: contentView.heightAnchor),
             
-            shareButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            shareButton.topAnchor.constraint(equalTo: contentView.topAnchor),
+            shareButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             shareButton.leadingAnchor.constraint(equalTo: commentButton.trailingAnchor, constant: padding),
-            shareButton.heightAnchor.constraint(equalToConstant: contentView.height),
-            shareButton.widthAnchor.constraint(equalToConstant: contentView.height),
+            shareButton.widthAnchor.constraint(equalTo: contentView.heightAnchor),
         ])
     }
     

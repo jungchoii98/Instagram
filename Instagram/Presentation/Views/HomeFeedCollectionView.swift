@@ -24,6 +24,8 @@ final class HomeFeedCollectionView: UICollectionView {
         register(PostCollectionViewCell.self, forCellWithReuseIdentifier: PostCollectionViewCell.reuseID)
         register(ActionsCollectionViewCell.self, forCellWithReuseIdentifier: ActionsCollectionViewCell.reuseID)
         register(LikesCountCollectionViewCell.self, forCellWithReuseIdentifier: LikesCountCollectionViewCell.reuseID)
+        register(CaptionCollectionViewCell.self, forCellWithReuseIdentifier: CaptionCollectionViewCell.reuseID)
+        register(TimestampCollectionViewCell.self, forCellWithReuseIdentifier: TimestampCollectionViewCell.reuseID)
         
         backgroundColor = .systemBackground
     }

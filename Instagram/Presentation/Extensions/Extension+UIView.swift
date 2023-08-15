@@ -1,5 +1,5 @@
 //
-//  Extensions + UIView.swift
+//  Extension + UIView.swift
 //  Instagram
 //
 //  Created by Jung Choi on 7/27/23.
