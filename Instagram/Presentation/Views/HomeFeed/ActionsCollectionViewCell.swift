@@ -7,19 +7,23 @@
 
 import UIKit
 
+protocol ActionsCollectionViewCellDelegate: AnyObject {
+    func actionsCollectionViewCellDidTapLike(_ cell: ActionsCollectionViewCell, isLiked: Bool)
+    func actionsCollectionViewCellDidTapComment(_ cell: ActionsCollectionViewCell)
+    func actionsCollectionViewCellDidTapShare(_ cell: ActionsCollectionViewCell)
+}
+
 class ActionsCollectionViewCell: UICollectionViewCell {
     
     static let reuseID = "\(ActionsCollectionViewCell.self)"
     
-    private lazy var likeButton: UIButton = {
+    private var likeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.tintColor = .label
-        button.setImage(UIImage(systemName: "heart"), for: .normal)
         return button
     }()
     
-    private lazy var commentButton: UIButton = {
+    private var commentButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .label
@@ -27,13 +31,16 @@ class ActionsCollectionViewCell: UICollectionViewCell {
         return button
     }()
     
-    private lazy var shareButton: UIButton = {
+    private var shareButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .label
         button.setImage(UIImage(systemName: "paperplane"), for: .normal)
         return button
     }()
+    
+    weak var delegate: ActionsCollectionViewCellDelegate?
+    private var isLiked: Bool!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -77,12 +84,40 @@ class ActionsCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(likeButton)
         contentView.addSubview(commentButton)
         contentView.addSubview(shareButton)
+        
+        likeButton.addTarget(self, action: #selector(didTapLike), for: .touchUpInside)
+        commentButton.addTarget(self, action: #selector(didTapComment), for: .touchUpInside)
+        shareButton.addTarget(self, action: #selector(didTapShare), for: .touchUpInside)
+    }
+    
+    @objc func didTapLike() {
+        isLiked.toggle()
+        updateLikeImage()
+        delegate?.actionsCollectionViewCellDidTapLike(self, isLiked: isLiked)
+    }
+    
+    @objc func didTapComment() {
+        delegate?.actionsCollectionViewCellDidTapComment(self)
+    }
+    
+    @objc func didTapShare() {
+        delegate?.actionsCollectionViewCellDidTapShare(self)
     }
     
     func configure(with viewModel: ActionsCellViewModel) {
-        if viewModel.isLiked {
+        isLiked = viewModel.isLiked
+        updateLikeImage()
+    }
+}
+
+private extension ActionsCollectionViewCell {
+    func updateLikeImage() {
+        if isLiked {
             likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
             likeButton.tintColor = .systemRed
+        } else {
+            likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            likeButton.tintColor = .label
         }
     }
 }

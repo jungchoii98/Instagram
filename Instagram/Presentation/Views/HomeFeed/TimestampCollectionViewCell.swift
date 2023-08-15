@@ -9,13 +9,13 @@ import UIKit
 
 class TimestampCollectionViewCell: UICollectionViewCell {
     
+    static let reuseID = "\(TimestampCollectionViewCell.self)"
+    
     private let timestampLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    static let reuseID = "\(TimestampCollectionViewCell.self)"
     
     override init(frame: CGRect) {
         super.init(frame: frame)

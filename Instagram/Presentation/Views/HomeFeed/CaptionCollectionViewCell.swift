@@ -7,15 +7,22 @@
 
 import UIKit
 
+protocol CaptionCollectionViewCellDelegate: AnyObject {
+    func captionCollectionViewCellDidTapCaption(_ cell: CaptionCollectionViewCell)
+}
+
 class CaptionCollectionViewCell: UICollectionViewCell {
+    
+    static let reuseID = "\(CaptionCollectionViewCell.self)"
     
     private let captionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.isUserInteractionEnabled = true
         return label
     }()
     
-    static let reuseID = "\(CaptionCollectionViewCell.self)"
+    weak var delegate: CaptionCollectionViewCellDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,6 +52,13 @@ class CaptionCollectionViewCell: UICollectionViewCell {
     private func setUp() {
         contentView.backgroundColor = .systemBackground
         contentView.addSubview(captionLabel)
+        
+        let captionTap = UITapGestureRecognizer(target: self, action: #selector(didTapCaption))
+        captionLabel.addGestureRecognizer(captionTap)
+    }
+    
+    @objc func didTapCaption() {
+        delegate?.captionCollectionViewCellDidTapCaption(self)
     }
     
     func configure(with viewModel: CaptionCellViewModel) {

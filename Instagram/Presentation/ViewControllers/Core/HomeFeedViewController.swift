@@ -61,28 +61,95 @@ class HomeFeedViewController: UIViewController {
     }
 }
 
-extension HomeFeedViewController {
-    private func configureDataSource() {
+private extension HomeFeedViewController {
+    func displayShareOptions() {
+        let activityViewController = UIActivityViewController(activityItems: [], applicationActivities: nil)
+        navigationController?.present(activityViewController, animated: true)
+    }
+    
+    func displayMoreOptions() {
+        let alertViewController = UIAlertController(title: "More Options", message: "Please select an option", preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let shareAction = UIAlertAction(title: "Share", style: .default) { action in
+        }
+        let reportAction = UIAlertAction(title: "Report", style: .destructive) { action in
+        }
+        alertViewController.addAction(cancelAction)
+        alertViewController.addAction(shareAction)
+        alertViewController.addAction(reportAction)
+        navigationController?.present(alertViewController, animated: true)
+    }
+}
+
+extension HomeFeedViewController: PosterCollectionViewCellDelegate {
+    func posterCollectionViewCellDidTapUsername(_ cell: PosterCollectionViewCell, with username: String) {
+        print("username tapped: \(username)")
+    }
+    
+    func posterCollectionViewCellDidTapMore(_ cell: PosterCollectionViewCell) {
+        displayMoreOptions()
+    }
+}
+
+extension HomeFeedViewController: PostCollectionViewCellDelegate {
+    func postCollectionViewCellDidDoubleTap(_ cell: PostCollectionViewCell) {
+        print("double tap liked")
+    }
+}
+
+extension HomeFeedViewController: ActionsCollectionViewCellDelegate {
+    func actionsCollectionViewCellDidTapLike(_ cell: ActionsCollectionViewCell, isLiked: Bool) {
+        print("like action tap")
+    }
+    
+    func actionsCollectionViewCellDidTapComment(_ cell: ActionsCollectionViewCell) {
+        print("comment action tap")
+    }
+    
+    func actionsCollectionViewCellDidTapShare(_ cell: ActionsCollectionViewCell) {
+        displayShareOptions()
+    }
+}
+
+extension HomeFeedViewController: LikesCountCollectionViewCellDelegate {
+    func likesCountCollectionViewCellDidTapCount(_ cell: LikesCountCollectionViewCell) {
+        print("likes count tap")
+    }
+}
+
+extension HomeFeedViewController: CaptionCollectionViewCellDelegate {
+    func captionCollectionViewCellDidTapCaption(_ cell: CaptionCollectionViewCell) {
+        print("caption tap")
+    }
+}
+
+private extension HomeFeedViewController {
+    func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             switch itemIdentifier {
             case .poster(let viewModel):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PosterCollectionViewCell.reuseID, for: indexPath) as! PosterCollectionViewCell
+                cell.delegate = self
                 cell.configure(with: viewModel)
                 return cell
             case .post(let viewModel):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PostCollectionViewCell.reuseID, for: indexPath) as! PostCollectionViewCell
+                cell.delegate = self
                 cell.configure(with: viewModel)
                 return cell
             case .actions(let viewModel):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ActionsCollectionViewCell.reuseID, for: indexPath) as! ActionsCollectionViewCell
+                cell.delegate = self
                 cell.configure(with: viewModel)
                 return cell
             case .likesCount(let viewModel):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LikesCountCollectionViewCell.reuseID, for: indexPath) as! LikesCountCollectionViewCell
+                cell.delegate = self
                 cell.configure(with: viewModel)
                 return cell
             case .caption(let viewModel):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CaptionCollectionViewCell.reuseID, for: indexPath) as! CaptionCollectionViewCell
+                cell.delegate = self
                 cell.configure(with: viewModel)
                 return cell
             case .timestamp(let viewModel):

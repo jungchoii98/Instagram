@@ -8,11 +8,16 @@
 import SDWebImage
 import UIKit
 
+protocol PosterCollectionViewCellDelegate: AnyObject {
+    func posterCollectionViewCellDidTapUsername(_ cell: PosterCollectionViewCell, with username: String)
+    func posterCollectionViewCellDidTapMore(_ cell: PosterCollectionViewCell)
+}
+
 class PosterCollectionViewCell: UICollectionViewCell {
     
     static let reuseID = "\(PosterCollectionViewCell.self)"
     
-    private lazy var avatarImageView: UIImageView = {
+    private var avatarImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
@@ -22,21 +27,25 @@ class PosterCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    private lazy var usernameLabel: UILabel = {
+    private var usernameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.isUserInteractionEnabled = true
         label.font = .systemFont(ofSize: 18, weight: .regular)
         label.sizeToFit()
         return label
     }()
     
-    private lazy var moreButton: UIButton = {
+    private var moreButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(systemName: "ellipsis"), for: .normal)
         button.tintColor = .label
         return button
     }()
+    
+    weak var delegate: PosterCollectionViewCellDelegate?
+    private var username: String!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -80,16 +89,23 @@ class PosterCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(avatarImageView)
         contentView.addSubview(usernameLabel)
         contentView.addSubview(moreButton)
+        
+        let usernameTap = UITapGestureRecognizer(target: self, action: #selector(tappedUsername))
+        usernameLabel.addGestureRecognizer(usernameTap)
         moreButton.addTarget(self, action: #selector(tappedMoreButton), for: .touchUpInside)
     }
     
+    @objc func tappedUsername() {
+        delegate?.posterCollectionViewCellDidTapUsername(self, with: username)
+    }
+    
     @objc func tappedMoreButton() {
-        // TODO: Implement functionality
-        print("Tapped more button")
+        delegate?.posterCollectionViewCellDidTapMore(self)
     }
     
     func configure(with viewModel: PosterCellViewModel) {
         avatarImageView.sd_setImage(with: viewModel.avatarImageURL, placeholderImage: UIImage(systemName: "wifi.slash"))
         usernameLabel.text = viewModel.username
+        username = viewModel.username
     }
 }

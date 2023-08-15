@@ -7,15 +7,22 @@
 
 import UIKit
 
+protocol LikesCountCollectionViewCellDelegate: AnyObject {
+    func likesCountCollectionViewCellDidTapCount(_ cell: LikesCountCollectionViewCell)
+}
+
 class LikesCountCollectionViewCell: UICollectionViewCell {
     
     static let reuseID = "\(LikesCountCollectionViewCell.self)"
     
-    private lazy var likesCountLabel: UILabel = {
+    private var likesCountLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.isUserInteractionEnabled = true
         return label
     }()
+    
+    weak var delegate: LikesCountCollectionViewCellDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,6 +52,13 @@ class LikesCountCollectionViewCell: UICollectionViewCell {
     private func setUp() {
         contentView.backgroundColor = .systemBackground
         contentView.addSubview(likesCountLabel)
+        
+        let countTap = UITapGestureRecognizer(target: self, action: #selector(didTapCount))
+        likesCountLabel.addGestureRecognizer(countTap)
+    }
+    
+    @objc func didTapCount() {
+        delegate?.likesCountCollectionViewCellDidTapCount(self)
     }
     
     func configure(with viewModel: LikesCountCellViewModel) {
