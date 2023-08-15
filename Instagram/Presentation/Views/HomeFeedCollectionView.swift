@@ -20,6 +20,10 @@ final class HomeFeedCollectionView: UICollectionView {
     
     private func configureCollectionView() {
         register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
+        register(PosterCollectionViewCell.self, forCellWithReuseIdentifier: PosterCollectionViewCell.reuseID)
+        register(PostCollectionViewCell.self, forCellWithReuseIdentifier: PostCollectionViewCell.reuseID)
+        register(ActionsCollectionViewCell.self, forCellWithReuseIdentifier: ActionsCollectionViewCell.reuseID)
+        register(LikesCountCollectionViewCell.self, forCellWithReuseIdentifier: LikesCountCollectionViewCell.reuseID)
         
         backgroundColor = .systemBackground
     }

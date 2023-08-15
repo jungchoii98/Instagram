@@ -9,5 +9,5 @@ import Foundation
 
 struct PostCellViewModel: Hashable {
     
-    let postImageURL: String
+    let postImageURL: URL
 }

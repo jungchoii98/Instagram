@@ -49,17 +49,6 @@ class HomeFeedViewController: UIViewController {
         collectionView.frame = view.bounds
     }
     
-    private func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-            cell.backgroundColor = .blue
-            cell.layer.borderColor = UIColor.black.cgColor
-            cell.layer.borderWidth = 1.0
-            return cell
-        })
-        update()
-    }
-    
     private func update() {
         DispatchQueue.main.async {
             var snapshot = NSDiffableDataSourceSnapshot<Int,HomeFeedCellType>()
@@ -69,5 +58,37 @@ class HomeFeedViewController: UIViewController {
             }
             self.dataSource.apply(snapshot, animatingDifferences: true)
         }
+    }
+}
+
+extension HomeFeedViewController {
+    private func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+            switch itemIdentifier {
+            case .poster(let viewModel):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PosterCollectionViewCell.reuseID, for: indexPath) as! PosterCollectionViewCell
+                cell.configure(with: viewModel)
+                return cell
+            case .post(let viewModel):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PostCollectionViewCell.reuseID, for: indexPath) as! PostCollectionViewCell
+                cell.configure(with: viewModel)
+                return cell
+            case .actions(let viewModel):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ActionsCollectionViewCell.reuseID, for: indexPath) as! ActionsCollectionViewCell
+                cell.configure(with: viewModel)
+                return cell
+            case .likesCount(let viewModel):
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LikesCountCollectionViewCell.reuseID, for: indexPath) as! LikesCountCollectionViewCell
+                cell.configure(with: viewModel)
+                return cell
+            default:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+                cell.backgroundColor = .blue
+                cell.layer.borderColor = UIColor.black.cgColor
+                cell.layer.borderWidth = 1.0
+                return cell
+            }
+        })
+        update()
     }
 }

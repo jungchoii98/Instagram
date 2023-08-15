@@ -10,5 +10,5 @@ import Foundation
 struct PosterCellViewModel: Hashable {
     
     let username: String
-    let avatarImageURL: String
+    let avatarImageURL: URL
 }
