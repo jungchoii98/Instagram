@@ -8,53 +8,68 @@
 import AVFoundation
 import UIKit
 
-protocol CameraViewControllerDelegate: AnyObject {}
+protocol CameraViewControllerDelegate: AnyObject {
+    func cameraViewControllerDidCapturePhoto(_ cameraViewController: CameraViewController, with image: UIImage)
+}
 
 class CameraViewController: UIViewController {
     
-    private var previewView: PreviewView = {
+    private let previewView: PreviewView = {
         let view = PreviewView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.videoPreviewLayer.videoGravity = .resizeAspectFill
         return view
     }()
     
+    private let shutterButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.layer.borderWidth = 2
+        button.layer.borderColor = UIColor.label.cgColor
+        button.backgroundColor = .white
+        return button
+    }()
+    
     weak var coordinator: CameraViewControllerDelegate?
     private let captureSession = AVCaptureSession()
+    private let photoOutput = AVCapturePhotoOutput()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .black
+        view.backgroundColor = .secondarySystemBackground
         title = "Camera"
         view.addSubview(previewView)
+        view.addSubview(shutterButton)
         setUpNavigationBar()
         prepareAuthorization()
+        shutterButton.addTarget(self, action: #selector(didTapShutter), for: .touchUpInside)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         tabBarController?.tabBar.isHidden = true
-        DispatchQueue(label: "camera").async {
-            if !self.captureSession.isRunning {
-                self.captureSession.startRunning()
-            }
-        }
+        startRunningCamera()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        DispatchQueue(label: "camera").async {
-            self.captureSession.stopRunning()
-        }
+        stopRunningCamera()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        let shutterButtonSize: CGFloat = view.width/5
+        shutterButton.layer.cornerRadius = shutterButtonSize/2
         NSLayoutConstraint.activate([
             previewView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             previewView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             previewView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            previewView.heightAnchor.constraint(equalToConstant: view.width)
+            previewView.heightAnchor.constraint(equalToConstant: view.width),
+            
+            shutterButton.topAnchor.constraint(equalTo: previewView.bottomAnchor, constant: 50),
+            shutterButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            shutterButton.heightAnchor.constraint(equalToConstant: view.width/5),
+            shutterButton.widthAnchor.constraint(equalToConstant: view.width/5)
         ])
     }
     
@@ -86,7 +101,6 @@ class CameraViewController: UIViewController {
               captureSession.canAddInput(cameraDeviceInput) else { return }
         captureSession.addInput(cameraDeviceInput)
         
-        let photoOutput = AVCapturePhotoOutput()
         guard captureSession.canAddOutput(photoOutput) else { return }
         captureSession.addOutput(photoOutput)
         captureSession.sessionPreset = .photo
@@ -104,11 +118,39 @@ class CameraViewController: UIViewController {
         tabBarController?.selectedIndex = 0
         tabBarController?.tabBar.isHidden = false
     }
+    
+    @objc func didTapShutter() {
+        photoOutput.capturePhoto(with: AVCapturePhotoSettings(), delegate: self)
+    }
 }
 
 private extension CameraViewController {
     func setUpNavigationBar() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(didTapClose))
+    }
+    
+    func startRunningCamera() {
+        DispatchQueue(label: "camera").async {
+            if !self.captureSession.isRunning {
+                self.captureSession.startRunning()
+            }
+        }
+    }
+    
+    func stopRunningCamera() {
+        DispatchQueue(label: "camera").async {
+            self.captureSession.stopRunning()
+        }
+    }
+}
+
+extension CameraViewController: AVCapturePhotoCaptureDelegate {
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        guard let data = photo.fileDataRepresentation(),
+              let image = UIImage(data: data)
+        else { return }
+        stopRunningCamera()
+        coordinator?.cameraViewControllerDidCapturePhoto(self, with: image)
     }
 }
 

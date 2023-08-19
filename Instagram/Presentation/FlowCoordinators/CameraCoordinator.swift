@@ -25,6 +25,20 @@ final class CameraCoordinator: Coordinator {
         cameraVC.coordinator = self
         navigationController.pushViewController(cameraVC, animated: true)
     }
+    
+    private func showCameraEdit(with image: UIImage) {
+        let editVC = CameraEditViewController(image: image)
+        editVC.coordinator = self
+        navigationController.pushViewController(editVC, animated: true)
+    }
 }
 
-extension CameraCoordinator: CameraViewControllerDelegate {}
+extension CameraCoordinator: CameraViewControllerDelegate {
+    func cameraViewControllerDidCapturePhoto(_ cameraViewController: CameraViewController, with image: UIImage) {
+        showCameraEdit(with: image)
+    }
+}
+
+extension CameraCoordinator: CameraEditViewControllerDelegate {
+    
+}

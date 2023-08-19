@@ -28,6 +28,7 @@
 		F086A3752A894B8000BDEEC0 /* TimestampCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F086A3742A894B8000BDEEC0 /* TimestampCollectionViewCell.swift */; };
 		F086A3942A8B368C00BDEEC0 /* Extension+DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F086A3932A8B368C00BDEEC0 /* Extension+DateFormatter.swift */; };
 		F086A3962A8B3AA500BDEEC0 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = F086A3952A8B3AA500BDEEC0 /* Extension+String.swift */; };
+		F086A3D22A90B51E00BDEEC0 /* CameraEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F086A3D12A90B51E00BDEEC0 /* CameraEditViewController.swift */; };
 		F09AA5912A71C3330059C845 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5902A71C3330059C845 /* AppDelegate.swift */; };
 		F09AA5932A71C3330059C845 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5922A71C3330059C845 /* SceneDelegate.swift */; };
 		F09AA5952A71C3330059C845 /* HomeFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5942A71C3330059C845 /* HomeFeedViewController.swift */; };
@@ -97,6 +98,7 @@
 		F086A3742A894B8000BDEEC0 /* TimestampCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimestampCollectionViewCell.swift; sourceTree = "<group>"; };
 		F086A3932A8B368C00BDEEC0 /* Extension+DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+DateFormatter.swift"; sourceTree = "<group>"; };
 		F086A3952A8B3AA500BDEEC0 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
+		F086A3D12A90B51E00BDEEC0 /* CameraEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraEditViewController.swift; sourceTree = "<group>"; };
 		F09AA58D2A71C3330059C845 /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F09AA5902A71C3330059C845 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F09AA5922A71C3330059C845 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -392,6 +394,7 @@
 				F09AA5C72A71D31E0059C845 /* ListViewController.swift */,
 				F09AA5C92A71D32E0059C845 /* PostViewController.swift */,
 				F09AA5CB2A71D33B0059C845 /* SettingsViewController.swift */,
+				F086A3D12A90B51E00BDEEC0 /* CameraEditViewController.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -538,6 +541,7 @@
 				F09AA5D62A71D3F30059C845 /* AuthService.swift in Sources */,
 				F09AA5C82A71D31E0059C845 /* ListViewController.swift in Sources */,
 				F09AA5EA2A72FD560059C845 /* IGTextField.swift in Sources */,
+				F086A3D22A90B51E00BDEEC0 /* CameraEditViewController.swift in Sources */,
 				F09AA5C22A71D2F10059C845 /* SignInViewController.swift in Sources */,
 				F09AA5D42A71D3BE0059C845 /* Notification.swift in Sources */,
 				F09AA5AD2A71CC5A0059C845 /* AppCoordinator.swift in Sources */,
