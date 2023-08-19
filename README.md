@@ -4,16 +4,16 @@ Frontend - UIKit </br>
 Backend - Firebase
 
 ## Note
-This repository is a passion project meant for learning and exploration. It is still a work in progress and I will be continuing to add more features.
+This repository is a passion project meant for learning and exploration. It is still a work in progress and I will be continuing to add more features. Please see the 'Upcoming Features' section for more information.
 
 ## Current Features
 1. Account creation & sign in/out capability
 2. Home page where users can scroll through the latest post from their following list
 
 ## Screenshots
-<img src="https://github.com/jungchoii98/Instagram/assets/31357887/1fb21cc5-d8f3-4bf5-9229-f76de69be6b7" width="250" height="444"/>
-
-
+<img src="https://github.com/jungchoii98/Instagram/assets/31357887/01c390d6-b4c0-4381-9313-35bb2c25637e" width="220" height="444"/>
+<img src="https://github.com/jungchoii98/Instagram/assets/31357887/2875321a-bc78-4e6d-8050-ed12ac49f0d5" width="220" height="444"/>
+<img src="https://github.com/jungchoii98/Instagram/assets/31357887/ca90d077-6bfa-4eb1-ba7f-15253150281c" width="220" height="444"/>
 
 ## Getting Started
 1. Setup Firebase
@@ -33,6 +33,7 @@ This repository is a passion project meant for learning and exploration. It is s
 3. Photo/Video upload capability
 4. Notifications
 5. Profile Screen
+6. Refined UI Design
 
 ## Contact
 If you have any questions, don't hesitate to reach out on LinkedIn </br>
