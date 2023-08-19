@@ -23,7 +23,7 @@ final class ExploreCoordinator: Coordinator {
     private func showExplore() {
         let exploreVC = ExploreViewController()
         exploreVC.coordinator = self
-        navigationController.pushViewController(exploreVC, animated: true)
+        navigationController.pushViewController(exploreVC, animated: false)
     }
 }
 

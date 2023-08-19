@@ -23,7 +23,7 @@ final class NotificationsCoordinator: Coordinator {
     private func showNotifications() {
         let notificationsVC = NotificationsViewController()
         notificationsVC.coordinator = self
-        navigationController.pushViewController(notificationsVC, animated: true)
+        navigationController.pushViewController(notificationsVC, animated: false)
     }
 }
 

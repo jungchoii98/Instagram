@@ -23,13 +23,20 @@ final class CameraCoordinator: Coordinator {
     private func showCamera() {
         let cameraVC = CameraViewController()
         cameraVC.coordinator = self
-        navigationController.pushViewController(cameraVC, animated: true)
+        navigationController.pushViewController(cameraVC, animated: false)
     }
     
     private func showCameraEdit(with image: UIImage) {
         let editVC = CameraEditViewController(image: image)
         editVC.coordinator = self
-        navigationController.pushViewController(editVC, animated: true)
+        navigationController.pushViewController(editVC, animated: false)
+    }
+    
+    private func showCaption(with image: UIImage) {
+        let viewModel = CaptionVCViewModel()
+        let captionVC = CaptionViewController(image: image, viewModel: viewModel)
+        captionVC.coordinator = self
+        navigationController.pushViewController(captionVC, animated: false)
     }
 }
 
@@ -40,5 +47,11 @@ extension CameraCoordinator: CameraViewControllerDelegate {
 }
 
 extension CameraCoordinator: CameraEditViewControllerDelegate {
+    func cameraEditViewControllerDidTapNext(_ cameraEditViewController: CameraEditViewController, with image: UIImage) {
+        showCaption(with: image)
+    }
+}
+
+extension CameraCoordinator: CaptionViewControllerDelegate {
     
 }

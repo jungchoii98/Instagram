@@ -8,6 +8,7 @@
 import UIKit
 
 protocol CameraEditViewControllerDelegate: AnyObject {
+    func cameraEditViewControllerDidTapNext(_ cameraEditViewController: CameraEditViewController, with image: UIImage)
 }
 
 class CameraEditViewController: UIViewController {
@@ -39,6 +40,7 @@ class CameraEditViewController: UIViewController {
         title = "Edit"
         view.backgroundColor = .secondarySystemBackground
         view.addSubview(imageView)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .done, target: self, action: #selector(didTapNext))
     }
     
     override func viewDidLayoutSubviews() {
@@ -49,5 +51,9 @@ class CameraEditViewController: UIViewController {
             imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             imageView.heightAnchor.constraint(equalToConstant: view.width),
         ])
+    }
+    
+    @objc func didTapNext() {
+        coordinator?.cameraEditViewControllerDidTapNext(self, with: image)
     }
 }

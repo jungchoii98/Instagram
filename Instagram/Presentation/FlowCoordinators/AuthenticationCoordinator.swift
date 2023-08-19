@@ -36,7 +36,7 @@ final class AuthenticationCoordinator: Coordinator {
         let viewModel = AuthenticationViewModel(authManager: authManager)
         let signInVC = SignInViewController(viewModel: viewModel)
         signInVC.coordinator = self
-        navigationController.pushViewController(signInVC, animated: true)
+        navigationController.pushViewController(signInVC, animated: false)
     }
     
     private func showSignUp() {

@@ -31,7 +31,7 @@ final class ProfileCoordinator: Coordinator {
         let viewModel = ProfileVCViewModel()
         let profileVC = ProfileViewController(viewModel: viewModel, user: user)
         profileVC.coordinator = self
-        navigationController.pushViewController(profileVC, animated: true)
+        navigationController.pushViewController(profileVC, animated: false)
     }
     
     private func showSettings() {
