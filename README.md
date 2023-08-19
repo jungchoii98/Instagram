@@ -34,6 +34,7 @@ This repository is a passion project meant for learning and exploration. It is s
 4. Notifications
 5. Profile Screen
 6. Refined UI Design
+7. Image filtering
 
 ## Contact
 If you have any questions, don't hesitate to reach out on LinkedIn </br>
