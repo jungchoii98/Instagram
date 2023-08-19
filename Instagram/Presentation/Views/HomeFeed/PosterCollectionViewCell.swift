@@ -68,7 +68,7 @@ class PosterCollectionViewCell: UICollectionViewCell {
             
             usernameLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             usernameLabel.leadingAnchor.constraint(equalTo: avatarImageView.trailingAnchor, constant: padding),
-            usernameLabel.widthAnchor.constraint(equalToConstant: contentView.width/5),
+            usernameLabel.widthAnchor.constraint(equalToConstant: contentView.width/2),
             usernameLabel.heightAnchor.constraint(equalToConstant: contentView.height - padding),
             
             moreButton.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),

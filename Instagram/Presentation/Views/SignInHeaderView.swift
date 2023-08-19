@@ -11,7 +11,7 @@ class SignInHeaderView: UIView {
     
     private let logoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "logo")
+        imageView.image = UIImage(named: "instagram icon")
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView

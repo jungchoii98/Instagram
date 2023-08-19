@@ -9,5 +9,12 @@ import Foundation
 
 struct ActionsCellViewModel: Hashable {
     
+    let uuid = UUID()
     let isLiked: Bool
+}
+
+extension ActionsCellViewModel {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(uuid)
+    }
 }

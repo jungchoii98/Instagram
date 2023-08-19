@@ -9,5 +9,12 @@ import Foundation
 
 struct LikesCountCellViewModel: Hashable {
     
+    let uuid = UUID()
     let likers: [String]
+}
+
+extension LikesCountCellViewModel {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(uuid)
+    }
 }
