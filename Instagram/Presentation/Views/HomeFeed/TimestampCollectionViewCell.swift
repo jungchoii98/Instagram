@@ -14,7 +14,7 @@ class TimestampCollectionViewCell: UICollectionViewCell {
     private let timestampLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
     

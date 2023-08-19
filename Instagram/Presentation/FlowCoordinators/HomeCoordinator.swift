@@ -24,7 +24,7 @@ final class HomeCoordinator: Coordinator {
         let viewModel = HomeFeedVCViewModel()
         let homeVC = HomeFeedViewController(viewModel: viewModel)
         homeVC.coordinator = self
-        navigationController.pushViewController(homeVC, animated: true)
+        navigationController.pushViewController(homeVC, animated: false)
     }
 }
 

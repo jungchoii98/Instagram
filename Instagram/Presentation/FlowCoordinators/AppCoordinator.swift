@@ -116,7 +116,7 @@ extension AppCoordinator: AuthenticationCoordinatorDelegate {
     func didAuthenticate(child: Coordinator) {
         removeChild(child: child)
         DispatchQueue.main.async {
-            self.navigationController.popToRootViewController(animated: true)
+            self.navigationController.popToRootViewController(animated: false)
             self.showMainScreen()
         }
     }

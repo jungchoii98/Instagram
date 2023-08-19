@@ -40,7 +40,7 @@ class CaptionCollectionViewCell: UICollectionViewCell {
             captionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
             captionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
             captionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
-            captionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding)
+            captionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding),
         ])
     }
     

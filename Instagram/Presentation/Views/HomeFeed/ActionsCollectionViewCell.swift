@@ -20,6 +20,9 @@ class ActionsCollectionViewCell: UICollectionViewCell {
     private var likeButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .fill
+        button.imageView?.contentMode = .scaleAspectFit
         return button
     }()
     
@@ -28,6 +31,9 @@ class ActionsCollectionViewCell: UICollectionViewCell {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .label
         button.setImage(UIImage(systemName: "message"), for: .normal)
+        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .fill
+        button.imageView?.contentMode = .scaleAspectFit
         return button
     }()
     
@@ -36,6 +42,9 @@ class ActionsCollectionViewCell: UICollectionViewCell {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .label
         button.setImage(UIImage(systemName: "paperplane"), for: .normal)
+        button.contentHorizontalAlignment = .fill
+        button.contentVerticalAlignment = .fill
+        button.imageView?.contentMode = .scaleAspectFit
         return button
     }()
     
@@ -55,18 +64,18 @@ class ActionsCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
         let padding: CGFloat = 12
         NSLayoutConstraint.activate([
-            likeButton.topAnchor.constraint(equalTo: contentView.topAnchor),
-            likeButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            likeButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            likeButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
             likeButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
             likeButton.widthAnchor.constraint(equalTo: contentView.heightAnchor),
             
-            commentButton.topAnchor.constraint(equalTo: contentView.topAnchor),
-            commentButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            commentButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            commentButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
             commentButton.leadingAnchor.constraint(equalTo: likeButton.trailingAnchor, constant: padding),
             commentButton.widthAnchor.constraint(equalTo: contentView.heightAnchor),
             
-            shareButton.topAnchor.constraint(equalTo: contentView.topAnchor),
-            shareButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            shareButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            shareButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
             shareButton.leadingAnchor.constraint(equalTo: commentButton.trailingAnchor, constant: padding),
             shareButton.widthAnchor.constraint(equalTo: contentView.heightAnchor),
         ])
