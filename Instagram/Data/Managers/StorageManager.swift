@@ -12,7 +12,7 @@ protocol StorageManagerProtocol {
     func uploadProfilePicture(
         username: String,
         pictureData: Data?,
-        completion: @escaping (Bool) -> Void
+        completion: @escaping (URL?) -> Void
     )
 }
 
@@ -27,14 +27,14 @@ final class StorageManager: StorageManagerProtocol {
     public func uploadProfilePicture(
         username: String,
         pictureData: Data?,
-        completion: @escaping (Bool) -> Void
+        completion: @escaping (URL?) -> Void
     ) {
         guard let data = pictureData else {
-            completion(false)
+            completion(nil)
             return
         }
-        storageClient.upload(fileName: username, itemName: "profile_picture.png", data: data) { didSucceed in
-            completion(didSucceed)
+        storageClient.upload(filePath: username, itemName: "profile_picture.png", data: data) { url in
+            completion(url)
         }
     }
 }

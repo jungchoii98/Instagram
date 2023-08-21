@@ -10,4 +10,5 @@ import Foundation
 struct IGUser: Codable {
     let username: String
     let email: String
+    let profileImageURL: String
 }

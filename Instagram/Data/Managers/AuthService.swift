@@ -72,30 +72,16 @@ final class AuthService: AuthServiceProtocol {
         profileImageData: Data?,
         completion: @escaping (Result<IGUser,AuthError>) -> Void
     ) {
-        authClient.createUser(withEmail: email, password: password) { [weak self] didSucceed in
-            guard let self = self,
-                  didSucceed else {
-                completion(.failure(.createUserError))
-                return
-            }
-            let user = IGUser(username: username, email: email)
-            self.databaseManager.createUser(user: user) { [weak self] didSucceed in
-                guard let self = self,
-                      didSucceed else {
-                    completion(.failure(.createUserError))
-                    return
-                }
-                self.storageManager.uploadProfilePicture(
-                    username: username,
-                    pictureData: profileImageData
-                ) { pictureDidUpload in
-                    if pictureDidUpload {
-                        completion(.success(user))
-                    } else {
-                        completion(.failure(.uploadProfilePictureError))
-                    }
-                }
-            }
+        storageManager.uploadProfilePicture(username: username, pictureData: profileImageData) { [weak self] url in
+            guard let url = url else { completion(.failure(.uploadProfilePictureError)); return }
+            let user = IGUser(username: username, email: email, profileImageURL: url.absoluteString)
+            self?.databaseManager.createUser(user: user, completion: { [weak self] didSucceed in
+                guard didSucceed else { completion(.failure(.createUserError)); return }
+                self?.authClient.createUser(withEmail: email, password: password, completion: { didSucceed in
+                    guard didSucceed else { completion(.failure(.createUserError)); return }
+                    completion(.success(user))
+                })
+            })
         }
     }
     
