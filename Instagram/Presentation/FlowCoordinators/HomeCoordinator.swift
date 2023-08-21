@@ -11,9 +11,14 @@ final class HomeCoordinator: Coordinator {
     
     private let navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
+    private let postRepository: PostRepositoryProtocol
     
-    init(navigationController: UINavigationController) {
+    init(
+        navigationController: UINavigationController,
+        postRepository: PostRepositoryProtocol
+    ) {
         self.navigationController = navigationController
+        self.postRepository = postRepository
     }
     
     func start() {
@@ -21,7 +26,7 @@ final class HomeCoordinator: Coordinator {
     }
     
     private func showHome() {
-        let viewModel = HomeFeedVCViewModel()
+        let viewModel = HomeFeedVCViewModel(postRepository: postRepository)
         let homeVC = HomeFeedViewController(viewModel: viewModel)
         homeVC.coordinator = self
         navigationController.pushViewController(homeVC, animated: false)

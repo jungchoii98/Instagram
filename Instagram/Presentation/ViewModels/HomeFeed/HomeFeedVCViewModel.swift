@@ -7,11 +7,16 @@
 
 import Foundation
 
-struct HomeFeedVCViewModel {
+class HomeFeedVCViewModel {
     
+    private let postRepository: PostRepositoryProtocol
     var posts = [[HomeFeedCellType]]()
     
-    mutating func fetchPosts() {
+    init(postRepository: PostRepositoryProtocol) {
+        self.postRepository = postRepository
+    }
+    
+    func fetchPosts() {
         posts.append(contentsOf: [
             HomeFeedVCViewModel.cell1,
             HomeFeedVCViewModel.cell2,

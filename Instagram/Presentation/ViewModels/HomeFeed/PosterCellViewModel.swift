@@ -8,7 +8,6 @@
 import Foundation
 
 struct PosterCellViewModel: Hashable {
-    
     let username: String
     let avatarImageURL: URL
 }

@@ -18,19 +18,16 @@ final class AppCoordinator {
     
     private var childCoordinators: [Coordinator] = []
     private let authManager: AuthServiceProtocol
-    private let databaseManager: DatabaseManagerProtocol
-    private let storageManager: StorageManagerProtocol
+    private let postRepository: PostRepositoryProtocol
     
     init(
         navigationController: UINavigationController,
         authManager: AuthServiceProtocol,
-        databaseManager: DatabaseManagerProtocol,
-        storageManager: StorageManagerProtocol
+        postRepository: PostRepositoryProtocol
     ) {
         self.navigationController = navigationController
         self.authManager = authManager
-        self.databaseManager = databaseManager
-        self.storageManager = storageManager
+        self.postRepository = postRepository
     }
     
     func start() {
@@ -72,13 +69,16 @@ final class AppCoordinator {
         )
         mainTabBarController.modalPresentationStyle = .fullScreen
         
-        let homeFlowCoordinator = HomeCoordinator(navigationController: homeNavigationController)
+        let homeFlowCoordinator = HomeCoordinator(
+            navigationController: homeNavigationController,
+            postRepository: postRepository
+        )
         let exploreFlowCoordinator = ExploreCoordinator(navigationController: exploreNavigationController)
         let cameraFlowCoordinator = CameraCoordinator(
             tabBarController: mainTabBarController,
             navigationController: cameraNavigationController,
             username: user.username,
-            postRepository: PostRepository(storageManager: storageManager, databaseManager: databaseManager)
+            postRepository: postRepository
         )
         let notificationsFlowCoordinator = NotificationsCoordinator(navigationController: notificationsNavigationController)
         let profileFlowCoordinator = ProfileCoordinator(navigationController: profileNavigationController, authManager: authManager, user: user)

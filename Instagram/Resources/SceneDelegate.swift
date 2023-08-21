@@ -22,6 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private lazy var databaseManager = DatabaseManager(databaseClient: databaseClient)
     private lazy var authClient = FirebaseAuth.Auth.auth()
     private lazy var authManager = AuthService(authClient: authClient, databaseManager: databaseManager, storageManager: storageManager)
+    private lazy var postRepository = PostRepository(storageManager: storageManager, databaseManager: databaseManager)
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -32,7 +33,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigationController = UINavigationController()
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
-        coordinator = AppCoordinator(navigationController: navigationController, authManager: authManager, databaseManager: databaseManager, storageManager: storageManager)
+        coordinator = AppCoordinator(
+            navigationController: navigationController,
+            authManager: authManager,
+            postRepository: postRepository
+        )
         coordinator?.start()
     }
 
