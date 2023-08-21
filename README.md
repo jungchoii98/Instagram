@@ -2,6 +2,7 @@
 
 Frontend - UIKit </br>
 Backend - Firebase
+Persistence - Core Data
 
 ## Note
 This repository is a passion project meant for learning and exploration. It is still a work in progress and I will be continuing to add more features. Please see the 'Upcoming Features' section for more information.
