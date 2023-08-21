@@ -10,6 +10,7 @@ This repository is a passion project meant for learning and exploration. It is s
 ## Current Features
 1. Account creation & sign in/out capability
 2. Home page where users can scroll through the latest post from their following list
+3. Photo/Video upload capability
 
 ## Screenshots
 <img src="https://github.com/jungchoii98/Instagram/assets/31357887/01c390d6-b4c0-4381-9313-35bb2c25637e" width="220" height="444"/>
@@ -31,11 +32,10 @@ This repository is a passion project meant for learning and exploration. It is s
 ## Upcoming Features
 1. Search for users
 2. Explore page for discovery of new content
-3. Photo/Video upload capability
-4. Notifications
-5. Profile Screen
-6. Refined UI Design
-7. Image filtering
+3. Notifications
+4. Profile Screen
+5. Refined UI Design
+6. Image filtering
 
 ## Contact
 If you have any questions, don't hesitate to reach out on LinkedIn </br>
