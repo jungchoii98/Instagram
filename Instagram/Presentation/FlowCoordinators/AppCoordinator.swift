@@ -42,6 +42,10 @@ final class AppCoordinator {
     }
     
     private func showMainScreen() {
+        guard let data = UserDefaults.standard.object(forKey: UserDefaultsConstants.user.rawValue) as? Data,
+              let user = Utility.decode(User.self, data: data) else {
+            return
+        }
         let homeNavigationController = UINavigationController()
         let exploreNavigationController = UINavigationController()
         let cameraNavigationController = UINavigationController()
@@ -53,14 +57,31 @@ final class AppCoordinator {
         cameraNavigationController.tabBarItem = UITabBarItem(title: "Camera", image: UIImage(systemName: "camera"), tag: 1)
         notificationsNavigationController.tabBarItem = UITabBarItem(title: "Notifications", image: UIImage(systemName: "bell"), tag: 1)
         profileNavigationController.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.circle"), tag: 1)
-        
         profileNavigationController.navigationBar.tintColor = .label
+        
+        let mainTabBarController = UITabBarController()
+        
+        mainTabBarController.setViewControllers([
+            homeNavigationController,
+            exploreNavigationController,
+            cameraNavigationController,
+            notificationsNavigationController,
+            profileNavigationController
+        ],
+            animated: false
+        )
+        mainTabBarController.modalPresentationStyle = .fullScreen
         
         let homeFlowCoordinator = HomeCoordinator(navigationController: homeNavigationController)
         let exploreFlowCoordinator = ExploreCoordinator(navigationController: exploreNavigationController)
-        let cameraFlowCoordinator = CameraCoordinator(navigationController: cameraNavigationController)
+        let cameraFlowCoordinator = CameraCoordinator(
+            tabBarController: mainTabBarController,
+            navigationController: cameraNavigationController,
+            username: user.username,
+            postRepository: PostRepository(storageManager: storageManager, databaseManager: databaseManager)
+        )
         let notificationsFlowCoordinator = NotificationsCoordinator(navigationController: notificationsNavigationController)
-        let profileFlowCoordinator = ProfileCoordinator(navigationController: profileNavigationController, authManager: authManager)
+        let profileFlowCoordinator = ProfileCoordinator(navigationController: profileNavigationController, authManager: authManager, user: user)
         
         profileFlowCoordinator.appCoordinator = self
         
@@ -77,18 +98,6 @@ final class AppCoordinator {
             coordinator.start()
         }
         
-        let mainTabBarController = UITabBarController()
-        
-        mainTabBarController.setViewControllers([
-            homeNavigationController,
-            exploreNavigationController,
-            cameraNavigationController,
-            notificationsNavigationController,
-            profileNavigationController
-        ],
-            animated: false
-        )
-        mainTabBarController.modalPresentationStyle = .fullScreen
         navigationController.present(mainTabBarController, animated: true)
     }
     

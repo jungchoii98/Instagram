@@ -12,14 +12,14 @@ protocol AuthServiceProtocol {
     func signIn(
         email: String,
         password: String,
-        completion: @escaping (Result<IGUser,AuthError>) -> Void
+        completion: @escaping (Result<User,AuthError>) -> Void
     )
     func signUp(
         email: String,
         password: String,
         username: String,
         profileImageData: Data?,
-        completion: @escaping (Result<IGUser,AuthError>) -> Void
+        completion: @escaping (Result<User,AuthError>) -> Void
     )
     func signOut(completion: @escaping (Bool) -> Void)
 }
@@ -47,7 +47,7 @@ final class AuthService: AuthServiceProtocol {
     public func signIn(
         email: String,
         password: String,
-        completion: @escaping (Result<IGUser,AuthError>) -> Void
+        completion: @escaping (Result<User,AuthError>) -> Void
     ) {
         databaseManager.findUser(email: email) { [weak self] user in
             guard let self = self,
@@ -70,11 +70,11 @@ final class AuthService: AuthServiceProtocol {
         password: String,
         username: String,
         profileImageData: Data?,
-        completion: @escaping (Result<IGUser,AuthError>) -> Void
+        completion: @escaping (Result<User,AuthError>) -> Void
     ) {
         storageManager.uploadProfilePicture(username: username, pictureData: profileImageData) { [weak self] url in
             guard let url = url else { completion(.failure(.uploadProfilePictureError)); return }
-            let user = IGUser(username: username, email: email, profileImageURL: url.absoluteString)
+            let user = User(username: username, email: email, profileImageURL: url.absoluteString)
             self?.databaseManager.createUser(user: user, completion: { [weak self] didSucceed in
                 guard didSucceed else { completion(.failure(.createUserError)); return }
                 self?.authClient.createUser(withEmail: email, password: password, completion: { didSucceed in

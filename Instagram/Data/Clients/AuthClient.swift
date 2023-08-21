@@ -23,10 +23,7 @@ extension FirebaseAuth.Auth: AuthClient {
     
     func signIn(withEmail: String, password: String, completion: @escaping (Bool) -> Void) {
         signIn(withEmail: withEmail, password: password) { result, error in
-            guard result != nil, error == nil else {
-                completion(false)
-                return
-            }
+            guard result != nil, error == nil else { completion(false); return }
             completion(true)
         }
     }

@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol CaptionViewControllerDelegate: AnyObject {
-    
-}
-
 class CaptionViewController: UIViewController {
     
     private let imageView: UIImageView = {
@@ -33,7 +29,6 @@ class CaptionViewController: UIViewController {
     }()
     
     private let image: UIImage
-    weak var coordinator: CaptionViewControllerDelegate?
     private let viewModel: CaptionVCViewModel
     
     init(image: UIImage, viewModel: CaptionVCViewModel) {
@@ -49,6 +44,7 @@ class CaptionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.delegate = self
         title = "Add Caption"
         view.backgroundColor = .systemBackground
         view.addSubview(imageView)
@@ -74,10 +70,10 @@ class CaptionViewController: UIViewController {
     }
     
     @objc func didTapPost() {
-        textView.resignFirstResponder()
-        let caption = textView.text == "Add a caption..." ? "" : textView.text
-        print(caption)
-//        viewModel.post()
+        dismissTextView()
+        guard let caption = textView.text == "Add a caption..." ? "" : textView.text else { return }
+        showSpinner()
+        viewModel.createPost(pictureData: image.pngData(), caption: caption)
     }
 }
 
@@ -100,5 +96,19 @@ extension CaptionViewController: UITextViewDelegate {
             textView.textColor = .placeholderText
             textView.text = "Add a caption..."
         }
+    }
+}
+
+extension CaptionViewController: CaptionVCViewModelDelegate {
+    func captionVCViewModelDidSucceedToPost(_ captionVCViewModel: CaptionVCViewModel) {
+        dismissSpinner()
+        navigationController?.popToRootViewController(animated: true)
+        tabBarController?.selectedIndex = 0
+        tabBarController?.tabBar.isHidden = false
+    }
+    
+    func captionVCViewModelDidFailToPost(_ captionVCViewModel: CaptionVCViewModel) {
+        dismissSpinner()
+        print("failed to post")
     }
 }

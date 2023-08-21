@@ -9,11 +9,22 @@ import UIKit
 
 final class CameraCoordinator: Coordinator {
     
+    private let tabBarController: UITabBarController
     private let navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
+    private let username: String
+    private let postRepository: PostRepositoryProtocol
     
-    init(navigationController: UINavigationController) {
+    init(
+        tabBarController: UITabBarController,
+        navigationController: UINavigationController,
+        username: String,
+        postRepository: PostRepositoryProtocol
+    ) {
+        self.tabBarController = tabBarController
         self.navigationController = navigationController
+        self.username = username
+        self.postRepository = postRepository
     }
     
     func start() {
@@ -33,9 +44,8 @@ final class CameraCoordinator: Coordinator {
     }
     
     private func showCaption(with image: UIImage) {
-        let viewModel = CaptionVCViewModel()
+        let viewModel = CaptionVCViewModel(postRepository: postRepository, username: username)
         let captionVC = CaptionViewController(image: image, viewModel: viewModel)
-        captionVC.coordinator = self
         navigationController.pushViewController(captionVC, animated: false)
     }
 }
@@ -50,8 +60,4 @@ extension CameraCoordinator: CameraEditViewControllerDelegate {
     func cameraEditViewControllerDidTapNext(_ cameraEditViewController: CameraEditViewController, with image: UIImage) {
         showCaption(with: image)
     }
-}
-
-extension CameraCoordinator: CaptionViewControllerDelegate {
-    
 }

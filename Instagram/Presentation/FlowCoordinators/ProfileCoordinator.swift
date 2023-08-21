@@ -13,10 +13,12 @@ final class ProfileCoordinator: Coordinator {
     weak var appCoordinator: AppCoordinator?
     var childCoordinators: [Coordinator] = []
     private let authManager: AuthServiceProtocol
+    private let user: User
     
-    init(navigationController: UINavigationController, authManager: AuthServiceProtocol) {
+    init(navigationController: UINavigationController, authManager: AuthServiceProtocol, user: User) {
         self.navigationController = navigationController
         self.authManager = authManager
+        self.user = user
     }
     
     func start() {
@@ -24,10 +26,6 @@ final class ProfileCoordinator: Coordinator {
     }
     
     private func showProfile() {
-        guard let data = UserDefaults.standard.object(forKey: UserDefaultsConstants.user.rawValue) as? Data,
-              let user = Utility.decode(IGUser.self, data: data) else {
-            return
-        }
         let viewModel = ProfileVCViewModel()
         let profileVC = ProfileViewController(viewModel: viewModel, user: user)
         profileVC.coordinator = self

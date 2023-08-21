@@ -14,10 +14,10 @@ protocol ProfileViewControllerDelegate: AnyObject {
 class ProfileViewController: UIViewController {
     
     weak var coordinator: ProfileViewControllerDelegate?
-    private let user: IGUser
+    private let user: User
     private let viewModel: ProfileVCViewModel
     
-    init(viewModel: ProfileVCViewModel, user: IGUser) {
+    init(viewModel: ProfileVCViewModel, user: User) {
         self.user = user
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)

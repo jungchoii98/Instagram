@@ -30,6 +30,7 @@
 		F086A3962A8B3AA500BDEEC0 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = F086A3952A8B3AA500BDEEC0 /* Extension+String.swift */; };
 		F086A3D22A90B51E00BDEEC0 /* CameraEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F086A3D12A90B51E00BDEEC0 /* CameraEditViewController.swift */; };
 		F086A3D42A9148A900BDEEC0 /* CaptionVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F086A3D32A9148A900BDEEC0 /* CaptionVCViewModel.swift */; };
+		F086A4542A93311F00BDEEC0 /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F086A4532A93311F00BDEEC0 /* PostRepository.swift */; };
 		F09AA5912A71C3330059C845 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5902A71C3330059C845 /* AppDelegate.swift */; };
 		F09AA5932A71C3330059C845 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5922A71C3330059C845 /* SceneDelegate.swift */; };
 		F09AA5952A71C3330059C845 /* HomeFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5942A71C3330059C845 /* HomeFeedViewController.swift */; };
@@ -51,7 +52,7 @@
 		F09AA5C82A71D31E0059C845 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5C72A71D31E0059C845 /* ListViewController.swift */; };
 		F09AA5CA2A71D32E0059C845 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5C92A71D32E0059C845 /* PostViewController.swift */; };
 		F09AA5CC2A71D33B0059C845 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5CB2A71D33B0059C845 /* SettingsViewController.swift */; };
-		F09AA5CE2A71D37C0059C845 /* IGUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5CD2A71D37C0059C845 /* IGUser.swift */; };
+		F09AA5CE2A71D37C0059C845 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5CD2A71D37C0059C845 /* User.swift */; };
 		F09AA5D02A71D38D0059C845 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5CF2A71D38D0059C845 /* Post.swift */; };
 		F09AA5D22A71D3A50059C845 /* Relationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5D12A71D3A50059C845 /* Relationship.swift */; };
 		F09AA5D42A71D3BE0059C845 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5D32A71D3BE0059C845 /* Notification.swift */; };
@@ -101,6 +102,7 @@
 		F086A3952A8B3AA500BDEEC0 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
 		F086A3D12A90B51E00BDEEC0 /* CameraEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraEditViewController.swift; sourceTree = "<group>"; };
 		F086A3D32A9148A900BDEEC0 /* CaptionVCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptionVCViewModel.swift; sourceTree = "<group>"; };
+		F086A4532A93311F00BDEEC0 /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
 		F09AA58D2A71C3330059C845 /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F09AA5902A71C3330059C845 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F09AA5922A71C3330059C845 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,7 +126,7 @@
 		F09AA5C72A71D31E0059C845 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		F09AA5C92A71D32E0059C845 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		F09AA5CB2A71D33B0059C845 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		F09AA5CD2A71D37C0059C845 /* IGUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGUser.swift; sourceTree = "<group>"; };
+		F09AA5CD2A71D37C0059C845 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F09AA5CF2A71D38D0059C845 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		F09AA5D12A71D3A50059C845 /* Relationship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relationship.swift; sourceTree = "<group>"; };
 		F09AA5D32A71D3BE0059C845 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 		F086A3532A88177700BDEEC0 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
+				F086A4532A93311F00BDEEC0 /* PostRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -354,7 +357,7 @@
 		F09AA5A92A71C9420059C845 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F09AA5CD2A71D37C0059C845 /* IGUser.swift */,
+				F09AA5CD2A71D37C0059C845 /* User.swift */,
 				F09AA5CF2A71D38D0059C845 /* Post.swift */,
 				F09AA5D12A71D3A50059C845 /* Relationship.swift */,
 				F09AA5D32A71D3BE0059C845 /* Notification.swift */,
@@ -560,7 +563,7 @@
 				F086A3962A8B3AA500BDEEC0 /* Extension+String.swift in Sources */,
 				F086A3642A89347D00BDEEC0 /* CaptionCellViewModel.swift in Sources */,
 				F086A3522A88138800BDEEC0 /* SettingsVCViewModel.swift in Sources */,
-				F09AA5CE2A71D37C0059C845 /* IGUser.swift in Sources */,
+				F09AA5CE2A71D37C0059C845 /* User.swift in Sources */,
 				F0B850792A79D45B00004B8C /* Extension+UIViewController.swift in Sources */,
 				F086A3502A880BBC00BDEEC0 /* StorageClient.swift in Sources */,
 				F09AA5D22A71D3A50059C845 /* Relationship.swift in Sources */,
@@ -587,6 +590,7 @@
 				F09AA5C42A71D2FB0059C845 /* SignUpViewController.swift in Sources */,
 				F09AA5E32A720ED20059C845 /* AuthenticationCoordinator.swift in Sources */,
 				F09AA5BF2A71CDDD0059C845 /* ProfileCoordinator.swift in Sources */,
+				F086A4542A93311F00BDEEC0 /* PostRepository.swift in Sources */,
 				F09AA5932A71C3330059C845 /* SceneDelegate.swift in Sources */,
 				F09AA5EF2A74CCB50059C845 /* UIImagePickerControllerAdapter.swift in Sources */,
 				F09AA5B32A71CD2B0059C845 /* NotificationsViewController.swift in Sources */,
