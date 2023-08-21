@@ -1,7 +1,7 @@
 # Instagram Clone
 
 Frontend - UIKit </br>
-Backend - Firebase
+Backend - Firebase </br>
 Persistence - Core Data
 
 ## Note
