@@ -16,6 +16,7 @@ class ExploreViewController: UIViewController {
     private let searchResultVC = ExploreSearchResultViewController()
     private let searchController = UISearchController()
     private var searchControllerWorkItem: DispatchWorkItem!
+    private let exploreMainVC = ExploreMainViewController()
     
     weak var coordinator: ExploreViewControllerDelegate?
     private let viewModel: ExploreViewModel
@@ -37,15 +38,17 @@ class ExploreViewController: UIViewController {
         navigationItem.searchController = searchController
         searchResultVC.delegate = self
         
-        view.addSubview(searchResultVC.view)
-        searchResultVC.view.translatesAutoresizingMaskIntoConstraints = false
-        searchResultVC.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        searchResultVC.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        searchResultVC.view.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        searchResultVC.view.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        addChild(searchResultVC)
-        
+//        view.addSubview(searchResultVC.view)
+//        searchResultVC.view.frame = view.bounds
+//        addChild(searchResultVC)
+//        searchResultVC.didMove(toParent: self)
         setUpSearchController()
+        add(searchResultVC)
+        
+//        view.addSubview(exploreMainVC.view)
+//        exploreMainVC.view.frame = view.bounds
+//        addChild(exploreMainVC)
+//        exploreMainVC.didMove(toParent: self)
     }
 }
 
@@ -65,11 +68,16 @@ extension ExploreViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let query = searchController.searchBar.text,
               !query.trimmingCharacters(in: .whitespaces).isEmpty else {
+            searchResultVC.remove()
+            add(exploreMainVC)
             return
         }
         searchControllerWorkItem?.cancel()
         searchControllerWorkItem = DispatchWorkItem() { [weak self] in
-            self?.viewModel.searchForUsers(with: query)
+            guard let self = self else { return }
+            self.exploreMainVC.remove()
+            self.add(self.searchResultVC)
+            self.viewModel.searchForUsers(with: query)
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: searchControllerWorkItem)
     }
