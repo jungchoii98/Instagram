@@ -8,6 +8,7 @@
 import Foundation
 
 struct PosterCellViewModel: Hashable {
+    let uuid = UUID()
     let username: String
     let avatarImageURL: URL
 }

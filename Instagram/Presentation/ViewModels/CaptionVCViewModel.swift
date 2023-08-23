@@ -16,25 +16,25 @@ class CaptionVCViewModel {
     
     weak var delegate: CaptionVCViewModelDelegate?
     private let postRepository: PostRepositoryProtocol
-    private let username: String
+    private let user: User
     
-    init(postRepository: PostRepositoryProtocol, username: String) {
+    init(postRepository: PostRepositoryProtocol, user: User) {
         self.postRepository = postRepository
-        self.username = username
+        self.user = user
     }
     
     func createPost(pictureData: Data?, caption: String) {
-        createPost(username: username, pictureData: pictureData, caption: caption)
+        createPost(username: user.username, profileImageURL: user.profileImageURL, pictureData: pictureData, caption: caption)
     }
     
-    private func createPost(username: String, pictureData: Data?, caption: String) {
+    private func createPost(username: String, profileImageURL: String, pictureData: Data?, caption: String) {
         postRepository.storePost(username: username, postID: UUID().uuidString, pictureData: pictureData) { [weak self] url in
             guard let self = self else { return }
             guard let url = url else {
                 self.delegate?.captionVCViewModelDidFailToPost(self)
                 return
             }
-            let post = Post(username: username, postImageURL: url.absoluteString, likers: [], caption: caption, timestamp: String.date(from: Date()))
+            let post = Post(username: username, avatarImageURL: profileImageURL, postImageURL: url.absoluteString, likers: [], caption: caption, timestamp: String.date(from: Date()))
             self.postRepository.uploadPost(username: username, post: post) { [weak self] didSucceed in
                 guard let self = self else { return }
                 if didSucceed {

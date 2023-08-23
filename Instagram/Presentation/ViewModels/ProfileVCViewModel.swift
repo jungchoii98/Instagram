@@ -9,11 +9,19 @@ import Foundation
 
 class ProfileVCViewModel {
     
-    func isCurrentUser(user: User) throws -> Bool {
-        guard let data = UserDefaults.standard.object(forKey: UserDefaultsConstants.user.rawValue) as? Data,
-              let loggedInUser = Utility.decode(User.self, data: data) else {
-            throw ProfileViewController.ProfileErrors.badData
-        }
+    let user: User
+    private let userRepository: UserRepositoryProtocol
+    
+    init(
+        user: User,
+        userRepository: UserRepositoryProtocol
+    ) {
+        self.user = user
+        self.userRepository = userRepository
+    }
+    
+    func isCurrentUser() throws -> Bool {
+        let loggedInUser = try userRepository.getLoggedInUser()
         return user.username == loggedInUser.username ? true : false
     }
 }

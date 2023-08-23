@@ -8,6 +8,11 @@
 import Foundation
 
 protocol PostRepositoryProtocol {
+    func fetchPosts(
+        for username: String,
+        completion: @escaping (Result<[Post], Error>) -> Void
+    )
+    
     func storePost(
         username: String,
         postID: String,
@@ -33,6 +38,13 @@ class PostRepository: PostRepositoryProtocol {
     ) {
         self.storageManager = storageManager
         self.databaseManager = databaseManager
+    }
+    
+    func fetchPosts(for username: String, completion: @escaping (Result<[Post], Error>) -> Void) {
+        databaseManager.fetchPosts(for: username) { posts in
+            guard let posts = posts else { completion(.failure(NSError())); return }
+            completion(.success(posts))
+        }
     }
     
     func storePost(

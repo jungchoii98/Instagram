@@ -35,6 +35,7 @@ class HomeFeedViewController: UIViewController {
         title = "Home"
         view.backgroundColor = .systemBackground
         configureCollectionView()
+        viewModel.delegate = self
         viewModel.fetchPosts()
     }
     
@@ -78,6 +79,12 @@ private extension HomeFeedViewController {
         alertViewController.addAction(shareAction)
         alertViewController.addAction(reportAction)
         navigationController?.present(alertViewController, animated: true)
+    }
+}
+
+extension HomeFeedViewController: HomeFeedVCViewModelDelegate {
+    func homeFeedVCViewModelDidFetchPosts(_ homeFeedVCViewModel: HomeFeedVCViewModel) {
+        update()
     }
 }
 

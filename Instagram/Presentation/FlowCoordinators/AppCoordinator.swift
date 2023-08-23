@@ -19,15 +19,18 @@ final class AppCoordinator {
     private var childCoordinators: [Coordinator] = []
     private let authManager: AuthServiceProtocol
     private let postRepository: PostRepositoryProtocol
+    private let userRepository: UserRepositoryProtocol
     
     init(
         navigationController: UINavigationController,
         authManager: AuthServiceProtocol,
-        postRepository: PostRepositoryProtocol
+        postRepository: PostRepositoryProtocol,
+        userRepository: UserRepositoryProtocol
     ) {
         self.navigationController = navigationController
         self.authManager = authManager
         self.postRepository = postRepository
+        self.userRepository = userRepository
     }
     
     func start() {
@@ -73,15 +76,23 @@ final class AppCoordinator {
             navigationController: homeNavigationController,
             postRepository: postRepository
         )
-        let exploreFlowCoordinator = ExploreCoordinator(navigationController: exploreNavigationController)
+        let exploreFlowCoordinator = ExploreCoordinator(
+            navigationController: exploreNavigationController,
+            userRepository: userRepository
+        )
         let cameraFlowCoordinator = CameraCoordinator(
             tabBarController: mainTabBarController,
             navigationController: cameraNavigationController,
-            username: user.username,
+            user: user,
             postRepository: postRepository
         )
         let notificationsFlowCoordinator = NotificationsCoordinator(navigationController: notificationsNavigationController)
-        let profileFlowCoordinator = ProfileCoordinator(navigationController: profileNavigationController, authManager: authManager, user: user)
+        let profileFlowCoordinator = ProfileCoordinator(
+            navigationController: profileNavigationController,
+            authManager: authManager,
+            user: user,
+            userRepository: userRepository
+        )
         
         profileFlowCoordinator.appCoordinator = self
         

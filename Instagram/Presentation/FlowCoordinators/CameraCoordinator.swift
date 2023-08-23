@@ -12,18 +12,18 @@ final class CameraCoordinator: Coordinator {
     private let tabBarController: UITabBarController
     private let navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
-    private let username: String
+    private let user: User
     private let postRepository: PostRepositoryProtocol
     
     init(
         tabBarController: UITabBarController,
         navigationController: UINavigationController,
-        username: String,
+        user: User,
         postRepository: PostRepositoryProtocol
     ) {
         self.tabBarController = tabBarController
         self.navigationController = navigationController
-        self.username = username
+        self.user = user
         self.postRepository = postRepository
     }
     
@@ -44,7 +44,7 @@ final class CameraCoordinator: Coordinator {
     }
     
     private func showCaption(with image: UIImage) {
-        let viewModel = CaptionVCViewModel(postRepository: postRepository, username: username)
+        let viewModel = CaptionVCViewModel(postRepository: postRepository, user: user)
         let captionVC = CaptionViewController(image: image, viewModel: viewModel)
         navigationController.pushViewController(captionVC, animated: false)
     }

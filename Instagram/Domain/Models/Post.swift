@@ -7,8 +7,9 @@
 
 import Foundation
 
-struct Post: Codable {
+struct Post: Codable, Hashable {
     let username: String
+    let avatarImageURL: String
     let postImageURL: String
     let likers: [String]
     let caption: String

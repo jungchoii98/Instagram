@@ -14,11 +14,9 @@ protocol ProfileViewControllerDelegate: AnyObject {
 class ProfileViewController: UIViewController {
     
     weak var coordinator: ProfileViewControllerDelegate?
-    private let user: User
     private let viewModel: ProfileVCViewModel
     
-    init(viewModel: ProfileVCViewModel, user: User) {
-        self.user = user
+    init(viewModel: ProfileVCViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -29,14 +27,14 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "\(user.username)"
+        title = "\(viewModel.user.username)"
         view.backgroundColor = .systemBackground
         configureNavigationBar()
     }
     
     private func configureNavigationBar() {
         do {
-            let isCurrentUser = try viewModel.isCurrentUser(user: user)
+            let isCurrentUser = try viewModel.isCurrentUser()
             if isCurrentUser {
                 navigationItem.rightBarButtonItem = UIBarButtonItem(
                     image: UIImage(systemName: "gear"),

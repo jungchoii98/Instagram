@@ -7,8 +7,13 @@
 
 import Foundation
 
+protocol HomeFeedVCViewModelDelegate: AnyObject {
+    func homeFeedVCViewModelDidFetchPosts(_ homeFeedVCViewModel: HomeFeedVCViewModel)
+}
+
 class HomeFeedVCViewModel {
     
+    weak var delegate: HomeFeedVCViewModelDelegate?
     private let postRepository: PostRepositoryProtocol
     var posts = [[HomeFeedCellType]]()
     
@@ -17,10 +22,41 @@ class HomeFeedVCViewModel {
     }
     
     func fetchPosts() {
-        posts.append(contentsOf: [
-            HomeFeedVCViewModel.cell1,
-            HomeFeedVCViewModel.cell2,
-        ])
+        postRepository.fetchPosts(for: "tzanner") { [weak self] result in
+            switch result {
+            case .success(let posts):
+                self?.configureCellViewModels(with: posts)
+            case .failure(let error):
+                print("Failed to fetch posts. Error: \(error.localizedDescription)")
+            }
+        }
+//        posts.append(contentsOf: [
+//            HomeFeedVCViewModel.cell1,
+//            HomeFeedVCViewModel.cell2,
+//        ])
+    }
+    
+    private func configureCellViewModels(with posts: [Post]) {
+        posts.forEach({ [weak self] post in
+            guard let postImageURL = URL(string: post.postImageURL),
+                  let avatarImageURL = URL(string: post.avatarImageURL)
+            else { return }
+            let posterCell = HomeFeedCellType.poster(PosterCellViewModel(username: post.username, avatarImageURL: avatarImageURL))
+            let postCell = HomeFeedCellType.post(PostCellViewModel(postImageURL: postImageURL))
+            let actionsCell = HomeFeedCellType.actions(ActionsCellViewModel(isLiked: !post.likers.isEmpty))
+            let likesCountCell = HomeFeedCellType.likesCount(LikesCountCellViewModel(likers: post.likers))
+            let captionCell = HomeFeedCellType.caption(CaptionCellViewModel(username: post.username, caption: post.caption))
+            let timestampCell = HomeFeedCellType.timestamp(TimetampCellViewModel(date: Date.string(from: post.timestamp)))
+            self?.posts.append([
+                posterCell,
+                postCell,
+                actionsCell,
+                likesCountCell,
+                captionCell,
+                timestampCell
+            ])
+        })
+        delegate?.homeFeedVCViewModelDidFetchPosts(self)
     }
     
     static let cell1 = [

@@ -5,6 +5,7 @@
 //  Created by Jung Choi on 8/19/23.
 //
 
+import AVFoundation
 import UIKit
 
 protocol CameraEditViewControllerDelegate: AnyObject {
@@ -54,6 +55,6 @@ class CameraEditViewController: UIViewController {
     }
     
     @objc func didTapNext() {
-        coordinator?.cameraEditViewControllerDidTapNext(self, with: image)
+        coordinator?.cameraEditViewControllerDidTapNext(self, with: image.resized(width: 640, height: 640))
     }
 }

@@ -14,11 +14,18 @@ final class ProfileCoordinator: Coordinator {
     var childCoordinators: [Coordinator] = []
     private let authManager: AuthServiceProtocol
     private let user: User
+    private let userRepository: UserRepositoryProtocol
     
-    init(navigationController: UINavigationController, authManager: AuthServiceProtocol, user: User) {
+    init(
+        navigationController: UINavigationController,
+        authManager: AuthServiceProtocol,
+        user: User,
+        userRepository: UserRepositoryProtocol
+    ) {
         self.navigationController = navigationController
         self.authManager = authManager
         self.user = user
+        self.userRepository = userRepository
     }
     
     func start() {
@@ -26,8 +33,8 @@ final class ProfileCoordinator: Coordinator {
     }
     
     private func showProfile() {
-        let viewModel = ProfileVCViewModel()
-        let profileVC = ProfileViewController(viewModel: viewModel, user: user)
+        let viewModel = ProfileVCViewModel(user: user, userRepository: userRepository)
+        let profileVC = ProfileViewController(viewModel: viewModel)
         profileVC.coordinator = self
         navigationController.pushViewController(profileVC, animated: false)
     }

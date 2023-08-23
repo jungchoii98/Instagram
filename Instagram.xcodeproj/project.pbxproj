@@ -73,6 +73,11 @@
 		F09AA5F92A76F5E10059C845 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5F82A76F5E10059C845 /* Utility.swift */; };
 		F09AA5FB2A771F3C0059C845 /* ProfileVCViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5FA2A771F3C0059C845 /* ProfileVCViewModel.swift */; };
 		F0B850792A79D45B00004B8C /* Extension+UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B850782A79D45B00004B8C /* Extension+UIViewController.swift */; };
+		F0FA83A42A9429400069DC3E /* Extension+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA83A32A9429400069DC3E /* Extension+Date.swift */; };
+		F0FA83A62A9435DE0069DC3E /* Extension+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA83A52A9435DE0069DC3E /* Extension+UIImage.swift */; };
+		F0FA83A92A9571010069DC3E /* ExploreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA83A82A9571010069DC3E /* ExploreViewModel.swift */; };
+		F0FA83AB2A9571390069DC3E /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA83AA2A9571390069DC3E /* UserRepository.swift */; };
+		F0FA83CF2A95800B0069DC3E /* ExploreSearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA83CE2A95800B0069DC3E /* ExploreSearchResultViewController.swift */; };
 		FDF9B74F1F7140AF20DAC2A6 /* Pods_Instagram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 724437086F110C91F8BF55FB /* Pods_Instagram.framework */; };
 /* End PBXBuildFile section */
 
@@ -147,6 +152,11 @@
 		F09AA5F82A76F5E10059C845 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		F09AA5FA2A771F3C0059C845 /* ProfileVCViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVCViewModel.swift; sourceTree = "<group>"; };
 		F0B850782A79D45B00004B8C /* Extension+UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIViewController.swift"; sourceTree = "<group>"; };
+		F0FA83A32A9429400069DC3E /* Extension+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Date.swift"; sourceTree = "<group>"; };
+		F0FA83A52A9435DE0069DC3E /* Extension+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIImage.swift"; sourceTree = "<group>"; };
+		F0FA83A82A9571010069DC3E /* ExploreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewModel.swift; sourceTree = "<group>"; };
+		F0FA83AA2A9571390069DC3E /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		F0FA83CE2A95800B0069DC3E /* ExploreSearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreSearchResultViewController.swift; sourceTree = "<group>"; };
 		FF3313F510F5DFF75A97A005 /* Pods-Instagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.debug.xcconfig"; path = "Target Support Files/Pods-Instagram/Pods-Instagram.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -233,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				F086A4532A93311F00BDEEC0 /* PostRepository.swift */,
+				F0FA83AA2A9571390069DC3E /* UserRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -345,6 +356,7 @@
 		F09AA5A82A71C9290059C845 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				F0FA83A72A9570DB0069DC3E /* Explore */,
 				F086A3582A89332500BDEEC0 /* HomeFeed */,
 				F09AA5EB2A7309D60059C845 /* AuthenticationViewModel.swift */,
 				F09AA5FA2A771F3C0059C845 /* ProfileVCViewModel.swift */,
@@ -401,6 +413,7 @@
 				F09AA5C92A71D32E0059C845 /* PostViewController.swift */,
 				F09AA5CB2A71D33B0059C845 /* SettingsViewController.swift */,
 				F086A3D12A90B51E00BDEEC0 /* CameraEditViewController.swift */,
+				F0FA83CE2A95800B0069DC3E /* ExploreSearchResultViewController.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -411,6 +424,8 @@
 				F09AA5F02A75E7C80059C845 /* Extension+Codable.swift */,
 				F086A3932A8B368C00BDEEC0 /* Extension+DateFormatter.swift */,
 				F086A3952A8B3AA500BDEEC0 /* Extension+String.swift */,
+				F0FA83A32A9429400069DC3E /* Extension+Date.swift */,
+				F0FA83A52A9435DE0069DC3E /* Extension+UIImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -421,6 +436,14 @@
 				F09AA5EE2A74CCB50059C845 /* UIImagePickerControllerAdapter.swift */,
 			);
 			path = Adapters;
+			sourceTree = "<group>";
+		};
+		F0FA83A72A9570DB0069DC3E /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+				F0FA83A82A9571010069DC3E /* ExploreViewModel.swift */,
+			);
+			path = Explore;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -559,13 +582,16 @@
 				F086A3732A894B6900BDEEC0 /* CaptionCollectionViewCell.swift in Sources */,
 				F09AA5C62A71D3090059C845 /* CaptionViewController.swift in Sources */,
 				F09AA5BB2A71CDC50059C845 /* CameraCoordinator.swift in Sources */,
+				F0FA83A42A9429400069DC3E /* Extension+Date.swift in Sources */,
 				F086A3942A8B368C00BDEEC0 /* Extension+DateFormatter.swift in Sources */,
 				F086A3962A8B3AA500BDEEC0 /* Extension+String.swift in Sources */,
 				F086A3642A89347D00BDEEC0 /* CaptionCellViewModel.swift in Sources */,
 				F086A3522A88138800BDEEC0 /* SettingsVCViewModel.swift in Sources */,
+				F0FA83A62A9435DE0069DC3E /* Extension+UIImage.swift in Sources */,
 				F09AA5CE2A71D37C0059C845 /* User.swift in Sources */,
 				F0B850792A79D45B00004B8C /* Extension+UIViewController.swift in Sources */,
 				F086A3502A880BBC00BDEEC0 /* StorageClient.swift in Sources */,
+				F0FA83A92A9571010069DC3E /* ExploreViewModel.swift in Sources */,
 				F09AA5D22A71D3A50059C845 /* Relationship.swift in Sources */,
 				F09AA5F92A76F5E10059C845 /* Utility.swift in Sources */,
 				F086A3662A8934AE00BDEEC0 /* TimetampCellViewModel.swift in Sources */,
@@ -580,10 +606,12 @@
 				F09AA5AF2A71CD090059C845 /* ExploreViewController.swift in Sources */,
 				F09AA5D02A71D38D0059C845 /* Post.swift in Sources */,
 				F09AA5E52A72EFA60059C845 /* SignInHeaderView.swift in Sources */,
+				F0FA83CF2A95800B0069DC3E /* ExploreSearchResultViewController.swift in Sources */,
 				F09AA5B92A71CDBB0059C845 /* ExploreCoordinator.swift in Sources */,
 				F09AA5EC2A7309D60059C845 /* AuthenticationViewModel.swift in Sources */,
 				F09AA5FB2A771F3C0059C845 /* ProfileVCViewModel.swift in Sources */,
 				F09AA5912A71C3330059C845 /* AppDelegate.swift in Sources */,
+				F0FA83AB2A9571390069DC3E /* UserRepository.swift in Sources */,
 				F086A3682A89350C00BDEEC0 /* HelperModels.swift in Sources */,
 				F086A35A2A89333800BDEEC0 /* HomeFeedVCViewModel.swift in Sources */,
 				F09AA5E82A72F4790059C845 /* Extension+UIView.swift in Sources */,
