@@ -35,7 +35,7 @@ class SignInHeaderView: UIView {
         gradientLayer.frame = self.bounds
         NSLayoutConstraint.activate([
             logoImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            logoImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            logoImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
             logoImageView.heightAnchor.constraint(equalToConstant: height - 40),
             logoImageView.widthAnchor.constraint(equalToConstant: width / 2)
         ])

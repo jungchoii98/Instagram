@@ -37,7 +37,7 @@ class CaptionCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
         let padding: CGFloat = 12
         NSLayoutConstraint.activate([
-            captionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
+            captionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
             captionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
             captionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
             captionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding),

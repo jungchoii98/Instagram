@@ -13,6 +13,7 @@ protocol DatabaseManagerProtocol {
     func findUser(email: String, completion: @escaping (User?) -> Void)
     func getUsers(completion: @escaping ([User]) -> Void)
     func fetchPosts(for username: String, completion: @escaping ([Post]?) -> Void)
+    func fetchAllPosts(completion: @escaping ([Post]) -> Void)
 }
 
 final class DatabaseManager: DatabaseManagerProtocol {
@@ -60,6 +61,27 @@ final class DatabaseManager: DatabaseManagerProtocol {
             guard let postsData = postsData else { completion(nil); return }
             let posts = postsData.compactMap({ Post(dictionary: $0) })
             completion(posts)
+        }
+    }
+    
+    public func fetchAllPosts(completion: @escaping ([Post]) -> Void) {
+        getUsers { [weak self] users in
+            guard let self = self else { completion([]); return }
+            let group = DispatchGroup()
+            var result = [Post]()
+            users.forEach { user in
+                group.enter()
+                self.fetchPosts(for: user.username) { posts in
+                    defer {
+                        group.leave()
+                    }
+                    guard let posts = posts else { completion([]); return }
+                    result.append(contentsOf: posts)
+                }
+            }
+            group.notify(queue: .main) {
+                completion(result)
+            }
         }
     }
 }

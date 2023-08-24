@@ -78,7 +78,8 @@ final class AppCoordinator {
         )
         let exploreFlowCoordinator = ExploreCoordinator(
             navigationController: exploreNavigationController,
-            userRepository: userRepository
+            userRepository: userRepository,
+            postRepository: postRepository
         )
         let cameraFlowCoordinator = CameraCoordinator(
             tabBarController: mainTabBarController,

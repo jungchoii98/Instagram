@@ -38,17 +38,9 @@ class ExploreViewController: UIViewController {
         navigationItem.searchController = searchController
         searchResultVC.delegate = self
         
-//        view.addSubview(searchResultVC.view)
-//        searchResultVC.view.frame = view.bounds
-//        addChild(searchResultVC)
-//        searchResultVC.didMove(toParent: self)
         setUpSearchController()
-        add(searchResultVC)
-        
-//        view.addSubview(exploreMainVC.view)
-//        exploreMainVC.view.frame = view.bounds
-//        addChild(exploreMainVC)
-//        exploreMainVC.didMove(toParent: self)
+        add(exploreMainVC)
+        viewModel.fetchAllPosts()
     }
 }
 
@@ -86,5 +78,9 @@ extension ExploreViewController: UISearchResultsUpdating {
 extension ExploreViewController: ExploreSearchResultViewControllerDelegate {
     func exploreSearchResultViewControllerDidSelectUser(_ exploreSearchResultViewController: ExploreSearchResultViewController, user: User) {
         coordinator?.exploreViewControllerDidSelectUser(self, user: user)
+    }
+    
+    func exploreViewModelFetchedAllPosts(_ exploreViewModel: ExploreViewModel, _ posts: [Post]) {
+        exploreMainVC.update(with: posts)
     }
 }

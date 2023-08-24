@@ -116,34 +116,34 @@ class SignUpViewController: UIViewController {
             profilePictureImageView.widthAnchor.constraint(equalToConstant: 90),
             
             usernameTextField.topAnchor.constraint(equalTo: profilePictureImageView.bottomAnchor, constant: 20),
-            usernameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            usernameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            usernameTextField.heightAnchor.constraint(equalToConstant: 50),
+            usernameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            usernameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            usernameTextField.heightAnchor.constraint(equalToConstant: 40),
             
             emailTextField.topAnchor.constraint(equalTo: usernameTextField.bottomAnchor, constant: 10),
-            emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            emailTextField.heightAnchor.constraint(equalToConstant: 50),
+            emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            emailTextField.heightAnchor.constraint(equalToConstant: 40),
             
             passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 10),
-            passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 50),
+            passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 40),
             
             signUpButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 20),
-            signUpButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            signUpButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            signUpButton.heightAnchor.constraint(equalToConstant: 50),
+            signUpButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            signUpButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            signUpButton.heightAnchor.constraint(equalToConstant: 40),
             
             termsButton.topAnchor.constraint(equalTo: signUpButton.bottomAnchor, constant: 50),
-            termsButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            termsButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            termsButton.heightAnchor.constraint(equalToConstant: 50),
+            termsButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            termsButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            termsButton.heightAnchor.constraint(equalToConstant: 40),
             
             privacyButton.topAnchor.constraint(equalTo: termsButton.bottomAnchor, constant: 20),
-            privacyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            privacyButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            privacyButton.heightAnchor.constraint(equalToConstant: 50),
+            privacyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            privacyButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            privacyButton.heightAnchor.constraint(equalToConstant: 40),
         ])
     }
     

@@ -15,7 +15,16 @@ class LikesCountCollectionViewCell: UICollectionViewCell {
     
     static let reuseID = "\(LikesCountCollectionViewCell.self)"
     
-    private var likesCountLabel: UILabel = {
+    private let likesImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(systemName: "heart.fill")
+        imageView.tintColor = .label
+        return imageView
+    }()
+    
+    private let likesCountLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.isUserInteractionEnabled = true
@@ -37,8 +46,13 @@ class LikesCountCollectionViewCell: UICollectionViewCell {
         super.layoutSubviews()
         let padding: CGFloat = 12
         NSLayoutConstraint.activate([
+            likesImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
+            likesImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+            likesImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding),
+            likesImageView.widthAnchor.constraint(equalTo: likesImageView.heightAnchor),
+            
             likesCountLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
-            likesCountLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
+            likesCountLabel.leadingAnchor.constraint(equalTo: likesImageView.trailingAnchor, constant: 5),
             likesCountLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
             likesCountLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding)
         ])
@@ -46,11 +60,13 @@ class LikesCountCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        likesImageView.image = nil
         likesCountLabel.text = nil
     }
     
     private func setUp() {
         contentView.backgroundColor = .systemBackground
+        contentView.addSubview(likesImageView)
         contentView.addSubview(likesCountLabel)
         
         let countTap = UITapGestureRecognizer(target: self, action: #selector(didTapCount))

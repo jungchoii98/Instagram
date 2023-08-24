@@ -12,13 +12,16 @@ final class ExploreCoordinator: Coordinator {
     private let navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     private let userRepository: UserRepositoryProtocol
+    private let postRepository: PostRepositoryProtocol
     
     init(
         navigationController: UINavigationController,
-         userRepository: UserRepositoryProtocol
+        userRepository: UserRepositoryProtocol,
+        postRepository: PostRepositoryProtocol
     ) {
         self.navigationController = navigationController
         self.userRepository = userRepository
+        self.postRepository = postRepository
     }
     
     func start() {
@@ -26,7 +29,7 @@ final class ExploreCoordinator: Coordinator {
     }
     
     private func showExplore() {
-        let viewModel = ExploreViewModel(userRepository: userRepository)
+        let viewModel = ExploreViewModel(userRepository: userRepository, postRepository: postRepository)
         let exploreVC = ExploreViewController(viewModel: viewModel)
         exploreVC.coordinator = self
         navigationController.pushViewController(exploreVC, animated: false)

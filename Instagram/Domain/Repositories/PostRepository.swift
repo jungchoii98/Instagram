@@ -25,6 +25,8 @@ protocol PostRepositoryProtocol {
         post: Post,
         completion: @escaping (Bool) -> Void
     )
+    
+    func fetchAllPosts(completion: @escaping ([Post]) -> Void)
 }
 
 class PostRepository: PostRepositoryProtocol {
@@ -66,5 +68,9 @@ class PostRepository: PostRepositoryProtocol {
         databaseManager.createPost(username: username, post: post) { didSucceed in
             completion(didSucceed)
         }
+    }
+    
+    func fetchAllPosts(completion: @escaping ([Post]) -> Void) {
+        databaseManager.fetchAllPosts(completion: completion)
     }
 }

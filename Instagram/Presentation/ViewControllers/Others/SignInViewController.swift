@@ -103,34 +103,34 @@ class SignInViewController: UIViewController {
             headerView.heightAnchor.constraint(equalToConstant: (view.height - view.safeAreaInsets.top)/3),
             
             emailTextField.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 20),
-            emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            emailTextField.heightAnchor.constraint(equalToConstant: 50),
+            emailTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            emailTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            emailTextField.heightAnchor.constraint(equalToConstant: 40),
             
             passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 10),
-            passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            passwordTextField.heightAnchor.constraint(equalToConstant: 50),
+            passwordTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            passwordTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            passwordTextField.heightAnchor.constraint(equalToConstant: 40),
             
             signInButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 20),
-            signInButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            signInButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            signInButton.heightAnchor.constraint(equalToConstant: 50),
+            signInButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            signInButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            signInButton.heightAnchor.constraint(equalToConstant: 40),
             
             createAccountButton.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 20),
-            createAccountButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            createAccountButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            createAccountButton.heightAnchor.constraint(equalToConstant: 50),
+            createAccountButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            createAccountButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            createAccountButton.heightAnchor.constraint(equalToConstant: 40),
             
             termsButton.topAnchor.constraint(equalTo: createAccountButton.bottomAnchor, constant: 50),
-            termsButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            termsButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            termsButton.heightAnchor.constraint(equalToConstant: 50),
+            termsButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            termsButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            termsButton.heightAnchor.constraint(equalToConstant: 40),
             
             privacyButton.topAnchor.constraint(equalTo: termsButton.bottomAnchor, constant: 20),
-            privacyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
-            privacyButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            privacyButton.heightAnchor.constraint(equalToConstant: 50)
+            privacyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            privacyButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            privacyButton.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
     
