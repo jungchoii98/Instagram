@@ -42,15 +42,41 @@ class SignInViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Sign In", for: .normal)
         button.backgroundColor = .systemBlue
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         button.layer.cornerRadius = 8
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
+    private let orLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "OR"
+        label.textColor = .tertiaryLabel
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: 10, weight: .regular)
+        return label
+    }()
+    
+    private let leftDividerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .tertiaryLabel
+        return view
+    }()
+    
+    private let rightDividerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .tertiaryLabel
+        return view
+    }()
+    
     private let createAccountButton: UIButton = {
         let button = UIButton()
         button.setTitle("Create Account", for: .normal)
-        button.setTitleColor(UIColor.link, for: .normal)
+        button.setTitleColor(UIColor.secondaryLabel, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -59,6 +85,7 @@ class SignInViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Terms and Services", for: .normal)
         button.setTitleColor(UIColor.link, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -67,6 +94,7 @@ class SignInViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Privacy", for: .normal)
         button.setTitleColor(UIColor.link, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -117,20 +145,35 @@ class SignInViewController: UIViewController {
             signInButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             signInButton.heightAnchor.constraint(equalToConstant: 40),
             
-            createAccountButton.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 20),
+            orLabel.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 10),
+            orLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            orLabel.heightAnchor.constraint(equalToConstant: 20),
+            orLabel.widthAnchor.constraint(equalToConstant: 25),
+            
+            leftDividerView.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 20),
+            leftDividerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            leftDividerView.trailingAnchor.constraint(equalTo: orLabel.leadingAnchor, constant: -10),
+            leftDividerView.heightAnchor.constraint(equalToConstant: 1),
+            
+            rightDividerView.topAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 20),
+            rightDividerView.leadingAnchor.constraint(equalTo: orLabel.trailingAnchor, constant: 10),
+            rightDividerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            rightDividerView.heightAnchor.constraint(equalToConstant: 1),
+            
+            createAccountButton.topAnchor.constraint(equalTo: orLabel.bottomAnchor),
             createAccountButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             createAccountButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             createAccountButton.heightAnchor.constraint(equalToConstant: 40),
             
-            termsButton.topAnchor.constraint(equalTo: createAccountButton.bottomAnchor, constant: 50),
+            termsButton.bottomAnchor.constraint(equalTo: privacyButton.topAnchor, constant: -5),
             termsButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             termsButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            termsButton.heightAnchor.constraint(equalToConstant: 40),
+            termsButton.heightAnchor.constraint(equalToConstant: 20),
             
-            privacyButton.topAnchor.constraint(equalTo: termsButton.bottomAnchor, constant: 20),
+            privacyButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             privacyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             privacyButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            privacyButton.heightAnchor.constraint(equalToConstant: 40)
+            privacyButton.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
     
@@ -139,6 +182,9 @@ class SignInViewController: UIViewController {
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
         view.addSubview(signInButton)
+        view.addSubview(orLabel)
+        view.addSubview(leftDividerView)
+        view.addSubview(rightDividerView)
         view.addSubview(createAccountButton)
         view.addSubview(termsButton)
         view.addSubview(privacyButton)
@@ -152,7 +198,6 @@ class SignInViewController: UIViewController {
     }
     
     // MARK: Actions
-    
     
     @objc func didTapSignIn() {
         emailTextField.resignFirstResponder()

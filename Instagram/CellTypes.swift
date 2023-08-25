@@ -15,3 +15,9 @@ enum HomeFeedCellType: Hashable {
     case caption(CaptionCellViewModel)
     case timestamp(TimetampCellViewModel)
 }
+
+enum NotificationCellType: Hashable {
+    case likes
+    case follow
+    case comment
+}
