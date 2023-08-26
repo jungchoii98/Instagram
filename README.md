@@ -1,23 +1,28 @@
 # Instagram Clone
 
+*This repository contains a fully functional Instagram application. It is a passion project meant for learning and exploration.*
+
 * Frontend - UIKit </br>
 * Backend - Firebase </br>
 * Persistence - Core Data
 
 ## Note
-> *This repository is a passion project meant for learning and exploration. It is still a work in progress and I will be continuing to add more features. Please see the 'Upcoming Features' section for more information.*
+> *It is still a work in progress and I will be continuing to add more features. Please see the 'Upcoming Features' section for more information.*
 
 ## Current Features
 - [x] **Account creation & sign in/out capability**
 - [x] **Home page where users can scroll through their own latest posts**
 - [x] **Photo/Video upload capability**
 - [x] **Search for user profiles**
+- [x] **Notifications Feed** 
 
 ## Screenshots
  &emsp; &emsp;
 ![Sign In](./Docs/Images/SignIn_Page.png?raw=true) &emsp; &emsp; &emsp;
-![Sign In](./Docs/Images/Home_Feed.png?raw=true) &emsp; &emsp; &emsp;
-![Sign In](./Docs/Images/Upload_Photo.png?raw=true)
+![Home Feed](./Docs/Images/Home_Feed.png?raw=true) &emsp; &emsp; &emsp;
+![Upload Photo](./Docs/Images/Upload_Photo.png?raw=true) </br>
+ &emsp; &emsp;
+![Notifications Feed](./Docs/Images/Notifications_Feed.png?raw=true) &emsp; &emsp; &emsp;
 
 ## Getting Started
 1. Setup Firebase
@@ -33,10 +38,9 @@
 
 ## Upcoming Features
 - Explore page for discovery of new content
-- Notifications
 - Following/Follower system
 - Profile Screen
-- Filter images
+- Be able to filter images when uploading photos
 
 ## Contact
 If you have any further questions, please don't hesitate to reach out on LinkedIn </br>
