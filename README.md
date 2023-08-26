@@ -24,6 +24,12 @@
  &emsp; &emsp;
 ![Notifications Feed](./Docs/Images/Notifications_Feed.png?raw=true) &emsp; &emsp; &emsp;
 
+||||
+|------------|-----------|-----------|
+|![Sign In](./Docs/Images/SignIn_Page.png?raw=true)|![Home Feed](./Docs/Images/Home_Feed.png?raw=true)|![Upload Photo](./Docs/Images/Upload_Photo.png?raw=true)|
+
+|![Notifications Feed](./Docs/Images/Notifications_Feed.png?raw=true)||
+
 ## Getting Started
 1. Setup Firebase
    * Please follow the instructions on the Firebase website: https://firebase.google.com/docs/ios/setup
