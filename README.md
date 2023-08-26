@@ -17,10 +17,10 @@
 - [x] **Notifications Feed** 
 
 ## Screenshots
-&emsp;&emsp;&emsp;&emsp;![Sign In](./Docs/Images/SignIn_Page.png?raw=true)
-&emsp;&emsp;&emsp;&emsp;![Home Feed](./Docs/Images/Home_Feed.png?raw=true)
-&emsp;&emsp;&emsp;&emsp;![Upload Photo](./Docs/Images/Upload_Photo.png?raw=true) </br>
-&emsp;&emsp;&emsp;&emsp;![Notifications Feed](./Docs/Images/Notifications_Feed.png?raw=true)
+&emsp;&emsp;![Sign In](./Docs/Images/SignIn_Page.png?raw=true)
+&emsp;&emsp;![Home Feed](./Docs/Images/Home_Feed.png?raw=true)
+&emsp;&emsp;![Upload Photo](./Docs/Images/Upload_Photo.png?raw=true) </br>
+&emsp;&emsp;![Notifications Feed](./Docs/Images/Notifications_Feed.png?raw=true)
 
 ## Getting Started
 1. Setup Firebase
