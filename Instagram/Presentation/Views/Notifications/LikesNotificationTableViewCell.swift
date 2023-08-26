@@ -8,6 +8,13 @@
 import SDWebImage
 import UIKit
 
+protocol LikesNotificationTableViewCellDelegate: AnyObject {
+    func likesNotificationTableViewCell(
+        _ likesNotificationTableViewCell: LikesNotificationTableViewCell,
+        didTapPost viewModel: LikesNotificationCellViewModel
+    )
+}
+
 class LikesNotificationTableViewCell: UITableViewCell {
     static let reuseID = "\(LikesNotificationTableViewCell.self)"
     
@@ -31,18 +38,30 @@ class LikesNotificationTableViewCell: UITableViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
+    
+    weak var delegate: LikesNotificationTableViewCellDelegate?
+    private var viewModel: LikesNotificationCellViewModel?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(profileImageView)
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(postImageView)
+        
+        let postTap = UITapGestureRecognizer(target: self, action: #selector(didTapPost))
+        postImageView.addGestureRecognizer(postTap)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func didTapPost() {
+        guard let viewModel = viewModel else { return }
+        delegate?.likesNotificationTableViewCell(self, didTapPost: viewModel)
     }
     
     override func layoutSubviews() {
@@ -74,6 +93,7 @@ class LikesNotificationTableViewCell: UITableViewCell {
     }
     
     func configure(with viewModel: LikesNotificationCellViewModel) {
+        self.viewModel = viewModel
         profileImageView.sd_setImage(with: viewModel.profilePictureURL)
         descriptionLabel.text = viewModel.username + " liked your post"
         postImageView.sd_setImage(with: viewModel.postURL)

@@ -98,22 +98,37 @@ extension NotificationViewModel {
 }
 
 struct LikesNotificationCellViewModel: Hashable {
-    let id = UUID()
     let username: String
     let profilePictureURL: URL
     let postURL: URL
+    
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.username == rhs.username
+        && lhs.profilePictureURL == rhs.profilePictureURL
+        && lhs.postURL == rhs.postURL
+    }
 }
 
 struct FollowNotificationCellViewModel: Hashable {
-    let id = UUID()
     let username: String
     let profilePictureURL: URL
-    let isFollowing: Bool
+    var isFollowing: Bool
+    
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.username == rhs.username
+        && lhs.profilePictureURL == rhs.profilePictureURL
+        && lhs.isFollowing == rhs.isFollowing
+    }
 }
 
 struct CommentNotificationCellViewModel: Hashable {
-    let id = UUID()
     let username: String
     let profilePictureURL: URL
     let postURL: URL
+    
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.username == rhs.username
+        && lhs.profilePictureURL == rhs.profilePictureURL
+        && lhs.postURL == rhs.postURL
+    }
 }

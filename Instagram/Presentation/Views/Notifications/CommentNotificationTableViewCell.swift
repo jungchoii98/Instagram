@@ -5,7 +5,15 @@
 //  Created by Jung Choi on 8/24/23.
 //
 
+import SDWebImage
 import UIKit
+
+protocol CommentNotificationTableViewCellDelegate: AnyObject {
+    func commentNotificationTableViewCell(
+        _ commentNotificationTableViewCell: CommentNotificationTableViewCell,
+        didTapPost viewModel: CommentNotificationCellViewModel
+    )
+}
 
 class CommentNotificationTableViewCell: UITableViewCell {
     static let reuseID = "\(CommentNotificationTableViewCell.self)"
@@ -30,18 +38,30 @@ class CommentNotificationTableViewCell: UITableViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
+    
+    weak var delegate: CommentNotificationTableViewCellDelegate?
+    private var viewModel: CommentNotificationCellViewModel?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(profileImageView)
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(postImageView)
+        
+        let postTap = UITapGestureRecognizer(target: self, action: #selector(didTapPost))
+        postImageView.addGestureRecognizer(postTap)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func didTapPost() {
+        guard let viewModel = viewModel else { return }
+        delegate?.commentNotificationTableViewCell(self, didTapPost: viewModel)
     }
     
     override func layoutSubviews() {
@@ -73,6 +93,7 @@ class CommentNotificationTableViewCell: UITableViewCell {
     }
     
     func configure(with viewModel: CommentNotificationCellViewModel) {
+        self.viewModel = viewModel
         profileImageView.sd_setImage(with: viewModel.profilePictureURL)
         descriptionLabel.text = viewModel.username + " commented on your post"
         postImageView.sd_setImage(with: viewModel.postURL)

@@ -76,14 +76,17 @@ class NotificationsViewController: UIViewController {
             switch itemIdentifier {
             case .likes(let viewModel):
                 let cell = tableView.dequeueReusableCell(withIdentifier: LikesNotificationTableViewCell.reuseID, for: indexPath) as! LikesNotificationTableViewCell
+                cell.delegate = self
                 cell.configure(with: viewModel)
                 return cell
             case .follow(let viewModel):
                 let cell = tableView.dequeueReusableCell(withIdentifier: FollowNotificationTableViewCell.reuseID, for: indexPath) as! FollowNotificationTableViewCell
+                cell.delegate = self
                 cell.configure(with: viewModel)
                 return cell
             case .comment(let viewModel):
                 let cell = tableView.dequeueReusableCell(withIdentifier: CommentNotificationTableViewCell.reuseID, for: indexPath) as! CommentNotificationTableViewCell
+                cell.delegate = self
                 cell.configure(with: viewModel)
                 return cell
             }
@@ -110,5 +113,19 @@ extension NotificationsViewController: UITableViewDelegate {
 extension NotificationsViewController: NotificationViewModelDelegate {
     func notificationViewModelDidFetchNotifications(_ notificationViewModel: NotificationViewModel) {
         update()
+    }
+}
+
+extension NotificationsViewController: LikesNotificationTableViewCellDelegate, CommentNotificationTableViewCellDelegate, FollowNotificationTableViewCellDelegate {
+    func likesNotificationTableViewCell(_ likesNotificationTableViewCell: LikesNotificationTableViewCell, didTapPost viewModel: LikesNotificationCellViewModel) {
+        print("tap post")
+    }
+    
+    func commentNotificationTableViewCell(_ commentNotificationTableViewCell: CommentNotificationTableViewCell, didTapPost viewModel: CommentNotificationCellViewModel) {
+        print("tap post")
+    }
+    
+    func followNotificationTableViewCell(_ followNotificationTableViewCell: FollowNotificationTableViewCell, didTapFollow viewModel: FollowNotificationCellViewModel) {
+        print("tap follow")
     }
 }

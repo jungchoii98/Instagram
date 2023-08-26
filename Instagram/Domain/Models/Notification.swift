@@ -8,5 +8,7 @@
 import Foundation
 
 struct Notification {
-    
+    let profilePictureURL: String
+    let username: String
+    let postURL: String
 }

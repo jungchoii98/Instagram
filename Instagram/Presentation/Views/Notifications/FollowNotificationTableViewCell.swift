@@ -5,7 +5,15 @@
 //  Created by Jung Choi on 8/24/23.
 //
 
+import SDWebImage
 import UIKit
+
+protocol FollowNotificationTableViewCellDelegate: AnyObject {
+    func followNotificationTableViewCell(
+        _ followNotificationTableViewCell: FollowNotificationTableViewCell,
+        didTapFollow viewModel: FollowNotificationCellViewModel
+    )
+}
 
 class FollowNotificationTableViewCell: UITableViewCell {
     static let reuseID = "\(FollowNotificationTableViewCell.self)"
@@ -32,11 +40,29 @@ class FollowNotificationTableViewCell: UITableViewCell {
         return button
     }()
     
+    weak var delegate: FollowNotificationTableViewCellDelegate?
+    private var viewModel: FollowNotificationCellViewModel?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubview(profileImageView)
         contentView.addSubview(descriptionLabel)
         contentView.addSubview(followButton)
+        
+        followButton.addTarget(self, action: #selector(didTapFollow), for: .touchUpInside)
+    }
+    
+    @objc func didTapFollow() {
+        self.viewModel?.isFollowing.toggle()
+        updateButton()
+        guard let viewModel = viewModel else { return }
+        delegate?.followNotificationTableViewCell(self, didTapFollow: viewModel)
+    }
+    
+    private func updateButton() {
+        guard let viewModel = viewModel else { return }
+        followButton.setTitle(viewModel.isFollowing ? "Following" : "Follow", for: .normal)
+        followButton.backgroundColor = viewModel.isFollowing ? .secondarySystemBackground : .systemBlue
     }
     
     required init?(coder: NSCoder) {
@@ -73,9 +99,9 @@ class FollowNotificationTableViewCell: UITableViewCell {
     }
     
     func configure(with viewModel: FollowNotificationCellViewModel) {
+        self.viewModel = viewModel
         profileImageView.sd_setImage(with: viewModel.profilePictureURL)
         descriptionLabel.text = viewModel.username + " has started following you"
-        followButton.setTitle(viewModel.isFollowing ? "Following" : "Follow", for: .normal)
-        followButton.backgroundColor = viewModel.isFollowing ? .secondarySystemBackground : .systemBlue
+        updateButton()
     }
 }
