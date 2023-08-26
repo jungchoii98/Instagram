@@ -84,6 +84,8 @@
 		F0FA84392A984DF10069DC3E /* LikesNotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA84382A984DF10069DC3E /* LikesNotificationTableViewCell.swift */; };
 		F0FA843B2A984DFF0069DC3E /* FollowNotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA843A2A984DFF0069DC3E /* FollowNotificationTableViewCell.swift */; };
 		F0FA843D2A984E0F0069DC3E /* CommentNotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA843C2A984E0F0069DC3E /* CommentNotificationTableViewCell.swift */; };
+		F0FA84402A9973890069DC3E /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA843F2A9973890069DC3E /* NotificationViewModel.swift */; };
+		F0FA84452A99B7B10069DC3E /* NotificationsTableViewDiffableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA84442A99B7B10069DC3E /* NotificationsTableViewDiffableDataSource.swift */; };
 		FDF9B74F1F7140AF20DAC2A6 /* Pods_Instagram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 724437086F110C91F8BF55FB /* Pods_Instagram.framework */; };
 /* End PBXBuildFile section */
 
@@ -169,6 +171,8 @@
 		F0FA84382A984DF10069DC3E /* LikesNotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikesNotificationTableViewCell.swift; sourceTree = "<group>"; };
 		F0FA843A2A984DFF0069DC3E /* FollowNotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowNotificationTableViewCell.swift; sourceTree = "<group>"; };
 		F0FA843C2A984E0F0069DC3E /* CommentNotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentNotificationTableViewCell.swift; sourceTree = "<group>"; };
+		F0FA843F2A9973890069DC3E /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
+		F0FA84442A99B7B10069DC3E /* NotificationsTableViewDiffableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewDiffableDataSource.swift; sourceTree = "<group>"; };
 		FF3313F510F5DFF75A97A005 /* Pods-Instagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.debug.xcconfig"; path = "Target Support Files/Pods-Instagram/Pods-Instagram.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -204,23 +208,13 @@
 		F086A3462A87FDD300BDEEC0 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				F0FA84432A99B7740069DC3E /* DD */,
 				F09AA5A72A71C9240059C845 /* Views */,
 				F09AA5A52A71C9110059C845 /* ViewControllers */,
 				F09AA5A82A71C9290059C845 /* ViewModels */,
 				F09AA5AB2A71CC470059C845 /* FlowCoordinators */,
-				F086A3472A87FDE200BDEEC0 /* Extensions */,
-				F09AA5ED2A74CC530059C845 /* Adapters */,
 			);
 			path = Presentation;
-			sourceTree = "<group>";
-		};
-		F086A3472A87FDE200BDEEC0 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				F09AA5E72A72F4790059C845 /* Extension+UIView.swift */,
-				F0B850782A79D45B00004B8C /* Extension+UIViewController.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		F086A3482A87FE0A00BDEEC0 /* Domain */ = {
@@ -312,6 +306,7 @@
 				F086A3492A87FE0E00BDEEC0 /* Data */,
 				F086A3482A87FE0A00BDEEC0 /* Domain */,
 				F086A3462A87FDD300BDEEC0 /* Presentation */,
+				F09AA5ED2A74CC530059C845 /* Adapters */,
 				F09AA5E62A72F46A0059C845 /* Extensions */,
 				F09AA5F82A76F5E10059C845 /* Utility.swift */,
 				F09AA5F62A76F5110059C845 /* Constants.swift */,
@@ -358,11 +353,10 @@
 		F09AA5A72A71C9240059C845 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F0FA84412A9974E70069DC3E /* Reusable */,
 				F0FA84362A984DB30069DC3E /* Notifications */,
 				F0FA83D22A96C37E0069DC3E /* Explore */,
 				F086A3692A894A5F00BDEEC0 /* HomeFeed */,
-				F09AA5E42A72EFA60059C845 /* SignInHeaderView.swift */,
-				F09AA5E92A72FD560059C845 /* IGTextField.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -370,6 +364,7 @@
 		F09AA5A82A71C9290059C845 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				F0FA843E2A99735E0069DC3E /* Notification */,
 				F0FA83A72A9570DB0069DC3E /* Explore */,
 				F086A3582A89332500BDEEC0 /* HomeFeed */,
 				F09AA5EB2A7309D60059C845 /* AuthenticationViewModel.swift */,
@@ -435,6 +430,8 @@
 		F09AA5E62A72F46A0059C845 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				F09AA5E72A72F4790059C845 /* Extension+UIView.swift */,
+				F0B850782A79D45B00004B8C /* Extension+UIViewController.swift */,
 				F09AA5F02A75E7C80059C845 /* Extension+Codable.swift */,
 				F086A3932A8B368C00BDEEC0 /* Extension+DateFormatter.swift */,
 				F086A3952A8B3AA500BDEEC0 /* Extension+String.swift */,
@@ -486,6 +483,31 @@
 				F09AA5C32A71D2FB0059C845 /* SignUpViewController.swift */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		F0FA843E2A99735E0069DC3E /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				F0FA843F2A9973890069DC3E /* NotificationViewModel.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		F0FA84412A9974E70069DC3E /* Reusable */ = {
+			isa = PBXGroup;
+			children = (
+				F09AA5E42A72EFA60059C845 /* SignInHeaderView.swift */,
+				F09AA5E92A72FD560059C845 /* IGTextField.swift */,
+			);
+			path = Reusable;
+			sourceTree = "<group>";
+		};
+		F0FA84432A99B7740069DC3E /* DD */ = {
+			isa = PBXGroup;
+			children = (
+				F0FA84442A99B7B10069DC3E /* NotificationsTableViewDiffableDataSource.swift */,
+			);
+			path = DD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -661,6 +683,7 @@
 				F086A35A2A89333800BDEEC0 /* HomeFeedVCViewModel.swift in Sources */,
 				F0FA843D2A984E0F0069DC3E /* CommentNotificationTableViewCell.swift in Sources */,
 				F0FA843B2A984DFF0069DC3E /* FollowNotificationTableViewCell.swift in Sources */,
+				F0FA84452A99B7B10069DC3E /* NotificationsTableViewDiffableDataSource.swift in Sources */,
 				F09AA5E82A72F4790059C845 /* Extension+UIView.swift in Sources */,
 				F09AA5C42A71D2FB0059C845 /* SignUpViewController.swift in Sources */,
 				F0FA83D62A96C6720069DC3E /* ExplorePostCollectionView.swift in Sources */,
@@ -674,6 +697,7 @@
 				F09AA5B52A71CD410059C845 /* ProfileViewController.swift in Sources */,
 				F086A34C2A8800B100BDEEC0 /* AuthClient.swift in Sources */,
 				F09AA5B12A71CD150059C845 /* CameraViewController.swift in Sources */,
+				F0FA84402A9973890069DC3E /* NotificationViewModel.swift in Sources */,
 				F09AA5F72A76F5110059C845 /* Constants.swift in Sources */,
 				F09AA5DA2A71D4380059C845 /* StorageManager.swift in Sources */,
 				F086A34E2A88055300BDEEC0 /* DatabaseClient.swift in Sources */,

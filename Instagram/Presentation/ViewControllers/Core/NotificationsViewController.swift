@@ -12,7 +12,9 @@ protocol NotificationsViewControllerDelegate: AnyObject {}
 class NotificationsViewController: UIViewController {
     
     enum Section {
-        case main
+        case thisWeek
+        case thisMonth
+        case earlier
     }
     
     private let noActivityLabel: UILabel = {
@@ -35,8 +37,19 @@ class NotificationsViewController: UIViewController {
     }()
     
     weak var coordinator: NotificationsViewControllerDelegate?
-    private var dataSource: UITableViewDiffableDataSource<Section,NotificationCellType>!
-
+    private var dataSource: NotificationsTableViewDiffableDataSource<Section,NotificationCellType>!
+    private let viewModel: NotificationViewModel
+    
+    init(viewModel: NotificationViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        viewModel.delegate = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Notifications"
@@ -44,8 +57,10 @@ class NotificationsViewController: UIViewController {
         view.addSubview(tableView)
         view.addSubview(noActivityLabel)
         tableView.delegate = self
+        tableView.rowHeight = view.bounds.height/14
         configureDatasouce()
-        noActivityLabel.isHidden = false
+        viewModel.fetchNotifications()
+        tableView.isHidden = false
     }
     
     override func viewDidLayoutSubviews() {
@@ -57,22 +72,43 @@ class NotificationsViewController: UIViewController {
     }
     
     private func configureDatasouce() {
-        dataSource = UITableViewDiffableDataSource(tableView: tableView, cellProvider: { tableView, indexPath, itemIdentifier in
+        dataSource = NotificationsTableViewDiffableDataSource(tableView: tableView, cellProvider: { tableView, indexPath, itemIdentifier in
             switch itemIdentifier {
-            case .likes:
+            case .likes(let viewModel):
                 let cell = tableView.dequeueReusableCell(withIdentifier: LikesNotificationTableViewCell.reuseID, for: indexPath) as! LikesNotificationTableViewCell
+                cell.configure(with: viewModel)
                 return cell
-            case .follow:
+            case .follow(let viewModel):
                 let cell = tableView.dequeueReusableCell(withIdentifier: FollowNotificationTableViewCell.reuseID, for: indexPath) as! FollowNotificationTableViewCell
+                cell.configure(with: viewModel)
                 return cell
-            case .comment:
+            case .comment(let viewModel):
                 let cell = tableView.dequeueReusableCell(withIdentifier: CommentNotificationTableViewCell.reuseID, for: indexPath) as! CommentNotificationTableViewCell
+                cell.configure(with: viewModel)
                 return cell
             }
         })
+        update()
+    }
+    
+    private func update() {
+        DispatchQueue.main.async {
+            var snapshot = NSDiffableDataSourceSnapshot<Section, NotificationCellType>()
+            snapshot.appendSections([.thisWeek, .thisMonth, .earlier])
+            snapshot.appendItems(self.viewModel.thisWeekViewModelCells, toSection: .thisWeek)
+            snapshot.appendItems(self.viewModel.thisMonthViewModelCells, toSection: .thisMonth)
+            snapshot.appendItems(self.viewModel.earlierViewModelCells, toSection: .earlier)
+            self.dataSource.apply(snapshot, animatingDifferences: true)
+        }
     }
 }
 
 extension NotificationsViewController: UITableViewDelegate {
     
+}
+
+extension NotificationsViewController: NotificationViewModelDelegate {
+    func notificationViewModelDidFetchNotifications(_ notificationViewModel: NotificationViewModel) {
+        update()
+    }
 }

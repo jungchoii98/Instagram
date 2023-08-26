@@ -17,7 +17,7 @@ enum HomeFeedCellType: Hashable {
 }
 
 enum NotificationCellType: Hashable {
-    case likes
-    case follow
-    case comment
+    case likes(LikesNotificationCellViewModel)
+    case follow(FollowNotificationCellViewModel)
+    case comment(CommentNotificationCellViewModel)
 }
