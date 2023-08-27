@@ -14,14 +14,14 @@ protocol PostRepositoryProtocol {
     )
     
     func storePost(
-        username: String,
+        userID: String,
         postID: String,
         pictureData: Data?,
         completion: @escaping (URL?) -> Void
     )
     
     func uploadPost(
-        username: String,
+        userID: String,
         post: Post,
         completion: @escaping (Bool) -> Void
     )
@@ -42,30 +42,30 @@ class PostRepository: PostRepositoryProtocol {
         self.databaseManager = databaseManager
     }
     
-    func fetchPosts(for username: String, completion: @escaping (Result<[Post], Error>) -> Void) {
-        databaseManager.fetchPosts(for: username) { posts in
+    func fetchPosts(for userID: String, completion: @escaping (Result<[Post], Error>) -> Void) {
+        databaseManager.fetchPosts(userID: userID) { posts in
             guard let posts = posts else { completion(.failure(NSError())); return }
             completion(.success(posts))
         }
     }
     
     func storePost(
-        username: String,
+        userID: String,
         postID: String,
         pictureData: Data?,
         completion: @escaping (URL?) -> Void
     ) {
-        storageManager.uploadPost(username: username, postID: postID, pictureData: pictureData) { url in
+        storageManager.uploadPost(userID: userID, postID: postID, pictureData: pictureData) { url in
             completion(url)
         }
     }
     
     func uploadPost(
-        username: String,
+        userID: String,
         post: Post,
         completion: @escaping (Bool) -> Void
     ) {
-        databaseManager.createPost(username: username, post: post) { didSucceed in
+        databaseManager.createPost(userID: userID, post: post) { didSucceed in
             completion(didSucceed)
         }
     }

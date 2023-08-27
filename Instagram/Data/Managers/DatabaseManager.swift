@@ -9,10 +9,10 @@ import Foundation
 
 protocol DatabaseManagerProtocol {
     func createUser(user: User, completion: @escaping (Bool) -> Void)
-    func createPost(username: String, post: Post, completion: @escaping (Bool) -> Void)
+    func createPost(userID: String, post: Post, completion: @escaping (Bool) -> Void)
     func findUser(email: String, completion: @escaping (User?) -> Void)
     func getUsers(completion: @escaping ([User]) -> Void)
-    func fetchPosts(for username: String, completion: @escaping ([Post]?) -> Void)
+    func fetchPosts(userID: String, completion: @escaping ([Post]?) -> Void)
     func fetchAllPosts(completion: @escaping ([Post]) -> Void)
 }
 
@@ -26,14 +26,14 @@ final class DatabaseManager: DatabaseManagerProtocol {
     
     public func createUser(user: User, completion: @escaping (Bool) -> Void) {
         guard let documentData = user.asJsonObject() else { completion(false); return }
-        databaseClient.create(path: "users/\(user.username)", data: documentData) { didSucceed in
+        databaseClient.create(path: "users/\(user.id)", data: documentData) { didSucceed in
             completion(didSucceed)
         }
     }
     
-    public func createPost(username: String, post: Post, completion: @escaping (Bool) -> Void) {
+    public func createPost(userID: String, post: Post, completion: @escaping (Bool) -> Void) {
         guard let documentData = post.asJsonObject() else { completion(false); return }
-        databaseClient.create(path: "users/\(username)/posts/\(post.id)", data: documentData) { didSucceed in
+        databaseClient.create(path: "users/\(userID)/posts/\(post.id)", data: documentData) { didSucceed in
             completion(didSucceed)
         }
     }
@@ -56,8 +56,8 @@ final class DatabaseManager: DatabaseManagerProtocol {
         }
     }
     
-    public func fetchPosts(for username: String, completion: @escaping ([Post]?) -> Void) {
-        databaseClient.find(path: "users/\(username)/posts") { postsData in
+    public func fetchPosts(userID: String, completion: @escaping ([Post]?) -> Void) {
+        databaseClient.find(path: "users/\(userID)/posts") { postsData in
             guard let postsData = postsData else { completion(nil); return }
             let posts = postsData.compactMap({ Post(dictionary: $0) })
             completion(posts)
@@ -71,7 +71,7 @@ final class DatabaseManager: DatabaseManagerProtocol {
             var result = [Post]()
             users.forEach { user in
                 group.enter()
-                self.fetchPosts(for: user.username) { posts in
+                self.fetchPosts(userID: user.id) { posts in
                     defer {
                         group.leave()
                     }

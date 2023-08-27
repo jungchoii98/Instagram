@@ -8,14 +8,12 @@
 import Foundation
 
 struct Post: Codable, Hashable {
+    let id: String
+    let userID: String
     let username: String
     let avatarImageURL: String
     let postImageURL: String
     let likers: [String]
     let caption: String
     let timestamp: String
-    
-    var id: String {
-        return UUID().uuidString
-    }
 }

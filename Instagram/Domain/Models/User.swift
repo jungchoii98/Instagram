@@ -8,6 +8,7 @@
 import Foundation
 
 struct User: Codable, Hashable {
+    let id: String
     let username: String
     let email: String
     let profileImageURL: String

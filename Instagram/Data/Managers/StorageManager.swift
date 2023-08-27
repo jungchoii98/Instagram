@@ -10,13 +10,13 @@ import Foundation
 
 protocol StorageManagerProtocol {
     func uploadProfilePicture(
-        username: String,
+        userID: String,
         pictureData: Data?,
         completion: @escaping (URL?) -> Void
     )
     
     func uploadPost(
-        username: String,
+        userID: String,
         postID: String,
         pictureData: Data?,
         completion: @escaping (URL?) -> Void
@@ -32,24 +32,24 @@ final class StorageManager: StorageManagerProtocol {
     }
     
     public func uploadProfilePicture(
-        username: String,
+        userID: String,
         pictureData: Data?,
         completion: @escaping (URL?) -> Void
     ) {
         guard let data = pictureData else { completion(nil); return }
-        storageClient.upload(filePath: username, itemName: "profile_picture.png", data: data) { url in
+        storageClient.upload(filePath: userID, itemName: "profile_picture.png", data: data) { url in
             completion(url)
         }
     }
     
     public func uploadPost(
-        username: String,
+        userID: String,
         postID: String,
         pictureData: Data?,
         completion: @escaping (URL?) -> Void
     ) {
         guard let data = pictureData else { completion(nil); return }
-        storageClient.upload(filePath: "\(username)/posts", itemName: postID + ".png", data: data) { url in
+        storageClient.upload(filePath: "\(userID)/posts", itemName: postID + ".png", data: data) { url in
             completion(url)
         }
     }

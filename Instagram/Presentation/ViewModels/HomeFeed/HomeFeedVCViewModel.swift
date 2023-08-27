@@ -15,25 +15,28 @@ class HomeFeedVCViewModel {
     
     weak var delegate: HomeFeedVCViewModelDelegate?
     private let postRepository: PostRepositoryProtocol
+    private let userRepository: UserRepositoryProtocol
     var posts = [[HomeFeedCellType]]()
     
-    init(postRepository: PostRepositoryProtocol) {
+    init(postRepository: PostRepositoryProtocol, userRepository: UserRepositoryProtocol) {
         self.postRepository = postRepository
+        self.userRepository = userRepository
     }
     
     func fetchPosts() {
-//        postRepository.fetchPosts(for: "tzanner") { [weak self] result in
-//            switch result {
-//            case .success(let posts):
-//                self?.configureCellViewModels(with: posts)
-//            case .failure(let error):
-//                print("Failed to fetch posts. Error: \(error.localizedDescription)")
-//            }
-//        }
-        posts.append(contentsOf: [
-            HomeFeedVCViewModel.cell1,
-            HomeFeedVCViewModel.cell2,
-        ])
+        guard let user = try? userRepository.getLoggedInUser() else { return }
+        postRepository.fetchPosts(for: user.id) { [weak self] result in
+            switch result {
+            case .success(let posts):
+                self?.configureCellViewModels(with: posts)
+            case .failure(let error):
+                print("Failed to fetch posts. Error: \(error.localizedDescription)")
+            }
+        }
+//        posts.append(contentsOf: [
+//            HomeFeedVCViewModel.cell1,
+//            HomeFeedVCViewModel.cell2,
+//        ])
     }
     
     private func configureCellViewModels(with posts: [Post]) {

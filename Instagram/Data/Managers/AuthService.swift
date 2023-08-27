@@ -72,9 +72,10 @@ final class AuthService: AuthServiceProtocol {
         profileImageData: Data?,
         completion: @escaping (Result<User,AuthError>) -> Void
     ) {
-        storageManager.uploadProfilePicture(username: username, pictureData: profileImageData) { [weak self] url in
+        let userID = UUID().uuidString
+        storageManager.uploadProfilePicture(userID: userID, pictureData: profileImageData) { [weak self] url in
             guard let url = url else { completion(.failure(.uploadProfilePictureError)); return }
-            let user = User(username: username, email: email, profileImageURL: url.absoluteString)
+            let user = User(id: userID, username: username, email: email, profileImageURL: url.absoluteString)
             self?.databaseManager.createUser(user: user, completion: { [weak self] didSucceed in
                 guard didSucceed else { completion(.failure(.createUserError)); return }
                 self?.authClient.createUser(withEmail: email, password: password, completion: { didSucceed in

@@ -74,7 +74,8 @@ final class AppCoordinator {
         
         let homeFlowCoordinator = HomeCoordinator(
             navigationController: homeNavigationController,
-            postRepository: postRepository
+            postRepository: postRepository,
+            userRepository: userRepository
         )
         let exploreFlowCoordinator = ExploreCoordinator(
             navigationController: exploreNavigationController,

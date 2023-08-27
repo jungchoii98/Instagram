@@ -24,18 +24,18 @@ class CaptionVCViewModel {
     }
     
     func createPost(pictureData: Data?, caption: String) {
-        createPost(username: user.username, profileImageURL: user.profileImageURL, pictureData: pictureData, caption: caption)
+        createPost(userID: user.id, username: user.username, profileImageURL: user.profileImageURL, pictureData: pictureData, caption: caption)
     }
     
-    private func createPost(username: String, profileImageURL: String, pictureData: Data?, caption: String) {
-        postRepository.storePost(username: username, postID: UUID().uuidString, pictureData: pictureData) { [weak self] url in
+    private func createPost(userID: String, username: String, profileImageURL: String, pictureData: Data?, caption: String) {
+        postRepository.storePost(userID: userID, postID: UUID().uuidString, pictureData: pictureData) { [weak self] url in
             guard let self = self else { return }
             guard let url = url else {
                 self.delegate?.captionVCViewModelDidFailToPost(self)
                 return
             }
-            let post = Post(username: username, avatarImageURL: profileImageURL, postImageURL: url.absoluteString, likers: [], caption: caption, timestamp: String.date(from: Date()))
-            self.postRepository.uploadPost(username: username, post: post) { [weak self] didSucceed in
+            let post = Post(id: UUID().uuidString, userID: userID, username: username, avatarImageURL: profileImageURL, postImageURL: url.absoluteString, likers: [], caption: caption, timestamp: String.date(from: Date()))
+            self.postRepository.uploadPost(userID: userID, post: post) { [weak self] didSucceed in
                 guard let self = self else { return }
                 if didSucceed {
                     self.delegate?.captionVCViewModelDidSucceedToPost(self)
