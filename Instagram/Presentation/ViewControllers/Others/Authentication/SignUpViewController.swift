@@ -70,6 +70,7 @@ class SignUpViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Terms and Services", for: .normal)
         button.setTitleColor(UIColor.link, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -78,6 +79,7 @@ class SignUpViewController: UIViewController {
         let button = UIButton()
         button.setTitle("Privacy", for: .normal)
         button.setTitleColor(UIColor.link, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -135,15 +137,15 @@ class SignUpViewController: UIViewController {
             signUpButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             signUpButton.heightAnchor.constraint(equalToConstant: 40),
             
-            termsButton.topAnchor.constraint(equalTo: signUpButton.bottomAnchor, constant: 50),
+            termsButton.bottomAnchor.constraint(equalTo: privacyButton.topAnchor, constant: -5),
             termsButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             termsButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            termsButton.heightAnchor.constraint(equalToConstant: 40),
+            termsButton.heightAnchor.constraint(equalToConstant: 20),
             
-            privacyButton.topAnchor.constraint(equalTo: termsButton.bottomAnchor, constant: 20),
+            privacyButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
             privacyButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             privacyButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            privacyButton.heightAnchor.constraint(equalToConstant: 40),
+            privacyButton.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
     
