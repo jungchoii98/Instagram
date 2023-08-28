@@ -11,9 +11,11 @@ final class NotificationsCoordinator: Coordinator {
     
     private let navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
+    private let notificationRepository: NotificationRepositoryProtocol
     
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, notificationRepository: NotificationRepositoryProtocol) {
         self.navigationController = navigationController
+        self.notificationRepository = notificationRepository
     }
     
     func start() {
@@ -21,7 +23,7 @@ final class NotificationsCoordinator: Coordinator {
     }
     
     private func showNotifications() {
-        let viewModel = NotificationViewModel()
+        let viewModel = NotificationViewModel(notificationRepository: notificationRepository)
         let notificationsVC = NotificationsViewController(viewModel: viewModel)
         notificationsVC.coordinator = self
         navigationController.pushViewController(notificationsVC, animated: false)

@@ -29,7 +29,7 @@ class UserRepository: UserRepositoryProtocol {
     func getLoggedInUser() throws -> User {
         guard let data = UserDefaults.standard.object(forKey: UserDefaultsConstants.user.rawValue) as? Data,
               let loggedInUser = Utility.decode(User.self, data: data) else {
-            throw ProfileViewController.ProfileErrors.badData
+            throw UserDefaultsError.userDataError
         }
         return loggedInUser
     }

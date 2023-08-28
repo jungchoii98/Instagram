@@ -55,7 +55,7 @@
 		F09AA5CE2A71D37C0059C845 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5CD2A71D37C0059C845 /* User.swift */; };
 		F09AA5D02A71D38D0059C845 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5CF2A71D38D0059C845 /* Post.swift */; };
 		F09AA5D22A71D3A50059C845 /* Relationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5D12A71D3A50059C845 /* Relationship.swift */; };
-		F09AA5D42A71D3BE0059C845 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5D32A71D3BE0059C845 /* Notification.swift */; };
+		F09AA5D42A71D3BE0059C845 /* IGNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5D32A71D3BE0059C845 /* IGNotification.swift */; };
 		F09AA5D62A71D3F30059C845 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5D52A71D3F30059C845 /* AuthService.swift */; };
 		F09AA5D82A71D40B0059C845 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5D72A71D40B0059C845 /* DatabaseManager.swift */; };
 		F09AA5DA2A71D4380059C845 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AA5D92A71D4380059C845 /* StorageManager.swift */; };
@@ -86,6 +86,7 @@
 		F0FA843D2A984E0F0069DC3E /* CommentNotificationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA843C2A984E0F0069DC3E /* CommentNotificationTableViewCell.swift */; };
 		F0FA84402A9973890069DC3E /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA843F2A9973890069DC3E /* NotificationViewModel.swift */; };
 		F0FA84452A99B7B10069DC3E /* NotificationsTableViewDiffableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA84442A99B7B10069DC3E /* NotificationsTableViewDiffableDataSource.swift */; };
+		F0FA84472A9B36A30069DC3E /* NotificationRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA84462A9B36A30069DC3E /* NotificationRepository.swift */; };
 		FDF9B74F1F7140AF20DAC2A6 /* Pods_Instagram.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 724437086F110C91F8BF55FB /* Pods_Instagram.framework */; };
 /* End PBXBuildFile section */
 
@@ -142,7 +143,7 @@
 		F09AA5CD2A71D37C0059C845 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F09AA5CF2A71D38D0059C845 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		F09AA5D12A71D3A50059C845 /* Relationship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relationship.swift; sourceTree = "<group>"; };
-		F09AA5D32A71D3BE0059C845 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		F09AA5D32A71D3BE0059C845 /* IGNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGNotification.swift; sourceTree = "<group>"; };
 		F09AA5D52A71D3F30059C845 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		F09AA5D72A71D40B0059C845 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		F09AA5D92A71D4380059C845 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
@@ -173,6 +174,7 @@
 		F0FA843C2A984E0F0069DC3E /* CommentNotificationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentNotificationTableViewCell.swift; sourceTree = "<group>"; };
 		F0FA843F2A9973890069DC3E /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		F0FA84442A99B7B10069DC3E /* NotificationsTableViewDiffableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewDiffableDataSource.swift; sourceTree = "<group>"; };
+		F0FA84462A9B36A30069DC3E /* NotificationRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRepository.swift; sourceTree = "<group>"; };
 		FF3313F510F5DFF75A97A005 /* Pods-Instagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.debug.xcconfig"; path = "Target Support Files/Pods-Instagram/Pods-Instagram.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -250,6 +252,7 @@
 			children = (
 				F086A4532A93311F00BDEEC0 /* PostRepository.swift */,
 				F0FA83AA2A9571390069DC3E /* UserRepository.swift */,
+				F0FA84462A9B36A30069DC3E /* NotificationRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -381,7 +384,7 @@
 				F09AA5CD2A71D37C0059C845 /* User.swift */,
 				F09AA5CF2A71D38D0059C845 /* Post.swift */,
 				F09AA5D12A71D3A50059C845 /* Relationship.swift */,
-				F09AA5D32A71D3BE0059C845 /* Notification.swift */,
+				F09AA5D32A71D3BE0059C845 /* IGNotification.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -634,10 +637,11 @@
 				F086A3572A888DFF00BDEEC0 /* HomeFeedCollectionView.swift in Sources */,
 				F09AA5D62A71D3F30059C845 /* AuthService.swift in Sources */,
 				F09AA5C82A71D31E0059C845 /* ListViewController.swift in Sources */,
+				F0FA84472A9B36A30069DC3E /* NotificationRepository.swift in Sources */,
 				F09AA5EA2A72FD560059C845 /* IGTextField.swift in Sources */,
 				F086A3D22A90B51E00BDEEC0 /* CameraEditViewController.swift in Sources */,
 				F09AA5C22A71D2F10059C845 /* SignInViewController.swift in Sources */,
-				F09AA5D42A71D3BE0059C845 /* Notification.swift in Sources */,
+				F09AA5D42A71D3BE0059C845 /* IGNotification.swift in Sources */,
 				F09AA5AD2A71CC5A0059C845 /* AppCoordinator.swift in Sources */,
 				F09AA5952A71C3330059C845 /* HomeFeedViewController.swift in Sources */,
 				F09AA5D82A71D40B0059C845 /* DatabaseManager.swift in Sources */,

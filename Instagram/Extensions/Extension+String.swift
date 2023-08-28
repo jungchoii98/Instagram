@@ -11,4 +11,9 @@ extension String {
     static func date(from date: Date) -> String {
         return DateFormatter.formatter.string(from: date)
     }
+    
+    static func timeAgo(dateString: String) -> String {
+        let date = Date.string(from: dateString)
+        return RelativeDateTimeFormatter.relativeFormatter.localizedString(for: date, relativeTo: Date())
+    }
 }

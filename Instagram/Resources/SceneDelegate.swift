@@ -24,11 +24,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private lazy var authManager = AuthService(authClient: authClient, databaseManager: databaseManager, storageManager: storageManager)
     private lazy var postRepository = PostRepository(storageManager: storageManager, databaseManager: databaseManager)
     private lazy var userRepository = UserRepository(storageManager: storageManager, databaseManager: databaseManager)
+    private lazy var notificationRepository = NotificationRepository(databaseManager: databaseManager)
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        
+//        let notification = IGNotification(
+//            id: UUID().uuidString,
+//            type: .follow,
+//            profilePictureURL: "https://www.allprodad.com/wp-content/uploads/2021/03/05-12-21-happy-people.jpg",
+//            username: "tzanner",
+//            postID: nil,
+//            postImageURL: nil,
+//            isFollowing: true,
+//            timestamp: String.date(from: Date())
+//        )
+//        Task {
+//            do {
+//                try await notificationRepository.createNotification(userID:"850CB200-FCEA-4B8E-9CC4-D5BC94D41956", notification:notification)
+//            } catch {
+//                print(error.localizedDescription)
+//            }
+//        }
+        
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         let navigationController = UINavigationController()
@@ -38,7 +58,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             navigationController: navigationController,
             authManager: authManager,
             postRepository: postRepository,
-            userRepository: userRepository
+            userRepository: userRepository,
+            notificationRepository: notificationRepository
         )
         coordinator?.start()
     }

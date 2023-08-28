@@ -30,6 +30,9 @@ class LikesNotificationTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         return label
     }()
     
@@ -95,7 +98,11 @@ class LikesNotificationTableViewCell: UITableViewCell {
     func configure(with viewModel: LikesNotificationCellViewModel) {
         self.viewModel = viewModel
         profileImageView.sd_setImage(with: viewModel.profilePictureURL)
-        descriptionLabel.text = viewModel.username + " liked your post"
+        let string = (viewModel.username + " liked your post " + viewModel.timeAgo) as NSString
+        let attributedString = NSMutableAttributedString(string: string as String)
+        attributedString.addAttribute(.foregroundColor, value: UIColor.secondaryLabel, range: string.range(of: viewModel.timeAgo))
+        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 15, weight: .bold), range: string.range(of: viewModel.username))
+        descriptionLabel.attributedText = attributedString
         postImageView.sd_setImage(with: viewModel.postURL)
     }
 }

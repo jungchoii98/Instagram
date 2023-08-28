@@ -10,3 +10,7 @@ import Foundation
 enum UserDefaultsConstants: String {
     case user = "user"
 }
+
+enum UserDefaultsError: Error {
+    case userDataError
+}

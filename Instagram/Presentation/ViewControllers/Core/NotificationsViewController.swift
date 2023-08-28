@@ -107,7 +107,9 @@ class NotificationsViewController: UIViewController {
 }
 
 extension NotificationsViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
 
 extension NotificationsViewController: NotificationViewModelDelegate {

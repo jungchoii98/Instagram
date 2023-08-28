@@ -20,17 +20,20 @@ final class AppCoordinator {
     private let authManager: AuthServiceProtocol
     private let postRepository: PostRepositoryProtocol
     private let userRepository: UserRepositoryProtocol
+    private let notificationRepository: NotificationRepositoryProtocol
     
     init(
         navigationController: UINavigationController,
         authManager: AuthServiceProtocol,
         postRepository: PostRepositoryProtocol,
-        userRepository: UserRepositoryProtocol
+        userRepository: UserRepositoryProtocol,
+        notificationRepository: NotificationRepositoryProtocol
     ) {
         self.navigationController = navigationController
         self.authManager = authManager
         self.postRepository = postRepository
         self.userRepository = userRepository
+        self.notificationRepository = notificationRepository
     }
     
     func start() {
@@ -88,7 +91,7 @@ final class AppCoordinator {
             user: user,
             postRepository: postRepository
         )
-        let notificationsFlowCoordinator = NotificationsCoordinator(navigationController: notificationsNavigationController)
+        let notificationsFlowCoordinator = NotificationsCoordinator(navigationController: notificationsNavigationController, notificationRepository: notificationRepository)
         let profileFlowCoordinator = ProfileCoordinator(
             navigationController: profileNavigationController,
             authManager: authManager,

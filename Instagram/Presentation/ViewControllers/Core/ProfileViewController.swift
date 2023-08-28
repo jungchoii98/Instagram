@@ -54,9 +54,3 @@ class ProfileViewController: UIViewController {
         coordinator?.didTapSettings()
     }
 }
-
-extension ProfileViewController {
-    enum ProfileErrors: Error {
-        case badData
-    }
-}

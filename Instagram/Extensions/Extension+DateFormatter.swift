@@ -15,3 +15,11 @@ extension DateFormatter {
         return formatter
     }
 }
+
+extension RelativeDateTimeFormatter {
+    static var relativeFormatter: RelativeDateTimeFormatter {
+        let formatter = RelativeDateTimeFormatter()
+        formatter.unitsStyle = .short
+        return formatter
+    }
+}

@@ -30,6 +30,9 @@ class CommentNotificationTableViewCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 15)
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         return label
     }()
     
@@ -95,7 +98,11 @@ class CommentNotificationTableViewCell: UITableViewCell {
     func configure(with viewModel: CommentNotificationCellViewModel) {
         self.viewModel = viewModel
         profileImageView.sd_setImage(with: viewModel.profilePictureURL)
-        descriptionLabel.text = viewModel.username + " commented on your post"
+        let string = (viewModel.username + " commented on your post " + viewModel.timeAgo) as NSString
+        let attributedString = NSMutableAttributedString(string: string as String)
+        attributedString.addAttribute(.foregroundColor, value: UIColor.secondaryLabel, range: string.range(of: viewModel.timeAgo))
+        attributedString.addAttribute(.font, value: UIFont.systemFont(ofSize: 15, weight: .bold), range: string.range(of: viewModel.username))
+        descriptionLabel.attributedText = attributedString
         postImageView.sd_setImage(with: viewModel.postURL)
     }
 }
