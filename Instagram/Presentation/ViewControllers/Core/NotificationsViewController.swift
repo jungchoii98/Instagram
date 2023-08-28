@@ -128,6 +128,6 @@ extension NotificationsViewController: LikesNotificationTableViewCellDelegate, C
     }
     
     func followNotificationTableViewCell(_ followNotificationTableViewCell: FollowNotificationTableViewCell, didTapFollow viewModel: FollowNotificationCellViewModel) {
-        print("tap follow")
+        self.viewModel.updateFollowStatus(cellViewModel: viewModel)
     }
 }

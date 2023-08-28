@@ -10,6 +10,7 @@ import Foundation
 protocol DatabaseManagerProtocol {
     func createUser(user: User, completion: @escaping (Bool) -> Void)
     func findUser(email: String, completion: @escaping (User?) -> Void)
+    func findUser(id: String) async throws -> User
     func getUsers(completion: @escaping ([User]) -> Void)
     
     func createPost(userID: String, post: Post, completion: @escaping (Bool) -> Void)
@@ -18,6 +19,8 @@ protocol DatabaseManagerProtocol {
     
     func fetchNotifications(userID: String) async throws -> [IGNotification]
     func createNotification(userID: String, notification: IGNotification) async throws
+    
+    func updateFollowStatus(currentUser: User, receivingUser: User, isFollowing: Bool) async throws
 }
 
 final class DatabaseManager: DatabaseManagerProtocol {
@@ -45,6 +48,13 @@ final class DatabaseManager: DatabaseManagerProtocol {
                 users.first(where: { $0.email == email })
             )
         }
+    }
+    
+    public func findUser(id: String) async throws -> User {
+        let usersData = try await databaseClient.find(path: "users")
+        let users = usersData.compactMap({ User(dictionary: $0) })
+        guard let user = users.first(where: { $0.id == id }) else { throw DatabaseError.badData }
+        return user
     }
     
     public func getUsers(completion: @escaping ([User]) -> Void) {
@@ -132,6 +142,32 @@ final class DatabaseManager: DatabaseManagerProtocol {
                 }
             }
         })
+    }
+    
+    // MARK: - Follow Status
+    
+    public func updateFollowStatus(
+        currentUser: User,
+        receivingUser: User,
+        isFollowing: Bool
+    ) async throws {
+        let currentUserPath = "users/\(currentUser.id)/following/\(receivingUser.id)"
+        let receivingUserPath = "users/\(receivingUser.id)/followers/\(currentUser.id)"
+        guard let currentUserData = currentUser.asJsonObject(),
+              let receivingUserData = receivingUser.asJsonObject()
+        else { throw DatabaseError.badData }
+        if isFollowing {
+            try await databaseClient.create(path: currentUserPath, data: receivingUserData)
+            try await databaseClient.create(path: receivingUserPath, data: currentUserData)
+        } else {
+            try await databaseClient.remove(path: currentUserPath)
+            try await databaseClient.remove(path: receivingUserPath)
+        }
+
+        if isFollowing {
+            let notification = IGNotification(id: UUID().uuidString, type: .follow, profilePictureURL: currentUser.profileImageURL, userID: currentUser.id, username: currentUser.username, postID: nil, postImageURL: nil, isFollowing: true, timestamp: String.date(from: Date()))
+            try await createNotification(userID: receivingUser.id, notification: notification)
+        }
     }
 }
 

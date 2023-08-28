@@ -31,23 +31,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         
-//        let notification = IGNotification(
-//            id: UUID().uuidString,
-//            type: .follow,
-//            profilePictureURL: "https://www.allprodad.com/wp-content/uploads/2021/03/05-12-21-happy-people.jpg",
-//            username: "tzanner",
-//            postID: nil,
-//            postImageURL: nil,
-//            isFollowing: true,
-//            timestamp: String.date(from: Date())
-//        )
-//        Task {
-//            do {
-//                try await notificationRepository.createNotification(userID:"850CB200-FCEA-4B8E-9CC4-D5BC94D41956", notification:notification)
-//            } catch {
-//                print(error.localizedDescription)
-//            }
-//        }
+        let notification = IGNotification(
+            id: UUID().uuidString,
+            type: .follow,
+            profilePictureURL: "https://www.allprodad.com/wp-content/uploads/2021/03/05-12-21-happy-people.jpg",
+            userID: "A948AF93-C92D-4302-857D-69A2BC579F8D",
+            username: "zztopaz",
+            postID: nil,
+            postImageURL: nil,
+            isFollowing: false,
+            timestamp: String.date(from: Date())
+        )
+        Task {
+            do {
+                try await notificationRepository.createNotification(userID:"850CB200-FCEA-4B8E-9CC4-D5BC94D41956", notification:notification)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)

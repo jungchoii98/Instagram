@@ -11,6 +11,7 @@ struct IGNotification: Codable, Hashable {
     let id: String
     let type: NotificationType
     let profilePictureURL: String
+    let userID: String
     let username: String
     let postID: String?
     let postImageURL: String?

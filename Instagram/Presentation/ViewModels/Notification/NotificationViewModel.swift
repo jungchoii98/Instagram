@@ -25,6 +25,7 @@ class NotificationViewModel {
     var thisWeekViewModelCells = [NotificationCellType]()
     var thisMonthViewModelCells = [NotificationCellType]()
     var earlierViewModelCells = [NotificationCellType]()
+    var notifications = [IGNotification]()
     
     init(notificationRepository: NotificationRepositoryProtocol) {
         self.notificationRepository = notificationRepository
@@ -33,7 +34,7 @@ class NotificationViewModel {
     func fetchNotifications() {
         Task {
             do {
-                let notifications = try await notificationRepository.getNotifications()
+                notifications = try await notificationRepository.getNotifications()
                 createSections(notifications: notifications)
                 delegate?.notificationViewModelDidFetchNotifications(self)
             } catch {
@@ -43,7 +44,19 @@ class NotificationViewModel {
 //        thisWeekViewModelCells = NotificationViewModel.getThisWeekMockData()
 //        thisMonthViewModelCells = NotificationViewModel.getThisMonthMockData()
 //        earlierViewModelCells = NotificationViewModel.getEarlierMockData()
-        
+    }
+    
+    func updateFollowStatus(
+        cellViewModel: FollowNotificationCellViewModel
+    ) {
+        guard let notification = notifications.first(where: { $0.username == cellViewModel.username }) else { return }
+        Task {
+            do {
+                try await notificationRepository.updateFollowStatus(receivingUserID: notification.userID, isFollowing: cellViewModel.isFollowing)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 

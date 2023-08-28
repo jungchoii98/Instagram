@@ -10,6 +10,7 @@ import Foundation
 protocol NotificationRepositoryProtocol {
     func getNotifications() async throws -> [IGNotification]
     func createNotification(userID: String, notification: IGNotification) async throws
+    func updateFollowStatus(receivingUserID: String, isFollowing: Bool) async throws
 }
 
 class NotificationRepository: NotificationRepositoryProtocol {
@@ -20,7 +21,7 @@ class NotificationRepository: NotificationRepositoryProtocol {
         self.databaseManager = databaseManager
     }
     
-    func getNotifications() async throws -> [IGNotification] {
+    public func getNotifications() async throws -> [IGNotification] {
         guard let data = UserDefaults.standard.object(forKey: UserDefaultsConstants.user.rawValue) as? Data,
               let loggedInUser = Utility.decode(User.self, data: data) else {
             throw UserDefaultsError.userDataError
@@ -29,10 +30,23 @@ class NotificationRepository: NotificationRepositoryProtocol {
         return notifications
     }
     
-    func createNotification(
+    public func createNotification(
         userID: String,
         notification: IGNotification
     ) async throws {
         try await databaseManager.createNotification(userID: userID, notification: notification)
+    }
+    
+    public func updateFollowStatus(
+        receivingUserID: String,
+        isFollowing: Bool
+    ) async throws {
+        guard let data = UserDefaults.standard.object(forKey: UserDefaultsConstants.user.rawValue) as? Data,
+              let loggedInUser = Utility.decode(User.self, data: data) else {
+            throw UserDefaultsError.userDataError
+        }
+        
+        let receivingUser = try await databaseManager.findUser(id: receivingUserID)
+        try await databaseManager.updateFollowStatus(currentUser: loggedInUser, receivingUser: receivingUser, isFollowing: isFollowing)
     }
 }
